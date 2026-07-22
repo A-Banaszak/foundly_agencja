@@ -80,7 +80,7 @@ export default function SubscriptionOrderForm() {
           </label>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {[
-              { id: 'start', title: 'Abonament Start', price: '390 zł / msc', desc: 'Strona one-page za 0 zł + SEO' },
+              { id: 'start', title: 'Abonament Start', price: '99 zł / msc', desc: 'Strona one-page za 0 zł + SEO' },
               { id: 'pro', title: 'Business Pro', price: '690 zł / msc', desc: 'Strona multi-page za 0 zł + SEO + Ads' },
               { id: 'dominator', title: 'Dominator', price: '990 zł / msc', desc: 'Sklep za 0 zł + Full Growth (SEO+Ads)' }
             ].map((item) => (

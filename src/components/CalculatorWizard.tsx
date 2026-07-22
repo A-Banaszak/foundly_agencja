@@ -18,9 +18,9 @@ export default function CalculatorWizard() {
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
   const getSitePrice = () => {
-    if (sitePackage === 'starter') return 890;
-    if (sitePackage === 'business') return 1490;
-    if (sitePackage === 'ecommerce') return 2990;
+    if (sitePackage === 'starter') return 999;
+    if (sitePackage === 'business') return 2999;
+    if (sitePackage === 'ecommerce') return 4999;
     return 0;
   };
 
@@ -168,9 +168,9 @@ export default function CalculatorWizard() {
                   <div className="text-xs font-bold uppercase tracking-wider text-white/40 mb-3">Pakiet Strony WWW:</div>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     {[
-                      { id: 'starter', name: 'Starter One-Page', price: '890 zł' },
-                      { id: 'business', name: 'Business Multi-Page', price: '1490 zł' },
-                      { id: 'ecommerce', name: 'Sklep E-Commerce', price: '2990 zł' }
+                      { id: 'starter', name: 'Starter One-Page', price: 'od 999 zł' },
+                      { id: 'business', name: 'Business Multi-Page', price: 'od 2 999 zł' },
+                      { id: 'ecommerce', name: 'Sklep E-Commerce', price: 'od 4 999 zł' }
                     ].map((pkg) => (
                       <button
                         key={pkg.id}
@@ -219,7 +219,7 @@ export default function CalculatorWizard() {
                   <div>
                     <div className="text-xs font-bold uppercase tracking-widest text-white/40">Szacowana Inwestycja:</div>
                     <div className="text-2xl font-black text-white italic">
-                      {getSitePrice()} PLN netto <span className="text-xs text-white/40 not-italic font-normal">(jednorazowo)</span>
+                      {getSitePrice()} PLN <span className="text-xs text-white/40 not-italic font-normal">(jednorazowo)</span>
                       {getMarketingPrice() > 0 && (
                         <span className="text-indigo-400 ml-2">+ {getMarketingPrice()} PLN/mc</span>
                       )}

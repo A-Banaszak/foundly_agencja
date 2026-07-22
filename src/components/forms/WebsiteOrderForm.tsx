@@ -84,9 +84,9 @@ export default function WebsiteOrderForm() {
           </label>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {[
-              { id: 'starter', title: 'Starter One-Page', price: '890 zł' },
-              { id: 'business', title: 'Business Multi-Page', price: '1490 zł' },
-              { id: 'ecommerce', title: 'Sklep E-Commerce', price: 'od 2990 zł' }
+              { id: 'starter', title: 'Starter One-Page', price: 'od 999 zł' },
+              { id: 'business', title: 'Business Multi-Page', price: 'od 2 999 zł' },
+              { id: 'ecommerce', title: 'Sklep E-Commerce', price: 'od 4 999 zł' }
             ].map((item) => (
               <button
                 key={item.id}

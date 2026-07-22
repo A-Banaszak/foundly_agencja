@@ -118,11 +118,11 @@ export default function PricingSection() {
 
                 <div className="p-4 rounded-2xl bg-white/5 border border-white/5 mb-6">
                   <div className="text-[11px] font-bold text-indigo-300 uppercase">Wkład własny na start:</div>
-                  <div className="text-2xl font-black text-white italic">0 PLN <span className="text-xs font-normal text-white/40">(zamiast 890 zł)</span></div>
+                  <div className="text-2xl font-black text-white italic">0 PLN <span className="text-xs font-normal text-white/40">(zamiast 999 zł)</span></div>
                 </div>
 
                 <div className="flex items-baseline gap-1 mb-2">
-                  <span className="text-4xl sm:text-5xl font-black text-white italic tracking-tighter">390</span>
+                  <span className="text-4xl sm:text-5xl font-black text-white italic tracking-tighter">99</span>
                   <span className="text-white/40 text-xs font-black uppercase tracking-widest">PLN / msc</span>
                 </div>
                 <div className="text-[10px] text-white/40 font-medium mb-8 uppercase tracking-wider italic">
@@ -169,7 +169,7 @@ export default function PricingSection() {
 
                 <div className="p-4 rounded-2xl bg-indigo-500/10 border border-indigo-500/30 mb-6">
                   <div className="text-[11px] font-bold text-indigo-300 uppercase">Wkład własny na start:</div>
-                  <div className="text-2xl font-black text-white italic">0 PLN <span className="text-xs font-normal text-white/40">(zamiast 1490 zł)</span></div>
+                  <div className="text-2xl font-black text-white italic">0 PLN <span className="text-xs font-normal text-white/40">(zamiast 2 999 zł)</span></div>
                 </div>
 
                 <div className="flex items-baseline gap-1 mb-2">
@@ -217,7 +217,7 @@ export default function PricingSection() {
 
                 <div className="p-4 rounded-2xl bg-white/5 border border-white/5 mb-6">
                   <div className="text-[11px] font-bold text-purple-300 uppercase">Wkład własny na start:</div>
-                  <div className="text-2xl font-black text-white italic">0 PLN <span className="text-xs font-normal text-white/40">(zamiast 2990 zł)</span></div>
+                  <div className="text-2xl font-black text-white italic">0 PLN <span className="text-xs font-normal text-white/40">(zamiast 4 999 zł)</span></div>
                 </div>
 
                 <div className="flex items-baseline gap-1 mb-2">
@@ -266,8 +266,8 @@ export default function PricingSection() {
                   Jednorazowa opłata za stworzenie strony wizytówki.
                 </p>
                 <div className="flex items-baseline gap-1 mb-8">
-                  <span className="text-4xl sm:text-5xl font-black text-white italic tracking-tighter">890</span>
-                  <span className="text-white/40 text-xs font-black uppercase tracking-widest">PLN netto</span>
+                  <span className="text-3xl font-black text-white italic tracking-tighter">od 999</span>
+                  <span className="text-white/40 text-xs font-black uppercase tracking-widest">PLN</span>
                 </div>
                 <ul className="space-y-4 mb-10">
                   {[
@@ -303,8 +303,8 @@ export default function PricingSection() {
                   Strona wielopodstronowa dla firmy.
                 </p>
                 <div className="flex items-baseline gap-1 mb-8">
-                  <span className="text-4xl sm:text-5xl font-black text-white italic tracking-tighter">1490</span>
-                  <span className="text-white/40 text-xs font-black uppercase tracking-widest">PLN netto</span>
+                  <span className="text-3xl font-black text-white italic tracking-tighter">od 2 999</span>
+                  <span className="text-white/40 text-xs font-black uppercase tracking-widest">PLN</span>
                 </div>
                 <ul className="space-y-4 mb-10">
                   {[
@@ -340,8 +340,8 @@ export default function PricingSection() {
                   Sklep internetowy z płatnościami online.
                 </p>
                 <div className="flex items-baseline gap-1 mb-8">
-                  <span className="text-3xl font-black text-white italic tracking-tighter">od 2990</span>
-                  <span className="text-white/40 text-xs font-black uppercase tracking-widest">PLN netto</span>
+                  <span className="text-3xl font-black text-white italic tracking-tighter">od 4 999</span>
+                  <span className="text-white/40 text-xs font-black uppercase tracking-widest">PLN</span>
                 </div>
                 <ul className="space-y-4 mb-10">
                   {[
