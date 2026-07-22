@@ -78,11 +78,12 @@ export default function SubscriptionOrderForm() {
           <label className="block text-xs font-bold uppercase tracking-wider text-white/60 mb-3">
             Wybierz wariant abonamentu:
           </label>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
             {[
-              { id: 'start', title: 'Abonament Start', price: '99 zł / msc', desc: 'Strona statyczna + SEO Lokalne' },
-              { id: 'pro', title: 'Business Pro', price: '690 zł / msc', desc: 'Strona WordPress + SEO + Ads' },
-              { id: 'dominator', title: 'Dominator', price: '990 zł / msc', desc: 'Sklep WordPress + Full Growth' }
+              { id: 'start', title: 'Abonament Start', price: '99 zł / msc', desc: 'Strona One-Page + SEO Lokalne' },
+              { id: 'growth', title: 'Abonament Growth', price: '390 zł / msc', desc: 'Strona Multi-Page (5 podstron) + SEO' },
+              { id: 'pro', title: 'Business Pro', price: '690 zł / msc', desc: 'Strona WordPress + SEO + Google Ads' },
+              { id: 'ecommerce', title: 'E-Commerce Max', price: '990 zł / msc', desc: 'Sklep WooCommerce + Full Growth' }
             ].map((item) => (
               <button
                 key={item.id}
