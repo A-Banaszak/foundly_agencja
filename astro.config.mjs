@@ -19,6 +19,7 @@ export default defineConfig({
     filter: (page) => 
       !page.includes('/panel-foundly') && 
       !page.includes('/panel-klienta') && 
+      !page.includes('/wiedza') && 
       !page.includes('/polityka-prywatnosci') && 
       !page.includes('/regulamin')
   })]
