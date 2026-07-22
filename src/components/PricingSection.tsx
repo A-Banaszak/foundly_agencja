@@ -271,11 +271,10 @@ export default function PricingSection() {
                 </div>
                 <ul className="space-y-4 mb-10">
                   {[
-                    "Strona One-Page (do 6 sekcji)",
+                    "Szybka strona statyczna One-Page",
                     "Wersja Startowa (MVP) w 48h",
-                    "100% RWD",
-                    "Formularz kontaktowy",
-                    "Certyfikat SSL"
+                    "100% RWD & Formularz kontaktowy",
+                    "Certyfikat SSL i szybki serwer"
                   ].map((feat, i) => (
                     <li key={i} className="flex items-center gap-3 text-xs font-bold uppercase tracking-tight text-white/60">
                       <CheckCircle2 className="w-4 h-4 text-indigo-500 shrink-0" />
@@ -300,7 +299,7 @@ export default function PricingSection() {
                   Business Multi-Page
                 </h3>
                 <p className="text-xs text-white/40 font-medium uppercase tracking-wider mb-6">
-                  Strona wielopodstronowa dla firmy.
+                  Strona wielopodstronowa na systemie WordPress.
                 </p>
                 <div className="flex items-baseline gap-1 mb-8">
                   <span className="text-3xl font-black text-white italic tracking-tighter">od 2 999</span>
@@ -308,8 +307,8 @@ export default function PricingSection() {
                 </div>
                 <ul className="space-y-4 mb-10">
                   {[
-                    "Strona do 5 podstron",
-                    "Osobna oferta i o nas",
+                    "Wdrożenie na systemie WordPress (CMS)",
+                    "Strona do 5 podstron z opcją edycji",
                     "Optymalizacja SEO On-Page",
                     "Podpięcie Analityki GA4",
                     "2 tury poprawek"
@@ -337,7 +336,7 @@ export default function PricingSection() {
                   E-Commerce Premium
                 </h3>
                 <p className="text-xs text-white/40 font-medium uppercase tracking-wider mb-6">
-                  Sklep internetowy z płatnościami online.
+                  Sklep na WordPress + WooCommerce z płatnościami.
                 </p>
                 <div className="flex items-baseline gap-1 mb-8">
                   <span className="text-3xl font-black text-white italic tracking-tighter">od 4 999</span>
@@ -345,10 +344,10 @@ export default function PricingSection() {
                 </div>
                 <ul className="space-y-4 mb-10">
                   {[
-                    "Sklep i płatności BLIK/Karty",
-                    "Integracja InPost i kurierów",
-                    "Panel zarządczy",
-                    "Dedykowany opiekun"
+                    "WordPress + Sklep WooCommerce",
+                    "Płatności online BLIK / Przelewy24 / Karty",
+                    "Integracja kurierów i InPost",
+                    "Panel zarządzania zamówieniami"
                   ].map((feat, i) => (
                     <li key={i} className="flex items-center gap-3 text-xs font-bold uppercase tracking-tight text-white/60">
                       <CheckCircle2 className="w-4 h-4 text-indigo-500 shrink-0" />
