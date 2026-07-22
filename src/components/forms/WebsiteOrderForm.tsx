@@ -29,9 +29,9 @@ export default function WebsiteOrderForm() {
       name: formData.name,
       contact: formData.contact,
       fields: [
-        { name: "💻 Wybrany Pakiet", value: pkg.toUpperCase(), inline: true },
-        { name: "🌐 Posiada domenę/stronę?", value: hasDomain === 'yes' ? 'Tak' : 'Nie', inline: true },
-        { name: "⏱️ Czas realizacji", value: timeline, inline: true },
+        { name: "Wybrany Pakiet", value: pkg.toUpperCase(), inline: true },
+        { name: "Posiada domenę/stronę?", value: hasDomain === 'yes' ? 'Tak' : 'Nie', inline: true },
+        { name: "Czas realizacji", value: timeline, inline: true },
       ],
       notes: formData.notes
     });

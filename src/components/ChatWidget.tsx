@@ -248,14 +248,14 @@ export function ChatWidget() {
   }
 
   return (
-    <div className="fixed bottom-6 right-6 z-[100] font-sans">
+    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[100] font-sans">
       <AnimatePresence>
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, y: 30, scale: 0.95, filter: "blur(8px)" }}
             animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
             exit={{ opacity: 0, y: 30, scale: 0.95, filter: "blur(8px)" }}
-            className="mb-4 w-80 md:w-[380px] bg-[#0a0a0a] border border-white/10 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.7)] overflow-hidden flex flex-col backdrop-blur-2xl"
+            className="mb-4 w-[calc(100vw-32px)] sm:w-[380px] bg-[#0a0a0a] border border-white/10 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.7)] overflow-hidden flex flex-col backdrop-blur-2xl"
           >
             {/* Header */}
             <div className="bg-white/5 p-6 flex items-center justify-between border-b border-white/5">

@@ -86,7 +86,7 @@ export default function PricingSection() {
               }`}
             >
               <Sparkles className="w-4 h-4 text-indigo-300" />
-              <span>🔥 Model Abonamentowy (Strona 0 PLN)</span>
+              <span>Model Abonamentowy (Strona 0 PLN)</span>
             </button>
 
             <button
@@ -97,7 +97,7 @@ export default function PricingSection() {
                   : 'text-white/60 hover:text-white'
               }`}
             >
-              🛠️ Wdrożenie Jednorazowe
+              Wdrożenie Jednorazowe
             </button>
           </div>
         </div>
@@ -154,7 +154,7 @@ export default function PricingSection() {
 
             <div className="p-8 sm:p-10 rounded-[2.5rem] bg-gradient-to-b from-indigo-950/60 via-indigo-900/30 to-black border-2 border-indigo-500 shadow-[0_0_60px_rgba(79,70,229,0.25)] flex flex-col justify-between relative group scale-105">
               <div className="absolute -top-4 right-8 px-4 py-1.5 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-[10px] font-black uppercase tracking-widest shadow-lg">
-                ★ Najczęściej Wybierany
+                Najczęściej Wybierany
               </div>
               <div>
                 <span className="px-3.5 py-1.5 rounded-full bg-indigo-500/20 border border-indigo-500/40 text-[10px] font-black uppercase tracking-widest text-indigo-300">

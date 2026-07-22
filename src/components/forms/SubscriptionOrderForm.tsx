@@ -27,7 +27,7 @@ export default function SubscriptionOrderForm() {
       name: formData.name,
       contact: formData.contact,
       fields: [
-        { name: "⚡ Wybrany Abonament", value: plan.toUpperCase(), inline: true }
+        { name: "Wybrany Abonament", value: plan.toUpperCase(), inline: true }
       ],
       notes: formData.notes
     });

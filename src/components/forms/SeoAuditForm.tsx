@@ -39,9 +39,9 @@ export default function SeoAuditForm() {
       name: formData.name,
       contact: formData.contact,
       fields: [
-        { name: "🌐 Witryna", value: formData.website, inline: true },
-        { name: "📍 Miasto / Obszar", value: formData.city, inline: true },
-        { name: "🔍 Słowa kluczowe", value: formData.keywords || "Nie podano", inline: false }
+        { name: "Witryna", value: formData.website, inline: true },
+        { name: "Miasto / Obszar", value: formData.city, inline: true },
+        { name: "Słowa kluczowe", value: formData.keywords || "Nie podano", inline: false }
       ]
     });
 

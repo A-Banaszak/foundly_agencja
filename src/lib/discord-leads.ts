@@ -18,13 +18,13 @@ export async function sendLeadToDiscord(payload: LeadPayload) {
   if (!FORM_DISCORD_WEBHOOK) return;
 
   const discordFields: LeadField[] = [
-    { name: "👤 Imię / Firma", value: payload.name || "Nie podano", inline: true },
-    { name: "📞 Kontakt", value: payload.contact || "Nie podano", inline: true },
+    { name: "Imię / Firma", value: payload.name || "Nie podano", inline: true },
+    { name: "Kontakt", value: payload.contact || "Nie podano", inline: true },
     ...(payload.fields || [])
   ];
 
   if (payload.notes) {
-    discordFields.push({ name: "💬 Uwagi / Opis", value: payload.notes, inline: false });
+    discordFields.push({ name: "Uwagi / Opis", value: payload.notes, inline: false });
   }
 
   try {
@@ -33,7 +33,7 @@ export async function sendLeadToDiscord(payload: LeadPayload) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         embeds: [{
-          title: `🎯 NOWY LEAD: ${payload.formTitle}`,
+          title: `NOWY LEAD: ${payload.formTitle}`,
           color: 0xf59e0b, // Złocisty kolor dla wyróżnienia leadów
           fields: discordFields,
           footer: { text: "Foundly Agencja — System Pozyskiwania Leada" },
