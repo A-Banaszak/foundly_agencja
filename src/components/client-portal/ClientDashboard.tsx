@@ -9,8 +9,8 @@ import type { ClientAccount, LeadItem } from '../../lib/client-portal-api';
 
 export default function ClientDashboard() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const [emailInput, setEmailInput] = useState<string>('');
-  const [passwordInput, setPasswordInput] = useState<string>('');
+  const [emailInput, setEmailInput] = useState<string>('demo@foundly.pl');
+  const [passwordInput, setPasswordInput] = useState<string>('haslo123');
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [authError, setAuthError] = useState<string>('');
   
@@ -20,32 +20,33 @@ export default function ClientDashboard() {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [isSyncing, setIsSyncing] = useState<boolean>(false);
 
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!emailInput.trim() || !passwordInput.trim()) {
-      setAuthError('Wprowadź e-mail oraz hasło.');
-      return;
+  const handleLogin = (e?: React.FormEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
     }
 
-    if (passwordInput.length < 3) {
-      setAuthError('Hasło musi składać się z co najmniej 3 znaków.');
-      return;
-    }
+    const currentEmail = emailInput.trim() || 'demo@foundly.pl';
+    const currentPassword = passwordInput.trim() || 'haslo123';
 
     // Set client account context
     setActiveAccount({
       ...DEMO_CLIENT_ACCOUNT,
-      email: emailInput,
-      clientName: emailInput.split('@')[0].toUpperCase(),
-      companyName: emailInput.includes('demo') ? DEMO_CLIENT_ACCOUNT.companyName : `Firma ${emailInput.split('@')[0]}`
+      email: currentEmail,
+      clientName: currentEmail.split('@')[0].toUpperCase(),
+      companyName: currentEmail.includes('demo') ? DEMO_CLIENT_ACCOUNT.companyName : `Firma ${currentEmail.split('@')[0]}`
     });
 
     setIsAuthenticated(true);
     setAuthError('');
   };
 
-  const handleDemoLogin = () => {
-    setEmailInput(DEMO_CLIENT_ACCOUNT.email);
+  const handleDemoLogin = (e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    setEmailInput('demo@foundly.pl');
     setPasswordInput('haslo123');
     setActiveAccount(DEMO_CLIENT_ACCOUNT);
     setIsAuthenticated(true);
@@ -153,14 +154,15 @@ export default function ClientDashboard() {
 
           <div className="pt-4 border-t border-white/10 text-center space-y-3">
             <button
+              type="button"
               onClick={handleDemoLogin}
-              className="w-full py-3.5 px-4 rounded-xl bg-white/10 border border-white/20 hover:bg-white/20 text-white font-bold text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2 shadow-lg"
+              className="w-full py-3.5 px-4 rounded-xl bg-white/10 border border-white/20 hover:bg-white/20 text-white font-bold text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2 shadow-lg cursor-pointer"
             >
               <Zap className="w-4 h-4 text-indigo-400 fill-indigo-400" />
               <span>Szybkie Logowanie Konto Demo (1-Click)</span>
             </button>
             <p className="text-[10px] text-white/40">
-              Użyj dowolnego e-maila i hasła lub kliknij przycisk powyżej.
+              Pola są wstępnie uzupełnione. Kliknij dowolny przycisk logowania.
             </p>
           </div>
         </div>
@@ -188,6 +190,7 @@ export default function ClientDashboard() {
 
         <div className="flex flex-wrap items-center gap-3">
           <button
+            type="button"
             onClick={handleManualSync}
             disabled={isSyncing}
             className="px-4 py-2.5 rounded-xl bg-indigo-500/20 border border-indigo-500/40 text-indigo-300 font-bold text-xs uppercase tracking-wider hover:bg-indigo-500/30 transition-all flex items-center gap-2"
@@ -197,6 +200,7 @@ export default function ClientDashboard() {
           </button>
 
           <button
+            type="button"
             onClick={() => setIsAuthenticated(false)}
             className="px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white/60 font-bold text-xs uppercase tracking-wider hover:text-white hover:bg-white/10 transition-all flex items-center gap-2"
           >
@@ -423,7 +427,7 @@ export default function ClientDashboard() {
 
         <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
           <a href="mailto:kontakt@foundly.pl" className="flex-1 md:flex-initial">
-            <button className="w-full px-6 h-12 rounded-xl bg-white text-black font-black text-xs uppercase tracking-widest hover:bg-zinc-200 transition-colors flex items-center justify-center gap-2">
+            <button type="button" className="w-full px-6 h-12 rounded-xl bg-white text-black font-black text-xs uppercase tracking-widest hover:bg-zinc-200 transition-colors flex items-center justify-center gap-2">
               <MessageSquare className="w-4 h-4" />
               <span>Napisz do Opiekuna</span>
             </button>
