@@ -13,16 +13,16 @@ import FAQ from '../components/FAQ.astro';
 import Footer from '../components/Footer.astro';
 ---
 
-<Layout title="Foundly Agencja - Nowoczesne Strony WWW + Wersja Startowa do Kampanii w 48h">
+<Layout title="Foundly Agencja - Strony WWW, Kampanie Ads, SEO dla Firm">
 	<Navbar />
 	<main>
 		<Hero />
 		<WhyUs />
+		<IndustrySelector />
 		<PricingSection client:visible />
 		<CalculatorWizard client:visible />
-		<IndustrySelector />
 		<Process />
-		{/* <Portfolio /> */}
+		<Portfolio />
 		<Testimonials />
 		<FAQ />
 	</main>
