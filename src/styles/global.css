@@ -22,6 +22,18 @@
     -webkit-font-smoothing: antialiased;
   }
 
+  /* Force pointer cursor for all buttons, links and interactive elements */
+  button,
+  a,
+  [role="button"],
+  input[type="submit"],
+  input[type="button"],
+  input[type="reset"],
+  summary,
+  label[for] {
+    cursor: pointer !important;
+  }
+
   ::selection {
     background-color: rgba(99, 102, 241, 0.3);
     color: #ffffff;
