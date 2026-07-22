@@ -131,7 +131,7 @@ export default function PricingSection() {
 
                 <ul className="space-y-4 mb-10">
                   {[
-                    "Strona WWW za 0 PLN na start (wdrożenie 48h)",
+                    "Strona WWW za 0 PLN na start (Wersja Startowa w 48h)",
                     "Hosting, szybki serwer i certyfikat SSL w cenie",
                     "Pozycjonowanie w Google Maps & Wizytówka",
                     "Stałe miesięczne raporty efektów i pozycji",
@@ -272,7 +272,7 @@ export default function PricingSection() {
                 <ul className="space-y-4 mb-10">
                   {[
                     "Strona One-Page (do 6 sekcji)",
-                    "Gotowość w 48h",
+                    "Wersja Startowa (MVP) w 48h",
                     "100% RWD",
                     "Formularz kontaktowy",
                     "Certyfikat SSL"

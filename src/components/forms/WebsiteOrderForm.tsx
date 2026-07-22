@@ -204,7 +204,7 @@ export default function WebsiteOrderForm() {
           type="submit"
           className="w-full h-14 rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-black text-xs uppercase tracking-widest hover:opacity-90 transition-opacity shadow-lg shadow-indigo-500/25 flex items-center justify-center gap-2"
         >
-          <span>Odbierz Wstępny Projekt Strony WWW w 48h</span>
+          <span>Odbierz Wersję Startową (MVP) w 48h</span>
           <Rocket className="w-4 h-4" />
         </button>
       </form>

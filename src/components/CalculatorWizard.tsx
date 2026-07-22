@@ -226,7 +226,7 @@ export default function CalculatorWizard() {
                     </div>
                   </div>
                   <div className="text-xs text-white/40 font-medium italic">
-                    Gwarancja wykonania w 48h
+                    Wersja Startowa (MVP) do kampanii w 48h
                   </div>
                 </div>
 
