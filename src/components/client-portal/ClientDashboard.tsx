@@ -1,9 +1,4 @@
 import React, { useState } from 'react';
-import { 
-  BarChart3, RefreshCw, Smartphone, ShieldCheck, Zap, TrendingUp, CheckCircle2, 
-  Lock, Key, Phone, Mail, FileText, Download, MessageSquare, Search, Filter, 
-  ChevronRight, ExternalLink, Calendar, DollarSign, Activity, AlertCircle, LogOut, Eye, EyeOff
-} from 'lucide-react';
 import { DEMO_CLIENT_ACCOUNT, DEMO_DAILY_METRICS, DEMO_LEADS_HISTORY } from '../../lib/client-portal-api';
 import type { ClientAccount, LeadItem } from '../../lib/client-portal-api';
 
@@ -27,9 +22,7 @@ export default function ClientDashboard() {
     }
 
     const currentEmail = emailInput.trim() || 'demo@foundly.pl';
-    const currentPassword = passwordInput.trim() || 'haslo123';
 
-    // Set client account context
     setActiveAccount({
       ...DEMO_CLIENT_ACCOUNT,
       email: currentEmail,
@@ -57,7 +50,7 @@ export default function ClientDashboard() {
     setIsSyncing(true);
     setTimeout(() => {
       setIsSyncing(false);
-    }, 1200);
+    }, 1000);
   };
 
   const updateLeadStatus = (leadId: string, newStatus: LeadItem['status']) => {
@@ -68,7 +61,9 @@ export default function ClientDashboard() {
   const totalLeads = DEMO_DAILY_METRICS.reduce((acc, m) => acc + m.leadsCount, 0);
   const totalPhoneClicks = DEMO_DAILY_METRICS.reduce((acc, m) => acc + m.phoneClicks, 0);
   const totalFormLeads = DEMO_DAILY_METRICS.reduce((acc, m) => acc + m.formLeads, 0);
-  const totalSpend = DEMO_DAILY_METRICS.reduce((acc, m) => acc + m.googleAdsSpend + m.metaAdsSpend, 0);
+  const totalGoogleSpend = DEMO_DAILY_METRICS.reduce((acc, m) => acc + m.googleAdsSpend, 0);
+  const totalMetaSpend = DEMO_DAILY_METRICS.reduce((acc, m) => acc + m.metaAdsSpend, 0);
+  const totalSpend = totalGoogleSpend + totalMetaSpend;
   const avgCpl = (totalSpend / totalLeads).toFixed(2);
 
   const filteredLeads = leads.filter(lead => {
@@ -81,88 +76,73 @@ export default function ClientDashboard() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-[80vh] flex items-center justify-center p-4">
-        <div className="w-full max-w-md p-8 sm:p-10 rounded-[2.5rem] bg-gradient-to-b from-indigo-950/40 via-purple-950/20 to-black border-2 border-indigo-500/40 backdrop-blur-2xl shadow-2xl space-y-8 relative overflow-hidden">
-          <div className="text-center space-y-3">
-            <div className="w-16 h-16 rounded-3xl bg-indigo-500/10 border border-indigo-500/30 text-indigo-400 flex items-center justify-center mx-auto shadow-lg shadow-indigo-500/10">
-              <Lock className="w-8 h-8" />
-            </div>
-            <span className="text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
-              Strefa Klienta Foundly 24/7
+      <div className="min-h-[85vh] bg-zinc-50 flex items-center justify-center p-4">
+        <div className="w-full max-w-md bg-white border border-zinc-200 rounded-2xl p-8 shadow-sm space-y-6">
+          <div className="space-y-2 text-center">
+            <span className="inline-block px-3 py-1 bg-zinc-100 text-zinc-700 text-[11px] font-bold rounded-md uppercase tracking-wider">
+              Panel Klienta Foundly
             </span>
-            <h1 className="text-3xl font-black uppercase italic tracking-tighter text-white">
-              Zaloguj się do Panelu
+            <h1 className="text-2xl font-bold text-zinc-900 tracking-tight">
+              Logowanie do serwisu
             </h1>
-            <p className="text-xs text-white/50 font-medium">
-              Dostęp na żywo do wyników kampanii Google Ads, Meta Ads oraz pozycji SEO.
+            <p className="text-xs text-zinc-500">
+              Wprowadź swoje dane, aby przejść do raportów i rejestru zapytań.
             </p>
           </div>
 
           {authError && (
-            <div className="p-4 rounded-2xl bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-bold flex items-center gap-2">
-              <AlertCircle className="w-4 h-4 shrink-0" />
-              <span>{authError}</span>
+            <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded-lg font-medium">
+              {authError}
             </div>
           )}
 
-          <form onSubmit={handleLogin} className="space-y-5" noValidate>
+          <form onSubmit={handleLogin} className="space-y-4" noValidate>
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-white/60 mb-2">
-                Adres E-mail Klienta:
+              <label className="block text-xs font-semibold text-zinc-700 mb-1.5">
+                Adres e-mail:
               </label>
               <input
                 type="email"
                 required
                 value={emailInput}
                 onChange={(e) => setEmailInput(e.target.value)}
-                placeholder="np. demo@foundly.pl lub Twój e-mail"
-                className="w-full h-12 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/20 text-xs focus:outline-none focus:border-indigo-500 transition-colors"
+                placeholder="np. demo@foundly.pl"
+                className="w-full h-10 px-3 rounded-lg border border-zinc-300 text-zinc-900 bg-white text-xs focus:outline-none focus:ring-2 focus:ring-zinc-900 transition-all"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-white/60 mb-2">
+              <label className="block text-xs font-semibold text-zinc-700 mb-1.5">
                 Hasło:
               </label>
-              <div className="relative">
-                <input
-                  type={showPassword ? 'text' : 'password'}
-                  required
-                  value={passwordInput}
-                  onChange={(e) => setPasswordInput(e.target.value)}
-                  placeholder="Wprowadź swoje hasło"
-                  className="w-full h-12 pl-4 pr-11 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/20 text-xs focus:outline-none focus:border-indigo-500 transition-colors"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3.5 top-3.5 text-white/40 hover:text-white transition-colors"
-                >
-                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                </button>
-              </div>
+              <input
+                type={showPassword ? 'text' : 'password'}
+                required
+                value={passwordInput}
+                onChange={(e) => setPasswordInput(e.target.value)}
+                placeholder="••••••••"
+                className="w-full h-10 px-3 rounded-lg border border-zinc-300 text-zinc-900 bg-white text-xs focus:outline-none focus:ring-2 focus:ring-zinc-900 transition-all"
+              />
             </div>
 
             <button
               type="submit"
-              className="w-full h-14 rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-black text-xs uppercase tracking-widest hover:opacity-90 transition-opacity shadow-lg shadow-indigo-500/25 flex items-center justify-center gap-2"
+              className="w-full h-11 bg-zinc-900 hover:bg-zinc-800 text-white font-semibold text-xs uppercase tracking-wider rounded-lg transition-colors shadow-sm"
             >
-              <span>Zaloguj do Panelu Wyników</span>
-              <ChevronRight className="w-4 h-4" />
+              Zaloguj do Panelu
             </button>
           </form>
 
-          <div className="pt-4 border-t border-white/10 text-center space-y-3">
+          <div className="pt-4 border-t border-zinc-100 text-center space-y-2">
             <button
               type="button"
               onClick={handleDemoLogin}
-              className="w-full py-3.5 px-4 rounded-xl bg-white/10 border border-white/20 hover:bg-white/20 text-white font-bold text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2 shadow-lg cursor-pointer"
+              className="w-full py-2.5 px-4 bg-zinc-100 hover:bg-zinc-200 text-zinc-800 font-semibold text-xs rounded-lg transition-colors"
             >
-              <Zap className="w-4 h-4 text-indigo-400 fill-indigo-400" />
-              <span>Szybkie Logowanie Konto Demo (1-Click)</span>
+              Zaloguj na Konto Demo (1-Click)
             </button>
-            <p className="text-[10px] text-white/40">
-              Pola są wstępnie uzupełnione. Kliknij dowolny przycisk logowania.
+            <p className="text-[11px] text-zinc-400">
+              Pola są wstępnie uzupełnione. Kliknij dowolny przycisk.
             </p>
           </div>
         </div>
@@ -171,268 +151,264 @@ export default function ClientDashboard() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-      {/* Top Header Bar */}
-      <div className="p-6 sm:p-8 rounded-[2.5rem] bg-gradient-to-r from-indigo-950/40 via-purple-950/20 to-black border border-white/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-        <div className="space-y-2">
-          <div className="flex items-center gap-3">
-            <span className="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span className="text-xs font-mono text-emerald-400 font-bold tracking-wider uppercase">Live API Sync Connected</span>
-            <span className="text-[10px] text-white/40 font-mono">| Ostatnia nocna sync: 01:00 AM</span>
-          </div>
-          <h1 className="text-2xl sm:text-4xl font-black uppercase italic tracking-tight text-white">
-            Witaj, {activeAccount.clientName} 👋
-          </h1>
-          <p className="text-xs sm:text-sm text-white/50 font-medium">
-            Firma: <strong className="text-white">{activeAccount.companyName}</strong> | Witryna: <a href={activeAccount.gscSiteUrl} target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:underline">{activeAccount.gscSiteUrl}</a>
-          </p>
-        </div>
-
-        <div className="flex flex-wrap items-center gap-3">
-          <button
-            type="button"
-            onClick={handleManualSync}
-            disabled={isSyncing}
-            className="px-4 py-2.5 rounded-xl bg-indigo-500/20 border border-indigo-500/40 text-indigo-300 font-bold text-xs uppercase tracking-wider hover:bg-indigo-500/30 transition-all flex items-center gap-2"
-          >
-            <RefreshCw className={`w-3.5 h-3.5 ${isSyncing ? 'animate-spin' : ''}`} />
-            <span>{isSyncing ? 'Synchronizacja API...' : 'Odśwież Dane Live'}</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setIsAuthenticated(false)}
-            className="px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white/60 font-bold text-xs uppercase tracking-wider hover:text-white hover:bg-white/10 transition-all flex items-center gap-2"
-          >
-            <LogOut className="w-3.5 h-3.5" />
-            <span>Wyloguj</span>
-          </button>
-        </div>
-      </div>
-
-      {/* 4 Main KPI Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="p-6 sm:p-8 rounded-[2rem] bg-white/[0.02] border border-white/10 space-y-4 hover:border-indigo-500/40 transition-colors relative overflow-hidden">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-bold uppercase tracking-wider text-white/50">Pozyskane Leady</span>
-            <div className="p-2.5 rounded-xl bg-indigo-500/10 text-indigo-400">
-              <Phone className="w-5 h-5" />
+    <div className="min-h-screen bg-zinc-50 text-zinc-900 font-sans py-6 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto space-y-6">
+        
+        {/* Top Header Bar */}
+        <div className="bg-white border border-zinc-200 rounded-xl p-5 sm:p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-sm">
+          <div className="space-y-1">
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+              <span className="text-xs font-semibold text-emerald-700 uppercase tracking-wider">Live API Sync Connected</span>
+              <span className="text-xs text-zinc-400 font-mono">| Ostatnia aktualizacja: dziś, 01:00</span>
             </div>
+            <h1 className="text-xl sm:text-2xl font-bold text-zinc-900 tracking-tight">
+              Konto: {activeAccount.companyName}
+            </h1>
+            <p className="text-xs text-zinc-500">
+              Użytkownik: <strong className="text-zinc-800">{activeAccount.clientName}</strong> ({activeAccount.email}) &bull; Domena: <span className="font-mono text-zinc-700">{activeAccount.gscSiteUrl}</span>
+            </p>
           </div>
-          <div>
-            <div className="text-3xl sm:text-4xl font-black text-white italic tracking-tight">{totalLeads}</div>
-            <div className="text-[11px] text-emerald-400 font-bold mt-1">↑ +28% od ubiegłego msc</div>
-          </div>
-          <div className="pt-3 border-t border-white/5 flex items-center justify-between text-[11px] font-bold text-white/40">
-            <span>Telefony: <strong className="text-white">{totalPhoneClicks}</strong></span>
-            <span>Formularze: <strong className="text-white">{totalFormLeads}</strong></span>
+
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={handleManualSync}
+              disabled={isSyncing}
+              className="px-3.5 py-2 bg-white border border-zinc-300 text-zinc-700 hover:bg-zinc-50 font-semibold text-xs rounded-lg transition-colors shadow-sm"
+            >
+              {isSyncing ? 'Synchronizowanie...' : 'Odśwież Dane'}
+            </button>
+            <button
+              type="button"
+              onClick={() => setIsAuthenticated(false)}
+              className="px-3.5 py-2 bg-zinc-100 hover:bg-zinc-200 text-zinc-700 font-semibold text-xs rounded-lg transition-colors"
+            >
+              Wyloguj
+            </button>
           </div>
         </div>
 
-        <div className="p-6 sm:p-8 rounded-[2rem] bg-white/[0.02] border border-white/10 space-y-4 hover:border-indigo-500/40 transition-colors">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-bold uppercase tracking-wider text-white/50">Średni CPL (Koszt Leada)</span>
-            <div className="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-400">
-              <DollarSign className="w-5 h-5" />
+        {/* Tabular KPI Summary Grid */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="bg-white border border-zinc-200 rounded-xl p-5 shadow-sm space-y-1">
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">Pozyskane Leady</span>
+            <div className="text-2xl sm:text-3xl font-bold text-zinc-900">{totalLeads}</div>
+            <div className="text-xs text-zinc-500 font-medium">
+              Telefony: <strong className="text-zinc-800">{totalPhoneClicks}</strong> &bull; Formularze: <strong className="text-zinc-800">{totalFormLeads}</strong>
             </div>
           </div>
-          <div>
-            <div className="text-3xl sm:text-4xl font-black text-indigo-400 italic tracking-tight">{avgCpl} PLN</div>
-            <div className="text-[11px] text-white/40 font-medium mt-1">Optymalizacja stawek na żywo</div>
+
+          <div className="bg-white border border-zinc-200 rounded-xl p-5 shadow-sm space-y-1">
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">Średni Koszt Leada (CPL)</span>
+            <div className="text-2xl sm:text-3xl font-bold text-indigo-600">{avgCpl} PLN</div>
+            <div className="text-xs text-emerald-600 font-medium">Stabilny koszt konwersji</div>
           </div>
-          <div className="pt-3 border-t border-white/5 text-[11px] font-bold text-white/40">
-            Stabilny koszt pozyskania leada
+
+          <div className="bg-white border border-zinc-200 rounded-xl p-5 shadow-sm space-y-1">
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">Budżet Ads (Ten msc)</span>
+            <div className="text-2xl sm:text-3xl font-bold text-zinc-900">{totalSpend} PLN</div>
+            <div className="text-xs text-zinc-500 font-medium">
+              Google: <strong className="text-zinc-800">{totalGoogleSpend} PLN</strong> &bull; Meta: <strong className="text-zinc-800">{totalMetaSpend} PLN</strong>
+            </div>
+          </div>
+
+          <div className="bg-white border border-zinc-200 rounded-xl p-5 shadow-sm space-y-1">
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">Widoczność w Google</span>
+            <div className="text-2xl sm:text-3xl font-bold text-emerald-600">TOP 1-3</div>
+            <div className="text-xs text-zinc-500 font-medium">Wizytówka Maps & Frazy Lokalne</div>
           </div>
         </div>
 
-        <div className="p-6 sm:p-8 rounded-[2rem] bg-white/[0.02] border border-white/10 space-y-4 hover:border-indigo-500/40 transition-colors">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-bold uppercase tracking-wider text-white/50">Wydatki na Ads (Ten msc)</span>
-            <div className="p-2.5 rounded-xl bg-purple-500/10 text-purple-400">
-              <Activity className="w-5 h-5" />
-            </div>
+        {/* Tabular API Integrations Table */}
+        <div className="bg-white border border-zinc-200 rounded-xl p-5 shadow-sm space-y-4">
+          <div className="flex items-center justify-between border-b border-zinc-100 pb-3">
+            <h2 className="text-sm font-bold text-zinc-900 uppercase tracking-wider">
+              Status Połączonych Systemów API
+            </h2>
+            <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded border border-emerald-200">
+              Wszystkie API aktywne
+            </span>
           </div>
-          <div>
-            <div className="text-3xl sm:text-4xl font-black text-white italic tracking-tight">{totalSpend} PLN</div>
-            <div className="text-[11px] text-white/40 font-medium mt-1">Płatne bezpośrednio do Google/Meta</div>
-          </div>
-          <div className="pt-3 border-t border-white/5 flex items-center justify-between text-[11px] font-bold text-white/40">
-            <span>Google: <strong className="text-white">474 PLN</strong></span>
-            <span>Meta: <strong className="text-white">160 PLN</strong></span>
+
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-xs">
+              <thead>
+                <tr className="border-b border-zinc-200 text-zinc-400 font-semibold uppercase tracking-wider text-[10px]">
+                  <th className="py-2.5 px-3">System</th>
+                  <th className="py-2.5 px-3">Identyfikator Konta / Zasobu</th>
+                  <th className="py-2.5 px-3">Zakres Pobieranych Danych</th>
+                  <th className="py-2.5 px-3 text-right">Status Sync</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-zinc-100 text-zinc-700">
+                <tr>
+                  <td className="py-2.5 px-3 font-semibold text-zinc-900">Google Analytics 4</td>
+                  <td className="py-2.5 px-3 font-mono text-zinc-500">Property ID: {activeAccount.ga4PropertyId}</td>
+                  <td className="py-2.5 px-3">Unikalne sesje, konwersje, kliknięcia w telefon</td>
+                  <td className="py-2.5 px-3 text-right"><span className="text-emerald-600 font-medium">● Połączono</span></td>
+                </tr>
+                <tr>
+                  <td className="py-2.5 px-3 font-semibold text-zinc-900">Google Ads API</td>
+                  <td className="py-2.5 px-3 font-mono text-zinc-500">Customer ID: {activeAccount.googleAdsCustomerId}</td>
+                  <td className="py-2.5 px-3">Wydatki, koszt kliknięcia, liczba połączeń</td>
+                  <td className="py-2.5 px-3 text-right"><span className="text-emerald-600 font-medium">● Połączono</span></td>
+                </tr>
+                <tr>
+                  <td className="py-2.5 px-3 font-semibold text-zinc-900">Meta Marketing API</td>
+                  <td className="py-2.5 px-3 font-mono text-zinc-500">Ad Account ID: {activeAccount.metaAdAccountId}</td>
+                  <td className="py-2.5 px-3">Wydatki Facebook/Instagram, pozyskane leady</td>
+                  <td className="py-2.5 px-3 text-right"><span className="text-emerald-600 font-medium">● Połączono</span></td>
+                </tr>
+                <tr>
+                  <td className="py-2.5 px-3 font-semibold text-zinc-900">Google Search Console</td>
+                  <td className="py-2.5 px-3 font-mono text-zinc-500">Domain: {activeAccount.gscSiteUrl.replace('https://', '')}</td>
+                  <td className="py-2.5 px-3">Pozycje organiczne w wyszukiwarce na frazy kluczowe</td>
+                  <td className="py-2.5 px-3 text-right"><span className="text-emerald-600 font-medium">● Połączono</span></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
 
-        <div className="p-6 sm:p-8 rounded-[2rem] bg-white/[0.02] border border-white/10 space-y-4 hover:border-indigo-500/40 transition-colors">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-bold uppercase tracking-wider text-white/50">Pozycja w Google Maps</span>
-            <div className="p-2.5 rounded-xl bg-amber-500/10 text-amber-400">
-              <TrendingUp className="w-5 h-5" />
+        {/* Tabular Rejestr Pozyskanych Zapytań */}
+        <div className="bg-white border border-zinc-200 rounded-xl p-5 shadow-sm space-y-4">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-zinc-100 pb-3">
+            <div>
+              <h2 className="text-sm font-bold text-zinc-900 uppercase tracking-wider">
+                Rejestr Pozyskanych Zapytań (Lead Log)
+              </h2>
+              <p className="text-xs text-zinc-500">Pełna lista potencjalnych klientów pozyskanych przez stronę i kampanie.</p>
             </div>
-          </div>
-          <div>
-            <div className="text-3xl sm:text-4xl font-black text-emerald-400 italic tracking-tight">TOP 1-3</div>
-            <div className="text-[11px] text-white/40 font-medium mt-1">Główne frazy branżowe w Twoim mieście</div>
-          </div>
-          <div className="pt-3 border-t border-white/5 text-[11px] font-bold text-white/40">
-            Wizytówka Google Moja Firma aktywna
-          </div>
-        </div>
-      </div>
 
-      {/* Live API Integration Status Details */}
-      <div className="p-6 sm:p-8 rounded-[2.5rem] bg-white/[0.02] border border-white/10 space-y-6">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-white/10 pb-4">
-          <div>
-            <h3 className="text-xl font-black uppercase italic text-white">Połączone Źródła Danych (API Status)</h3>
-            <p className="text-xs text-white/50">Automatyczna pobieralnia statystyk bezpośrednio z oficjalnych systemów.</p>
-          </div>
-          <span className="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs font-bold">
-            Wszystkie API Aktywne (100% Sync)
-          </span>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="p-4 rounded-2xl bg-white/5 border border-white/5 space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-bold uppercase text-white">Google Analytics 4</span>
-              <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
-            </div>
-            <div className="text-[11px] font-mono text-white/40">ID: {activeAccount.ga4PropertyId}</div>
-            <div className="text-[10px] text-indigo-300 font-bold">Sesje & Zdarzenia Konwersji</div>
-          </div>
-
-          <div className="p-4 rounded-2xl bg-white/5 border border-white/5 space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-bold uppercase text-white">Google Ads API</span>
-              <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
-            </div>
-            <div className="text-[11px] font-mono text-white/40">ID: {activeAccount.googleAdsCustomerId}</div>
-            <div className="text-[10px] text-indigo-300 font-bold">Wydatki & Kliknięcia Telefonów</div>
-          </div>
-
-          <div className="p-4 rounded-2xl bg-white/5 border border-white/5 space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-bold uppercase text-white">Meta Marketing API</span>
-              <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
-            </div>
-            <div className="text-[11px] font-mono text-white/40">ID: {activeAccount.metaAdAccountId}</div>
-            <div className="text-[10px] text-purple-300 font-bold">Kampanie Facebook & Instagram</div>
-          </div>
-
-          <div className="p-4 rounded-2xl bg-white/5 border border-white/5 space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-bold uppercase text-white">Search Console API</span>
-              <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
-            </div>
-            <div className="text-[11px] font-mono text-white/40">Domain: {activeAccount.gscSiteUrl.replace('https://', '')}</div>
-            <div className="text-[10px] text-emerald-300 font-bold">Pozycje Fraza Po Frazie</div>
-          </div>
-        </div>
-      </div>
-
-      {/* Interactive Leads Table */}
-      <div className="p-6 sm:p-8 rounded-[2.5rem] bg-white/[0.02] border border-white/10 space-y-6">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-white/10 pb-4">
-          <div>
-            <h3 className="text-xl font-black uppercase italic text-white">Rejestr Pozyskanych Zapytań (Live Feed)</h3>
-            <p className="text-xs text-white/50">Lista potencjalnych klientów pozyskanych przez stronę i kampanie.</p>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto">
-            <div className="relative flex-1 sm:w-64">
-              <Search className="w-3.5 h-3.5 absolute left-3.5 top-3 text-white/40" />
+            <div className="flex items-center gap-2 w-full sm:w-auto">
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Szukaj leada..."
-                className="w-full h-9 pl-9 pr-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/20 text-xs focus:outline-none focus:border-indigo-500"
+                placeholder="Filtruj wg nazwiska lub tel..."
+                className="h-9 px-3 rounded-lg border border-zinc-300 text-zinc-900 text-xs focus:outline-none focus:ring-1 focus:ring-zinc-900 w-full sm:w-56"
               />
-            </div>
 
-            <select
-              value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value)}
-              className="h-9 px-3 rounded-xl bg-white/5 border border-white/10 text-white text-xs font-bold uppercase focus:outline-none focus:border-indigo-500"
-            >
-              <option value="all" className="bg-[#080808]">Wszystkie statusy</option>
-              <option value="Nowy" className="bg-[#080808]">Nowe zapytania</option>
-              <option value="W kontakcie" className="bg-[#080808]">W kontakcie</option>
-              <option value="Zrealizowany" className="bg-[#080808]">Zrealizowane</option>
-            </select>
+              <select
+                value={statusFilter}
+                onChange={(e) => setStatusFilter(e.target.value)}
+                className="h-9 px-3 rounded-lg border border-zinc-300 text-zinc-900 text-xs font-medium focus:outline-none focus:ring-1 focus:ring-zinc-900 bg-white"
+              >
+                <option value="all">Wszystkie statusy</option>
+                <option value="Nowy">Nowy</option>
+                <option value="W kontakcie">W kontakcie</option>
+                <option value="Zrealizowany">Zrealizowany</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr className="border-b border-zinc-200 text-zinc-400 font-semibold uppercase tracking-wider text-[10px]">
+                  <th className="py-2.5 px-3">Data i Czas</th>
+                  <th className="py-2.5 px-3">Kanał Pozyskania</th>
+                  <th className="py-2.5 px-3">Typ Zgłoszenia</th>
+                  <th className="py-2.5 px-3">Klient / Kontakt</th>
+                  <th className="py-2.5 px-3">Szczegóły Zapytania</th>
+                  <th className="py-2.5 px-3 text-right">Status Obsługi</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-zinc-100">
+                {filteredLeads.map((lead) => (
+                  <tr key={lead.id} className="hover:bg-zinc-50 transition-colors">
+                    <td className="py-3 px-3 font-mono text-zinc-500 text-[11px]">{lead.date}</td>
+                    <td className="py-3 px-3 font-semibold text-zinc-800">{lead.source}</td>
+                    <td className="py-3 px-3">
+                      <span className={`px-2 py-0.5 rounded text-[10px] font-semibold ${
+                        lead.type === 'phone' ? 'bg-indigo-50 text-indigo-700 border border-indigo-200' : 'bg-purple-50 text-purple-700 border border-purple-200'
+                      }`}>
+                        {lead.type === 'phone' ? 'Połączenie Tel.' : 'Formularz WWW'}
+                      </span>
+                    </td>
+                    <td className="py-3 px-3">
+                      <div className="font-bold text-zinc-900">{lead.clientName}</div>
+                      <div className="text-zinc-500 font-mono text-[11px]">{lead.contact}</div>
+                    </td>
+                    <td className="py-3 px-3 text-zinc-600 max-w-xs truncate">{lead.details || '-'}</td>
+                    <td className="py-3 px-3 text-right">
+                      <select
+                        value={lead.status}
+                        onChange={(e) => updateLeadStatus(lead.id, e.target.value as LeadItem['status'])}
+                        className={`px-2 py-1 rounded text-[11px] font-semibold border focus:outline-none bg-white ${
+                          lead.status === 'Nowy' ? 'text-amber-800 border-amber-300 bg-amber-50' :
+                          lead.status === 'W kontakcie' ? 'text-indigo-800 border-indigo-300 bg-indigo-50' :
+                          'text-emerald-800 border-emerald-300 bg-emerald-50'
+                        }`}
+                      >
+                        <option value="Nowy">Nowy</option>
+                        <option value="W kontakcie">W kontakcie</option>
+                        <option value="Zrealizowany">Zrealizowany</option>
+                      </select>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
 
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
-            <thead>
-              <tr className="border-b border-white/10 text-[10px] font-black uppercase tracking-wider text-white/40">
-                <th className="py-3 px-4">Data i Czas</th>
-                <th className="py-3 px-4">Typ Zgłoszenia</th>
-                <th className="py-3 px-4">Źródło Ruchu</th>
-                <th className="py-3 px-4">Imię i Kontakt</th>
-                <th className="py-3 px-4">Szczegóły</th>
-                <th className="py-3 px-4 text-right">Status</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-white/5 text-xs font-medium">
-              {filteredLeads.map((lead) => (
-                <tr key={lead.id} className="hover:bg-white/[0.02] transition-colors">
-                  <td className="py-4 px-4 text-white/60 font-mono text-[11px]">{lead.date}</td>
-                  <td className="py-4 px-4">
-                    <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase ${
-                      lead.type === 'phone' ? 'bg-indigo-500/20 text-indigo-300 border border-indigo-500/30' : 'bg-purple-500/20 text-purple-300 border border-purple-500/30'
-                    }`}>
-                      {lead.type === 'phone' ? '📞 Połączenie' : '📝 Formularz'}
-                    </span>
-                  </td>
-                  <td className="py-4 px-4 font-bold text-white/80">{lead.source}</td>
-                  <td className="py-4 px-4">
-                    <div className="font-bold text-white">{lead.clientName}</div>
-                    <div className="text-[11px] text-indigo-400 font-mono">{lead.contact}</div>
-                  </td>
-                  <td className="py-4 px-4 text-white/60 max-w-xs truncate">{lead.details || '-'}</td>
-                  <td className="py-4 px-4 text-right">
-                    <select
-                      value={lead.status}
-                      onChange={(e) => updateLeadStatus(lead.id, e.target.value as LeadItem['status'])}
-                      className={`px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase border focus:outline-none ${
-                        lead.status === 'Nowy' ? 'bg-amber-500/20 text-amber-300 border-amber-500/40' :
-                        lead.status === 'W kontakcie' ? 'bg-indigo-500/20 text-indigo-300 border-indigo-500/40' :
-                        'bg-emerald-500/20 text-emerald-300 border-emerald-500/40'
-                      }`}
-                    >
-                      <option value="Nowy" className="bg-[#080808] text-white">Nowy</option>
-                      <option value="W kontakcie" className="bg-[#080808] text-white">W kontakcie</option>
-                      <option value="Zrealizowany" className="bg-[#080808] text-white">Zrealizowany</option>
-                    </select>
-                  </td>
+        {/* Tabular Daily History Table */}
+        <div className="bg-white border border-zinc-200 rounded-xl p-5 shadow-sm space-y-4">
+          <div className="border-b border-zinc-100 pb-3">
+            <h2 className="text-sm font-bold text-zinc-900 uppercase tracking-wider">
+              Dzienny Zapis Wyników (Ostatnie 7 Dni)
+            </h2>
+            <p className="text-xs text-zinc-500">Zapis dzienny pobrany bezpośrednio z interfejsów API systemów reklamowych.</p>
+          </div>
+
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr className="border-b border-zinc-200 text-zinc-400 font-semibold uppercase tracking-wider text-[10px]">
+                  <th className="py-2.5 px-3">Data</th>
+                  <th className="py-2.5 px-3 text-center">Suma Leadów</th>
+                  <th className="py-2.5 px-3 text-center">Telefony</th>
+                  <th className="py-2.5 px-3 text-center">Formularze</th>
+                  <th className="py-2.5 px-3 text-right">Google Ads</th>
+                  <th className="py-2.5 px-3 text-right">Meta Ads</th>
+                  <th className="py-2.5 px-3 text-right">Koszt Leada (CPL)</th>
+                  <th className="py-2.5 px-3 text-right">Pozycja Maps</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-zinc-100">
+                {DEMO_DAILY_METRICS.map((row, idx) => (
+                  <tr key={idx} className="hover:bg-zinc-50 transition-colors">
+                    <td className="py-2.5 px-3 font-mono font-medium text-zinc-700">{row.date}</td>
+                    <td className="py-2.5 px-3 text-center font-bold text-zinc-900">{row.leadsCount}</td>
+                    <td className="py-2.5 px-3 text-center text-zinc-600">{row.phoneClicks}</td>
+                    <td className="py-2.5 px-3 text-center text-zinc-600">{row.formLeads}</td>
+                    <td className="py-2.5 px-3 text-right text-zinc-700">{row.googleAdsSpend} PLN</td>
+                    <td className="py-2.5 px-3 text-right text-zinc-700">{row.metaAdsSpend} PLN</td>
+                    <td className="py-2.5 px-3 text-right font-semibold text-indigo-600">{row.avgCpl.toFixed(2)} PLN</td>
+                    <td className="py-2.5 px-3 text-right font-semibold text-emerald-700">#{row.topGooglePosition}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
 
-      {/* Support & Rapid Actions */}
-      <div className="p-6 sm:p-8 rounded-[2.5rem] bg-white/[0.02] border border-white/10 flex flex-col md:flex-row items-center justify-between gap-6">
-        <div>
-          <h3 className="text-xl font-black uppercase italic text-white mb-1">
-            Masz pytania do opiekuna lub chcesz wprowadzić zmiany na stronie?
-          </h3>
-          <p className="text-xs text-white/50">
-            Darmowe modyfikacje treści w cenie abonamentu. Dedykowany opiekun odpowiada w max 2h.
-          </p>
-        </div>
-
-        <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
-          <a href="mailto:kontakt@foundly.pl" className="flex-1 md:flex-initial">
-            <button type="button" className="w-full px-6 h-12 rounded-xl bg-white text-black font-black text-xs uppercase tracking-widest hover:bg-zinc-200 transition-colors flex items-center justify-center gap-2">
-              <MessageSquare className="w-4 h-4" />
-              <span>Napisz do Opiekuna</span>
-            </button>
+        {/* Contact Support Footer Box */}
+        <div className="bg-zinc-900 text-white rounded-xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
+          <div>
+            <h3 className="text-base font-bold">Wsparcie i Dedykowana Opieka Foundly</h3>
+            <p className="text-xs text-zinc-400">Potrzebujesz zmian w treściach na stronie lub zmiany budżetu kampanii? Napisz do opiekuna.</p>
+          </div>
+          <a
+            href="mailto:kontakt@foundly.pl"
+            className="px-5 py-2.5 bg-white text-zinc-900 hover:bg-zinc-100 font-semibold text-xs rounded-lg transition-colors uppercase tracking-wider shrink-0"
+          >
+            Kontakt z Opiekunem
           </a>
         </div>
+
       </div>
     </div>
   );
