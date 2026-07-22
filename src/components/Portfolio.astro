@@ -1,0 +1,77 @@
+---
+const works = [
+  {
+    title: "Omega Centrum",
+    category: "Psychoterapia & Zdrowie",
+    desc: "Kompletna strona wielopodstronowa z systemem rezerwacji wizyt i pozycjonowaniem lokalnym.",
+    imageBg: "from-purple-900/40 to-indigo-950/60"
+  },
+  {
+    title: "Paro Clinic",
+    category: "Medycyna Estetyczna",
+    desc: "Elegancja i wysoka konwersja z reklamy Google Ads. Wdrożenie w 48 godzin.",
+    imageBg: "from-indigo-950/50 to-blue-950/60"
+  },
+  {
+    title: "Domki Orle",
+    category: "Turystyka & Wynajem",
+    desc: "Nowoczesny serwis z prezentacją domków i formularzem rezerwacyjnym.",
+    imageBg: "from-emerald-950/40 to-indigo-950/60"
+  },
+  {
+    title: "Mebloton",
+    category: "Stolarz & Meble na wymiar",
+    desc: "Katalog wybranych realizacji kuchennych z przyciskiem szybkiej wyceny.",
+    imageBg: "from-amber-950/40 to-indigo-950/60"
+  }
+];
+---
+
+<section id="realizacje" class="py-28 bg-[#050505] relative">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+      <div>
+        <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-indigo-400 mb-4">
+          <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
+          <span>05. Realizacje</span>
+        </div>
+        <h2 class="text-4xl sm:text-6xl font-black uppercase italic tracking-tighter text-white leading-none">
+          Wybrane projekty <br />
+          <span class="text-white/40">naszych klientów.</span>
+        </h2>
+      </div>
+      <a href="#kalkulator" class="h-14 px-8 rounded-full bg-white/5 border border-white/10 text-white font-black text-xs uppercase tracking-widest hover:bg-white/10 transition-colors inline-flex items-center gap-2">
+        <span>Zamów podobną stronę</span>
+        <span>→</span>
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {works.map((item) => (
+        <div class="group rounded-[2.5rem] bg-white/[0.02] border border-white/5 overflow-hidden hover:border-indigo-500/40 transition-all duration-500 flex flex-col justify-between">
+          <div class={`h-64 sm:h-80 bg-gradient-to-br ${item.imageBg} relative p-8 flex flex-col justify-between overflow-hidden`}>
+            <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent opacity-60"></div>
+            
+            <div class="flex justify-between items-start relative z-10">
+              <span class="px-3 py-1 rounded-full bg-black/50 border border-white/10 backdrop-blur-md text-[10px] font-black uppercase tracking-widest text-white">
+                {item.category}
+              </span>
+              <span class="w-8 h-8 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white text-xs font-bold group-hover:bg-indigo-500 transition-colors">
+                ↗
+              </span>
+            </div>
+
+            <div class="relative z-10">
+              <h3 class="text-3xl font-black uppercase italic text-white tracking-tighter mb-2 group-hover:translate-x-2 transition-transform">
+                {item.title}
+              </h3>
+              <p class="text-xs text-white/70 max-w-md font-medium">
+                {item.desc}
+              </p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,17 +1,30 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
+import WhyUs from '../components/WhyUs.astro';
+import PricingSection from '../components/PricingSection';
+import CalculatorWizard from '../components/CalculatorWizard';
+import IndustrySelector from '../components/IndustrySelector.astro';
+import Process from '../components/Process.astro';
+import Portfolio from '../components/Portfolio.astro';
+import Testimonials from '../components/Testimonials.astro';
+import FAQ from '../components/FAQ.astro';
+import Footer from '../components/Footer.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Foundly Agencja — Nowoczesne Strony WWW + Klienci z Google w 48h">
+	<Navbar />
+	<main>
+		<Hero />
+		<WhyUs />
+		<PricingSection client:visible />
+		<CalculatorWizard client:visible />
+		<IndustrySelector />
+		<Process />
+		<Portfolio />
+		<Testimonials />
+		<FAQ />
+	</main>
+	<Footer />
+</Layout>

@@ -1,0 +1,52 @@
+---
+const faqs = [
+  {
+    q: "Ile naprawdę trwa wykonanie strony?",
+    a: "Pierwszy działający projekt strony firmowej przesyłamy do wglądu w ciągu 48 godzin od wypełnienia briefu i przekazania materiałów. Po akceptacji strona jest publikowana natychmiast."
+  },
+  {
+    q: "Czy strona będzie moja na własność?",
+    a: "Tak. Przy wyborze płatności jednorazowej dostajesz 100% praw do strony, kodu, grafik oraz domeny. Nie trzymamy klientów 'na uwięzi'."
+  },
+  {
+    q: "Jak działa abonament 'Strona za 0 PLN na start'?",
+    a: "W tym modelu nie płacisz żadnej kwoty początkowej za projekt strony. My projektujemy ją i wdrażamy na nasz koszt, a Ty opłacasz jedną stałą miesięczną opłatę obejmującą stronę, hosting, domenę oraz obsługę SEO/Ads."
+  },
+  {
+    q: "Czym różni się Foundly od zwykłej agencji?",
+    a: "Agencje tworzą strony i zostawiają Cię bez ruchu. My łączymy projektowanie błyskawicznych stron z gotowym systemem pozyskiwania klientów z Google (SEO i Google Ads)."
+  },
+  {
+    q: "Czy muszę sam pisać teksty na stronę?",
+    a: "Nie. Na podstawie krótkiego wywiadu i podanej branży przygotowujemy profesjonalne teksty (copywriting) zoptymalizowane pod konwersję i słowa kluczowe w Twoim mieście."
+  }
+];
+---
+
+<section id="faq" class="py-28 bg-[#050505] relative border-t border-white/5">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-indigo-400 mb-4">
+        <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
+        <span>07. Najczęściej Zadawane Pytania</span>
+      </div>
+      <h2 class="text-4xl sm:text-6xl font-black uppercase italic tracking-tighter text-white">
+        Wszystko, co musisz wiedzieć.
+      </h2>
+    </div>
+
+    <div class="space-y-4">
+      {faqs.map((item, idx) => (
+        <details class="group p-6 rounded-2xl bg-white/[0.02] border border-white/5 cursor-pointer transition-all duration-300 [&[open]]:bg-white/[0.05] [&[open]]:border-indigo-500/30">
+          <summary class="flex items-center justify-between text-lg font-black uppercase italic tracking-tight text-white list-none">
+            <span>{item.q}</span>
+            <span class="text-indigo-400 font-bold transition-transform group-open:rotate-180">↓</span>
+          </summary>
+          <p class="mt-4 text-xs sm:text-sm text-white/60 leading-relaxed font-medium">
+            {item.a}
+          </p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

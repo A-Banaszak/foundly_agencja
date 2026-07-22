@@ -1,0 +1,92 @@
+---
+import { Building2, Wrench, Stethoscope, ShieldCheck, Scissors, Car } from 'lucide-react';
+
+const industries = [
+  {
+    icon: Building2,
+    title: "Firma Budowlana & Remonty",
+    desc: "Prezentacja portfolio elewacji, dachów i wykończeń. Formularz darmowej wyceny robót.",
+    tag: "Budownictwo"
+  },
+  {
+    icon: Wrench,
+    title: "Stolarz & Meble na wymiar",
+    desc: "Katalog realizacji kuchni, szaf i mebli. Generowanie zapytań o pomiary u klienta.",
+    tag: "Stolarstwo"
+  },
+  {
+    icon: Stethoscope,
+    title: "Psycholog & Gabinet Medyczny",
+    desc: "Zaufany wizerunek specjalisty, podstrony zabiegów i łatwy system rezerwacji wizyt.",
+    tag: "Medycyna & Health"
+  },
+  {
+    icon: ShieldCheck,
+    title: "Kancelaria Prawna & Biuro Rachunkowe",
+    desc: "Profesjonalny design budujący autorytet. Specjalizacje prawa i konsultacje online.",
+    tag: "Prawo & Finanse"
+  },
+  {
+    icon: Scissors,
+    title: "Salon Beauty & Fryzjer",
+    desc: "Cennik usług, zdjęcia metamorfoz i automatyczne kierowanie do rezerwacji Booksy/Telefon.",
+    tag: "Beauty & Spa"
+  },
+  {
+    icon: Car,
+    title: "Mechanik & Auto Serwis",
+    desc: "Lokalne pozycjonowanie w Google Maps, przycisk natychmiastowego połączenia z lawetą/warsztatem.",
+    tag: "Motoryzacja"
+  }
+];
+---
+
+<section id="branze" class="py-28 bg-[#050505] relative">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+      <div>
+        <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-indigo-400 mb-4">
+          <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
+          <span>03. Dedykowane Rozwiązania</span>
+        </div>
+        <h2 class="text-4xl sm:text-6xl font-black uppercase italic tracking-tighter text-white leading-none">
+          Strony Tworzone <br />
+          <span class="text-white/40">pod specyfikę Twojej branży.</span>
+        </h2>
+      </div>
+      <p class="text-white/50 text-sm max-w-sm font-medium leading-relaxed">
+        Wiemy, czego szukają Twoi klienci. Dostosowujemy układ, teksty i przyciski akcji (CTA) pod specyfikę Twojego rynku.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {industries.map((ind) => {
+        const Icon = ind.icon;
+        return (
+          <div class="p-8 rounded-[2rem] bg-white/[0.02] border border-white/5 hover:border-indigo-500/40 hover:bg-white/[0.04] transition-all duration-300 flex flex-col justify-between group">
+            <div>
+              <div class="flex items-center justify-between mb-6">
+                <div class="p-3 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 group-hover:scale-110 transition-transform">
+                  <Icon class="w-6 h-6" />
+                </div>
+                <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-widest text-white/50">
+                  {ind.tag}
+                </span>
+              </div>
+              <h3 class="text-xl font-black uppercase italic tracking-tight text-white mb-3 group-hover:text-indigo-400 transition-colors">
+                {ind.title}
+              </h3>
+              <p class="text-xs text-white/40 leading-relaxed font-medium mb-6">
+                {ind.desc}
+              </p>
+            </div>
+            <a href="#kalkulator" class="inline-flex items-center gap-2 text-xs font-black uppercase tracking-wider text-indigo-400 group-hover:text-white transition-colors">
+              <span>Zobacz projekt w wycenie</span>
+              <span>→</span>
+            </a>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>
