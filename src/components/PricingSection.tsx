@@ -1,73 +1,252 @@
 import React, { useState } from 'react';
-import { CheckCircle2, Zap, Sparkles } from 'lucide-react';
+import { CheckCircle2, Zap, Sparkles, ShieldCheck, BarChart3, Clock, Unlock } from 'lucide-react';
 
 export default function PricingSection() {
-  const [activeTab, setActiveTab] = useState<'sites' | 'marketing' | 'subscription'>('sites');
+  const [mode, setMode] = useState<'subscription' | 'oneoff'>('subscription');
 
   return (
     <section id="cennik" className="py-28 bg-[#050505] relative overflow-hidden">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-indigo-600/10 blur-[160px] pointer-events-none -z-10"></div>
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[600px] bg-indigo-600/10 blur-[180px] pointer-events-none -z-10"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
-          <div>
-            <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-indigo-400 mb-4">
-              <span className="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
-              <span>02. Przejrzysty Cennik</span>
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-xs font-bold uppercase tracking-widest text-indigo-400 mb-4">
+            <Sparkles className="w-4 h-4 text-indigo-400" />
+            <span>Elastyczne Pakiety & Abonament</span>
+          </div>
+          <h2 className="text-4xl sm:text-6xl font-black uppercase italic tracking-tighter text-white leading-none mb-6">
+            Zyskaj stronę i klientów. <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">
+              Bez dużych kosztów na start.
+            </span>
+          </h2>
+          <p className="text-white/60 text-base leading-relaxed">
+            Wybierz zoptymalizowany model abonamentowy ze stroną za 0 zł z góry lub wdrożenie jednorazowe.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+          <div className="p-6 rounded-3xl bg-white/[0.02] border border-white/10 flex flex-col gap-3 hover:border-indigo-500/40 transition-colors">
+            <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center font-black">
+              <Zap className="w-6 h-6" />
             </div>
-            <h2 className="text-4xl sm:text-6xl font-black uppercase italic tracking-tighter text-white leading-none">
-              Proste Zasady. <br />
-              <span className="text-white/40">Zero ukrytych kosztów.</span>
-            </h2>
+            <h3 className="text-lg font-black uppercase italic text-white tracking-tight">0 PLN na start</h3>
+            <p className="text-xs text-white/50 leading-relaxed font-medium">
+              Nie zamrażasz tysięcy złotych w gotówce. Projektujemy i wdrażamy stronę za 0 zł w ramach abonamentu.
+            </p>
           </div>
 
-          <div className="inline-flex p-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-xl">
+          <div className="p-6 rounded-3xl bg-white/[0.02] border border-white/10 flex flex-col gap-3 hover:border-indigo-500/40 transition-colors">
+            <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center font-black">
+              <Clock className="w-6 h-6" />
+            </div>
+            <h3 className="text-lg font-black uppercase italic text-white tracking-tight">Pełen Pakiet od 1. Dnia</h3>
+            <p className="text-xs text-white/50 leading-relaxed font-medium">
+              Od razu otrzymujesz stronę, hosting, domenkę, pozycjonowanie w Google oraz kampanie reklamowe.
+            </p>
+          </div>
+
+          <div className="p-6 rounded-3xl bg-white/[0.02] border border-white/10 flex flex-col gap-3 hover:border-indigo-500/40 transition-colors">
+            <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center font-black">
+              <BarChart3 className="w-6 h-6" />
+            </div>
+            <h3 className="text-lg font-black uppercase italic text-white tracking-tight">Stałe Raportowanie</h3>
+            <p className="text-xs text-white/50 leading-relaxed font-medium">
+              Co miesiąc dostajesz przejrzysty raport pozycji w Google, liczby telefonów i zapytań od klientów.
+            </p>
+          </div>
+
+          <div className="p-6 rounded-3xl bg-white/[0.02] border border-white/10 flex flex-col gap-3 hover:border-indigo-500/40 transition-colors">
+            <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center font-black">
+              <Unlock className="w-6 h-6" />
+            </div>
+            <h3 className="text-lg font-black uppercase italic text-white tracking-tight">Bez Długich Umów</h3>
+            <p className="text-xs text-white/50 leading-relaxed font-medium">
+              Szanujemy Twoją wolność. Elastyczna umowa z 30-dniowym okresem wypowiedzenia bez lojalnościówek.
+            </p>
+          </div>
+        </div>
+
+        <div className="flex justify-center mb-16">
+          <div className="p-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-xl inline-flex gap-2">
             <button
-              onClick={() => setActiveTab('sites')}
-              className={`px-5 py-2.5 rounded-full text-xs font-black uppercase tracking-wider transition-all duration-300 ${
-                activeTab === 'sites'
-                  ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/30'
+              onClick={() => setMode('subscription')}
+              className={`px-8 py-4 rounded-full text-xs sm:text-sm font-black uppercase tracking-wider transition-all duration-300 flex items-center gap-2 ${
+                mode === 'subscription'
+                  ? 'bg-gradient-to-r from-indigo-500 via-indigo-600 to-purple-600 text-white shadow-xl shadow-indigo-500/30 scale-105'
                   : 'text-white/60 hover:text-white'
               }`}
             >
-              Strony WWW
+              <Sparkles className="w-4 h-4 text-indigo-300" />
+              <span>🔥 Model Abonamentowy (Strona 0 PLN)</span>
             </button>
+
             <button
-              onClick={() => setActiveTab('marketing')}
-              className={`px-5 py-2.5 rounded-full text-xs font-black uppercase tracking-wider transition-all duration-300 ${
-                activeTab === 'marketing'
-                  ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/30'
+              onClick={() => setMode('oneoff')}
+              className={`px-8 py-4 rounded-full text-xs sm:text-sm font-black uppercase tracking-wider transition-all duration-300 ${
+                mode === 'oneoff'
+                  ? 'bg-white text-black shadow-xl'
                   : 'text-white/60 hover:text-white'
               }`}
             >
-              SEO & Ads
-            </button>
-            <button
-              onClick={() => setActiveTab('subscription')}
-              className={`px-5 py-2.5 rounded-full text-xs font-black uppercase tracking-wider transition-all duration-300 flex items-center gap-1.5 ${
-                activeTab === 'subscription'
-                  ? 'bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg shadow-purple-500/30'
-                  : 'text-indigo-400 hover:text-indigo-300'
-              }`}
-            >
-              <Sparkles className="w-3.5 h-3.5" />
-              Strona za 0 zł
+              🛠️ Wdrożenie Jednorazowe
             </button>
           </div>
         </div>
 
-        {activeTab === 'sites' && (
+        {mode === 'subscription' && (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="p-8 sm:p-10 rounded-[2.5rem] bg-white/[0.02] border border-white/10 hover:border-white/20 transition-all flex flex-col justify-between group">
+              <div>
+                <span className="px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-widest text-indigo-400">
+                  Strona 0 zł + SEO
+                </span>
+                <h3 className="text-2xl font-black uppercase italic tracking-tighter text-white mt-4 mb-2">
+                  Abonament Start
+                </h3>
+                <p className="text-xs text-white/40 font-medium uppercase tracking-wider mb-6">
+                  Strona one-page za 0 zł + lokalne SEO w Google.
+                </p>
+
+                <div className="p-4 rounded-2xl bg-white/5 border border-white/5 mb-6">
+                  <div className="text-[11px] font-bold text-indigo-300 uppercase">Wkład własny na start:</div>
+                  <div className="text-2xl font-black text-white italic">0 PLN <span className="text-xs font-normal text-white/40">(zamiast 890 zł)</span></div>
+                </div>
+
+                <div className="flex items-baseline gap-1 mb-8">
+                  <span className="text-4xl sm:text-5xl font-black text-white italic tracking-tighter">390</span>
+                  <span className="text-white/40 text-xs font-black uppercase tracking-widest">PLN / msc</span>
+                </div>
+
+                <ul className="space-y-4 mb-10">
+                  {[
+                    "Strona WWW za 0 PLN na start (wdrożenie 48h)",
+                    "Hosting, szybki serwer i certyfikat SSL w cenie",
+                    "Pozycjonowanie w Google Maps & Wizytówka",
+                    "Stałe miesięczne raporty efektów i pozycji",
+                    "Bez długoterminowych umów (30 dni wypowiedzenia)",
+                    "Darmowe poprawki i opieka techniczna"
+                  ].map((feat, i) => (
+                    <li key={i} className="flex items-center gap-3 text-xs font-bold uppercase tracking-tight text-white/70">
+                      <CheckCircle2 className="w-4 h-4 text-indigo-500 shrink-0" />
+                      <span>{feat}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <a href="#kalkulator" className="w-full">
+                <button className="w-full h-14 rounded-2xl bg-white/5 text-white font-black text-xs uppercase tracking-widest hover:bg-white/10 border border-white/10 transition-colors">
+                  Wybierz Abonament Start
+                </button>
+              </a>
+            </div>
+
+            <div className="p-8 sm:p-10 rounded-[2.5rem] bg-gradient-to-b from-indigo-950/60 via-indigo-900/30 to-black border-2 border-indigo-500 shadow-[0_0_60px_rgba(79,70,229,0.25)] flex flex-col justify-between relative group scale-105">
+              <div className="absolute -top-4 right-8 px-4 py-1.5 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-[10px] font-black uppercase tracking-widest shadow-lg">
+                ★ Najczęściej Wybierany
+              </div>
+              <div>
+                <span className="px-3.5 py-1.5 rounded-full bg-indigo-500/20 border border-indigo-500/40 text-[10px] font-black uppercase tracking-widest text-indigo-300">
+                  Strona 0 zł + SEO + Ads
+                </span>
+                <h3 className="text-2xl font-black uppercase italic tracking-tighter text-white mt-4 mb-2">
+                  Abonament Business Pro
+                </h3>
+                <p className="text-xs text-indigo-200/60 font-medium uppercase tracking-wider mb-6">
+                  Wielopodstronowa strona za 0 zł + potok klientów z reklam.
+                </p>
+
+                <div className="p-4 rounded-2xl bg-indigo-500/10 border border-indigo-500/30 mb-6">
+                  <div className="text-[11px] font-bold text-indigo-300 uppercase">Wkład własny na start:</div>
+                  <div className="text-2xl font-black text-white italic">0 PLN <span className="text-xs font-normal text-white/40">(zamiast 1490 zł)</span></div>
+                </div>
+
+                <div className="flex items-baseline gap-1 mb-8">
+                  <span className="text-4xl sm:text-5xl font-black text-white italic tracking-tighter">690</span>
+                  <span className="text-white/40 text-xs font-black uppercase tracking-widest">PLN / msc</span>
+                </div>
+
+                <ul className="space-y-4 mb-10">
+                  {[
+                    "Pełna witryna firmowa (do 5 podstron) za 0 PLN z góry",
+                    "Prowadzenie Kampanii Google Ads + SEO Lokalne",
+                    "Natychmiastowe telefony i zapytania od klientów",
+                    "Miesięczny raport konwersji i zwrotu z inwestycji",
+                    "Darmowe modyfikacje treści w cenie",
+                    "Zero zobowiązań – umowa na czas nieokreślony"
+                  ].map((feat, i) => (
+                    <li key={i} className="flex items-center gap-3 text-xs font-bold uppercase tracking-tight text-white">
+                      <CheckCircle2 className="w-4 h-4 text-indigo-400 shrink-0" />
+                      <span>{feat}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <a href="#kalkulator" className="w-full">
+                <button className="w-full h-14 rounded-2xl bg-white text-black font-black text-xs uppercase tracking-widest hover:bg-zinc-200 transition-colors shadow-xl">
+                  Zamów Abonament Business Pro
+                </button>
+              </a>
+            </div>
+
+            <div className="p-8 sm:p-10 rounded-[2.5rem] bg-white/[0.02] border border-white/10 hover:border-white/20 transition-all flex flex-col justify-between group">
+              <div>
+                <span className="px-3.5 py-1.5 rounded-full bg-purple-500/20 border border-purple-500/30 text-[10px] font-black uppercase tracking-widest text-purple-300">
+                  Kompletna Dominacja
+                </span>
+                <h3 className="text-2xl font-black uppercase italic tracking-tighter text-white mt-4 mb-2">
+                  Abonament Dominator
+                </h3>
+                <p className="text-xs text-white/40 font-medium uppercase tracking-wider mb-6">
+                  Dedykowana strona/sklep za 0 zł + Full Growth (SEO+Ads).
+                </p>
+
+                <div className="p-4 rounded-2xl bg-white/5 border border-white/5 mb-6">
+                  <div className="text-[11px] font-bold text-purple-300 uppercase">Wkład własny na start:</div>
+                  <div className="text-2xl font-black text-white italic">0 PLN <span className="text-xs font-normal text-white/40">(zamiast 2990 zł)</span></div>
+                </div>
+
+                <div className="flex items-baseline gap-1 mb-8">
+                  <span className="text-4xl sm:text-5xl font-black text-white italic tracking-tighter">990</span>
+                  <span className="text-white/40 text-xs font-black uppercase tracking-widest">PLN / msc</span>
+                </div>
+
+                <ul className="space-y-4 mb-10">
+                  {[
+                    "Dedykowana strona lub sklep e-commerce za 0 PLN",
+                    "Full Growth: SEO + Google Ads + Reklamy Meta Ads",
+                    "Zaawansowana analityka i dedykowany opiekun",
+                    "Priorytetowe raporty i cotygodniowe statystyki",
+                    "Elastyczna umowa bez lojalnościówki"
+                  ].map((feat, i) => (
+                    <li key={i} className="flex items-center gap-3 text-xs font-bold uppercase tracking-tight text-white/70">
+                      <CheckCircle2 className="w-4 h-4 text-purple-400 shrink-0" />
+                      <span>{feat}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <a href="#kalkulator" className="w-full">
+                <button className="w-full h-14 rounded-2xl bg-white/5 text-white font-black text-xs uppercase tracking-widest hover:bg-white/10 border border-white/10 transition-colors">
+                  Wybierz Abonament Dominator
+                </button>
+              </a>
+            </div>
+          </div>
+        )}
+
+        {mode === 'oneoff' && (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="p-8 sm:p-10 rounded-[2.5rem] bg-white/[0.02] border border-white/5 hover:border-white/20 transition-all flex flex-col justify-between group">
               <div>
                 <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-widest text-white/60">
-                  Pakiet 01
+                  Wdrożenie Jednorazowe
                 </span>
                 <h3 className="text-2xl font-black uppercase italic tracking-tighter text-white mt-4 mb-2">
                   Starter One-Page
                 </h3>
                 <p className="text-xs text-white/40 font-medium uppercase tracking-wider mb-6">
-                  Idealny szybki start dla małych firm i usług.
+                  Jednorazowa opłata za stworzenie strony wizytówki.
                 </p>
                 <div className="flex items-baseline gap-1 mb-8">
                   <span className="text-4xl sm:text-5xl font-black text-white italic tracking-tighter">890</span>
@@ -76,11 +255,10 @@ export default function PricingSection() {
                 <ul className="space-y-4 mb-10">
                   {[
                     "Strona One-Page (do 6 sekcji)",
-                    "Pierwszy projekt gotowy w 48h",
-                    "100% Responsywność (RWD)",
-                    "Formularz kontaktowy + Podpięcie mapy",
-                    "Podstawowa optymalizacja SEO On-Page",
-                    "Certyfikat SSL + Podpięcie domeny"
+                    "Gotowość w 48h",
+                    "100% RWD",
+                    "Formularz kontaktowy",
+                    "Certyfikat SSL"
                   ].map((feat, i) => (
                     <li key={i} className="flex items-center gap-3 text-xs font-bold uppercase tracking-tight text-white/60">
                       <CheckCircle2 className="w-4 h-4 text-indigo-500 shrink-0" />
@@ -91,24 +269,21 @@ export default function PricingSection() {
               </div>
               <a href="#kalkulator" className="w-full">
                 <button className="w-full h-14 rounded-2xl bg-white/5 text-white font-black text-xs uppercase tracking-widest hover:bg-white/10 border border-white/10 transition-colors">
-                  Zamów Starter
+                  Zamów Jednorazowo
                 </button>
               </a>
             </div>
 
-            <div className="p-8 sm:p-10 rounded-[2.5rem] bg-gradient-to-b from-indigo-950/40 via-indigo-900/20 to-black border border-indigo-500/50 shadow-[0_0_50px_rgba(79,70,229,0.15)] flex flex-col justify-between relative group scale-105">
-              <div className="absolute -top-4 right-8 px-4 py-1 rounded-full bg-indigo-600 text-white text-[10px] font-black uppercase tracking-widest shadow-lg">
-                Najczęściej Wybierany
-              </div>
+            <div className="p-8 sm:p-10 rounded-[2.5rem] bg-white/[0.02] border border-white/10 hover:border-white/20 transition-all flex flex-col justify-between group">
               <div>
-                <span className="px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-500/30 text-[10px] font-black uppercase tracking-widest text-indigo-400">
-                  Pakiet 02
+                <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-widest text-indigo-400">
+                  Wdrożenie Jednorazowe
                 </span>
                 <h3 className="text-2xl font-black uppercase italic tracking-tighter text-white mt-4 mb-2">
                   Business Multi-Page
                 </h3>
-                <p className="text-xs text-indigo-300/60 font-medium uppercase tracking-wider mb-6">
-                  Kompletna strona z dedykowanymi podstronami oferty.
+                <p className="text-xs text-white/40 font-medium uppercase tracking-wider mb-6">
+                  Strona wielopodstronowa dla firmy.
                 </p>
                 <div className="flex items-baseline gap-1 mb-8">
                   <span className="text-4xl sm:text-5xl font-black text-white italic tracking-tighter">1490</span>
@@ -116,23 +291,22 @@ export default function PricingSection() {
                 </div>
                 <ul className="space-y-4 mb-10">
                   {[
-                    "Strona Wielopodstronowa (do 5 podstron)",
-                    "Dedykowana podstrona Oferty i O Nas",
-                    "Sekcja Realizacji / FAQ / Galeria",
-                    "Zaawansowana optymalizacja SEO On-Page",
-                    "Podpięcie Analityki (Google Analytics 4)",
-                    "2 tury korekt w cenie + opieka 30 dni"
+                    "Strona do 5 podstron",
+                    "Osobna oferta i o nas",
+                    "Optymalizacja SEO On-Page",
+                    "Podpięcie Analityki GA4",
+                    "2 tury poprawek"
                   ].map((feat, i) => (
-                    <li key={i} className="flex items-center gap-3 text-xs font-bold uppercase tracking-tight text-white/90">
-                      <CheckCircle2 className="w-4 h-4 text-indigo-400 shrink-0" />
+                    <li key={i} className="flex items-center gap-3 text-xs font-bold uppercase tracking-tight text-white/60">
+                      <CheckCircle2 className="w-4 h-4 text-indigo-500 shrink-0" />
                       <span>{feat}</span>
                     </li>
                   ))}
                 </ul>
               </div>
               <a href="#kalkulator" className="w-full">
-                <button className="w-full h-14 rounded-2xl bg-white text-black font-black text-xs uppercase tracking-widest hover:bg-zinc-200 transition-colors shadow-lg shadow-white/10">
-                  Zamów Business
+                <button className="w-full h-14 rounded-2xl bg-white/5 text-white font-black text-xs uppercase tracking-widest hover:bg-white/10 border border-white/10 transition-colors">
+                  Zamów Jednorazowo
                 </button>
               </a>
             </div>
@@ -140,13 +314,13 @@ export default function PricingSection() {
             <div className="p-8 sm:p-10 rounded-[2.5rem] bg-white/[0.02] border border-white/5 hover:border-white/20 transition-all flex flex-col justify-between group">
               <div>
                 <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-widest text-white/60">
-                  Pakiet 03
+                  Sklep / Custom
                 </span>
                 <h3 className="text-2xl font-black uppercase italic tracking-tighter text-white mt-4 mb-2">
-                  E-Commerce / Custom
+                  E-Commerce Premium
                 </h3>
                 <p className="text-xs text-white/40 font-medium uppercase tracking-wider mb-6">
-                  Sklep internetowy lub dedykowany portal z integracjami.
+                  Sklep internetowy z płatnościami online.
                 </p>
                 <div className="flex items-baseline gap-1 mb-8">
                   <span className="text-3xl font-black text-white italic tracking-tighter">od 2990</span>
@@ -154,12 +328,10 @@ export default function PricingSection() {
                 </div>
                 <ul className="space-y-4 mb-10">
                   {[
-                    "Sklep internetowy z płatnościami online (BLIK/Karty)",
-                    "Integracja kurierów (InPost, DPD, Paczkomaty)",
-                    "Panel zarządzania produktami i zamówieniami",
-                    "Dedykowane funkcjonalności i rezerwacje online",
-                    "Zaawansowane moduły marketingowe i porzucone koszyki",
-                    "Indywidualne wsparcie opiekuna"
+                    "Sklep i płatności BLIK/Karty",
+                    "Integracja InPost i kurierów",
+                    "Panel zarządczy",
+                    "Dedykowany opiekun"
                   ].map((feat, i) => (
                     <li key={i} className="flex items-center gap-3 text-xs font-bold uppercase tracking-tight text-white/60">
                       <CheckCircle2 className="w-4 h-4 text-indigo-500 shrink-0" />
@@ -170,166 +342,10 @@ export default function PricingSection() {
               </div>
               <a href="#kalkulator" className="w-full">
                 <button className="w-full h-14 rounded-2xl bg-white/5 text-white font-black text-xs uppercase tracking-widest hover:bg-white/10 border border-white/10 transition-colors">
-                  Wycena Indywidualna
+                  Zapytaj o Sklep
                 </button>
               </a>
             </div>
-          </div>
-        )}
-
-        {activeTab === 'marketing' && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="p-8 sm:p-10 rounded-[2.5rem] bg-white/[0.02] border border-white/5 hover:border-white/20 transition-all flex flex-col justify-between">
-              <div>
-                <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-widest text-indigo-400">
-                  SEO Lokalne
-                </span>
-                <h3 className="text-2xl font-black uppercase italic tracking-tighter text-white mt-4 mb-2">
-                  Pozycjonowanie w Google
-                </h3>
-                <p className="text-xs text-white/40 font-medium uppercase tracking-wider mb-6">
-                  Wizytówka Google Moja Firma + Frazy w Twoim mieście.
-                </p>
-                <div className="flex items-baseline gap-1 mb-8">
-                  <span className="text-4xl sm:text-5xl font-black text-white italic tracking-tighter">490</span>
-                  <span className="text-white/40 text-xs font-black uppercase tracking-widest">PLN / msc</span>
-                </div>
-                <ul className="space-y-4 mb-10">
-                  {[
-                    "Optymalizacja wizytówki Google Maps",
-                    "Pozycjonowanie na frazy lokalne (np. stolarz Kraków)",
-                    "Analiza konkurencji i audyt treści",
-                    "Miesięczny raport pozycji i ruchu",
-                    "Zero długoterminowych umów (30 dni wypowiedzenia)"
-                  ].map((feat, i) => (
-                    <li key={i} className="flex items-center gap-3 text-xs font-bold uppercase tracking-tight text-white/60">
-                      <CheckCircle2 className="w-4 h-4 text-indigo-500 shrink-0" />
-                      <span>{feat}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <a href="#kalkulator" className="w-full">
-                <button className="w-full h-14 rounded-2xl bg-white/5 text-white font-black text-xs uppercase tracking-widest hover:bg-white/10 border border-white/10 transition-colors">
-                  Wybierz SEO
-                </button>
-              </a>
-            </div>
-
-            <div className="p-8 sm:p-10 rounded-[2.5rem] bg-gradient-to-b from-indigo-950/40 via-indigo-900/20 to-black border border-indigo-500/50 shadow-[0_0_50px_rgba(79,70,229,0.15)] flex flex-col justify-between scale-105">
-              <div>
-                <span className="px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-500/30 text-[10px] font-black uppercase tracking-widest text-indigo-400">
-                  Kampanie Ads
-                </span>
-                <h3 className="text-2xl font-black uppercase italic tracking-tighter text-white mt-4 mb-2">
-                  Google & Meta Ads
-                </h3>
-                <p className="text-xs text-indigo-300/60 font-medium uppercase tracking-wider mb-6">
-                  Natychmiastowy potok zapytań i połączeń.
-                </p>
-                <div className="flex items-baseline gap-1 mb-8">
-                  <span className="text-4xl sm:text-5xl font-black text-white italic tracking-tighter">690</span>
-                  <span className="text-white/40 text-xs font-black uppercase tracking-widest">PLN / msc + budżet</span>
-                </div>
-                <ul className="space-y-4 mb-10">
-                  {[
-                    "Prowadzenie płatnych reklam w Google i na Facebooku",
-                    "Konfiguracja celów: Telefoniczne zamówienia & Formularze",
-                    "Bieżąca optymalizacja stawek i wykluczeń",
-                    "Projekt banerów i tekstów reklamowych",
-                    "Pełna analityka konwersji i zwrotu z inwestycji (ROAS)"
-                  ].map((feat, i) => (
-                    <li key={i} className="flex items-center gap-3 text-xs font-bold uppercase tracking-tight text-white/90">
-                      <CheckCircle2 className="w-4 h-4 text-indigo-400 shrink-0" />
-                      <span>{feat}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <a href="#kalkulator" className="w-full">
-                <button className="w-full h-14 rounded-2xl bg-white text-black font-black text-xs uppercase tracking-widest hover:bg-zinc-200 transition-colors">
-                  Uruchom Kampanie Ads
-                </button>
-              </a>
-            </div>
-
-            <div className="p-8 sm:p-10 rounded-[2.5rem] bg-white/[0.02] border border-white/5 hover:border-white/20 transition-all flex flex-col justify-between">
-              <div>
-                <span className="px-3 py-1 rounded-full bg-purple-500/20 border border-purple-500/30 text-[10px] font-black uppercase tracking-widest text-purple-400">
-                  Kompletny Wzrost
-                </span>
-                <h3 className="text-2xl font-black uppercase italic tracking-tighter text-white mt-4 mb-2">
-                  Full Growth (SEO + Ads)
-                </h3>
-                <p className="text-xs text-white/40 font-medium uppercase tracking-wider mb-6">
-                  Pełna dominacja w Twojej branży i regionie.
-                </p>
-                <div className="flex items-baseline gap-1 mb-8">
-                  <span className="text-4xl sm:text-5xl font-black text-white italic tracking-tighter">990</span>
-                  <span className="text-white/40 text-xs font-black uppercase tracking-widest">PLN / msc</span>
-                </div>
-                <ul className="space-y-4 mb-10">
-                  {[
-                    "Połączenie SEO Lokalnego i Kampanii Google Ads",
-                    "Ciągłe testowanie A/B landing page'a pod konwersję",
-                    "Priorytetowe wsparcie i opieka techniczna strony",
-                    "Dedykowany konsultant marketingowy"
-                  ].map((feat, i) => (
-                    <li key={i} className="flex items-center gap-3 text-xs font-bold uppercase tracking-tight text-white/60">
-                      <CheckCircle2 className="w-4 h-4 text-indigo-500 shrink-0" />
-                      <span>{feat}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <a href="#kalkulator" className="w-full">
-                <button className="w-full h-14 rounded-2xl bg-white/5 text-white font-black text-xs uppercase tracking-widest hover:bg-white/10 border border-white/10 transition-colors">
-                  Wybierz Full Growth
-                </button>
-              </a>
-            </div>
-          </div>
-        )}
-
-        {activeTab === 'subscription' && (
-          <div className="max-w-4xl mx-auto p-10 sm:p-14 rounded-[3rem] bg-gradient-to-br from-indigo-950/60 via-purple-950/40 to-black border-2 border-indigo-500/60 shadow-[0_0_80px_rgba(99,102,241,0.25)] relative overflow-hidden">
-            <div className="absolute top-0 right-0 p-8 text-indigo-400/20 font-black italic text-9xl pointer-events-none select-none">
-              0 PLN
-            </div>
-
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/20 border border-indigo-500/40 text-xs font-bold uppercase tracking-widest text-indigo-300 mb-6">
-              <Sparkles className="w-4 h-4 text-indigo-400" />
-              <span>Model Abonamentowy All-In-One</span>
-            </div>
-
-            <h3 className="text-3xl sm:text-5xl font-black uppercase italic tracking-tighter text-white mb-6">
-              Strona WWW za 0 PLN na start <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-300">
-                + Marketing w 1 stałej racie!
-              </span>
-            </h3>
-
-            <p className="text-white/70 text-sm sm:text-base leading-relaxed mb-8 max-w-2xl">
-              Nie chcesz płacić kilku tysięcy złotych z góry za stronę? Oferujemy unikalny model: **projektujemy i wdrażamy pełną stronę firmową za 0 zł**, a Ty opłacasz jedynie stałą miesięczną opłatę za jej utrzymanie oraz stałe pozyskiwanie klientów (SEO + Reklamy).
-            </p>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
-              <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
-                <div className="text-2xl font-black text-white italic mb-1">0 PLN z góry</div>
-                <div className="text-xs text-white/50 font-medium">Brak ryzyka. Projektujesz stronę bez angażowania kapitału początkowego.</div>
-              </div>
-              <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
-                <div className="text-2xl font-black text-indigo-400 italic mb-1">od 390 PLN / msc</div>
-                <div className="text-xs text-white/50 font-medium">W cenie: Strona + Hosting + Domena + Opieka + SEO/Google Ads.</div>
-              </div>
-            </div>
-
-            <a href="#kalkulator">
-              <button className="h-16 px-10 rounded-full bg-white text-black font-black text-xs uppercase tracking-widest hover:bg-zinc-200 transition-colors shadow-2xl flex items-center gap-3">
-                <span>Zapytaj o abonament z 0 PLN na start</span>
-                <Zap className="w-4 h-4 text-indigo-600 fill-indigo-600" />
-              </button>
-            </a>
           </div>
         )}
       </div>
