@@ -14,7 +14,6 @@ export default function CalculatorWizard() {
   });
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
-  // Prices calculation
   const getSitePrice = () => {
     if (sitePackage === 'starter') return 890;
     if (sitePackage === 'business') return 1490;
@@ -68,7 +67,6 @@ export default function CalculatorWizard() {
           </div>
         ) : (
           <div className="p-8 sm:p-12 rounded-[2.5rem] bg-white/[0.02] border border-white/10 shadow-2xl backdrop-blur-xl relative">
-            {/* Step Indicators */}
             <div className="flex items-center justify-between mb-10 pb-6 border-b border-white/10">
               <div className={`flex items-center gap-2 text-xs font-black uppercase tracking-wider ${step >= 1 ? 'text-indigo-400' : 'text-white/20'}`}>
                 <span className="w-6 h-6 rounded-full bg-indigo-500/20 border border-indigo-500/40 flex items-center justify-center text-[10px]">1</span>
@@ -86,7 +84,6 @@ export default function CalculatorWizard() {
               </div>
             </div>
 
-            {/* STEP 1: Industry */}
             {step === 1 && (
               <div>
                 <h3 className="text-xl font-black uppercase italic text-white mb-6">
@@ -132,14 +129,12 @@ export default function CalculatorWizard() {
               </div>
             )}
 
-            {/* STEP 2: Website & Marketing Packages */}
             {step === 2 && (
               <div>
                 <h3 className="text-xl font-black uppercase italic text-white mb-6">
                   Krok 2: Wybierz pakiet strony oraz opcjonalny marketing
                 </h3>
 
-                {/* Website Packages */}
                 <div className="mb-8">
                   <div className="text-xs font-bold uppercase tracking-wider text-white/40 mb-3">Pakiet Strony WWW:</div>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -165,7 +160,6 @@ export default function CalculatorWizard() {
                   </div>
                 </div>
 
-                {/* Marketing Packages */}
                 <div className="mb-10">
                   <div className="text-xs font-bold uppercase tracking-wider text-white/40 mb-3">Dodatkowy Marketing (Pozyskiwanie klientów):</div>
                   <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
@@ -192,7 +186,6 @@ export default function CalculatorWizard() {
                   </div>
                 </div>
 
-                {/* Live Estimation Bar */}
                 <div className="p-6 rounded-2xl bg-white/5 border border-white/10 mb-8 flex flex-col sm:flex-row items-center justify-between gap-4">
                   <div>
                     <div className="text-xs font-bold uppercase tracking-widest text-white/40">Szacowana Inwestycja:</div>
@@ -228,7 +221,6 @@ export default function CalculatorWizard() {
               </div>
             )}
 
-            {/* STEP 3: Contact Form */}
             {step === 3 && (
               <form onSubmit={handleSubmit}>
                 <h3 className="text-xl font-black uppercase italic text-white mb-2">

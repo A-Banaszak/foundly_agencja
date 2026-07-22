@@ -6,11 +6,9 @@ export default function PricingSection() {
 
   return (
     <section id="cennik" className="py-28 bg-[#050505] relative overflow-hidden">
-      {/* Background Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-indigo-600/10 blur-[160px] pointer-events-none -z-10"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
           <div>
             <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-indigo-400 mb-4">
@@ -23,7 +21,6 @@ export default function PricingSection() {
             </h2>
           </div>
 
-          {/* Tabs Switcher */}
           <div className="inline-flex p-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-xl">
             <button
               onClick={() => setActiveTab('sites')}
@@ -59,10 +56,8 @@ export default function PricingSection() {
           </div>
         </div>
 
-        {/* Tab Content: Websites */}
         {activeTab === 'sites' && (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Start */}
             <div className="p-8 sm:p-10 rounded-[2.5rem] bg-white/[0.02] border border-white/5 hover:border-white/20 transition-all flex flex-col justify-between group">
               <div>
                 <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-widest text-white/60">
@@ -101,7 +96,6 @@ export default function PricingSection() {
               </a>
             </div>
 
-            {/* Business */}
             <div className="p-8 sm:p-10 rounded-[2.5rem] bg-gradient-to-b from-indigo-950/40 via-indigo-900/20 to-black border border-indigo-500/50 shadow-[0_0_50px_rgba(79,70,229,0.15)] flex flex-col justify-between relative group scale-105">
               <div className="absolute -top-4 right-8 px-4 py-1 rounded-full bg-indigo-600 text-white text-[10px] font-black uppercase tracking-widest shadow-lg">
                 Najczęściej Wybierany
@@ -143,7 +137,6 @@ export default function PricingSection() {
               </a>
             </div>
 
-            {/* Premium */}
             <div className="p-8 sm:p-10 rounded-[2.5rem] bg-white/[0.02] border border-white/5 hover:border-white/20 transition-all flex flex-col justify-between group">
               <div>
                 <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-widest text-white/60">
@@ -184,10 +177,8 @@ export default function PricingSection() {
           </div>
         )}
 
-        {/* Tab Content: Marketing (SEO/Ads) */}
         {activeTab === 'marketing' && (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* SEO Local */}
             <div className="p-8 sm:p-10 rounded-[2.5rem] bg-white/[0.02] border border-white/5 hover:border-white/20 transition-all flex flex-col justify-between">
               <div>
                 <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-widest text-indigo-400">
@@ -225,7 +216,6 @@ export default function PricingSection() {
               </a>
             </div>
 
-            {/* Ads Growth */}
             <div className="p-8 sm:p-10 rounded-[2.5rem] bg-gradient-to-b from-indigo-950/40 via-indigo-900/20 to-black border border-indigo-500/50 shadow-[0_0_50px_rgba(79,70,229,0.15)] flex flex-col justify-between scale-105">
               <div>
                 <span className="px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-500/30 text-[10px] font-black uppercase tracking-widest text-indigo-400">
@@ -263,7 +253,6 @@ export default function PricingSection() {
               </a>
             </div>
 
-            {/* All in One */}
             <div className="p-8 sm:p-10 rounded-[2.5rem] bg-white/[0.02] border border-white/5 hover:border-white/20 transition-all flex flex-col justify-between">
               <div>
                 <span className="px-3 py-1 rounded-full bg-purple-500/20 border border-purple-500/30 text-[10px] font-black uppercase tracking-widest text-purple-400">
@@ -302,7 +291,6 @@ export default function PricingSection() {
           </div>
         )}
 
-        {/* Tab Content: Subscription (Strona za 0 zł) */}
         {activeTab === 'subscription' && (
           <div className="max-w-4xl mx-auto p-10 sm:p-14 rounded-[3rem] bg-gradient-to-br from-indigo-950/60 via-purple-950/40 to-black border-2 border-indigo-500/60 shadow-[0_0_80px_rgba(99,102,241,0.25)] relative overflow-hidden">
             <div className="absolute top-0 right-0 p-8 text-indigo-400/20 font-black italic text-9xl pointer-events-none select-none">
