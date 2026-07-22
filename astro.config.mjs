@@ -8,6 +8,9 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://foundly.pl',
+  devToolbar: {
+    enabled: false
+  },
   vite: {
     plugins: [tailwindcss()]
   },
@@ -15,6 +18,7 @@ export default defineConfig({
   integrations: [react(), sitemap({
     filter: (page) => 
       !page.includes('/panel-foundly') && 
+      !page.includes('/panel-klienta') && 
       !page.includes('/polityka-prywatnosci') && 
       !page.includes('/regulamin')
   })]
