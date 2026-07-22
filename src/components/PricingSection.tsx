@@ -17,11 +17,11 @@ export default function PricingSection() {
           <h2 className="text-4xl sm:text-6xl font-black uppercase italic tracking-tighter text-white leading-none mb-6">
             Zyskaj stronę i klientów. <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">
-              Bez dużych kosztów na start.
+              Bez jednorazowej inwestycji w serwis.
             </span>
           </h2>
           <p className="text-white/60 text-base leading-relaxed">
-            Wybierz zoptymalizowany model abonamentowy ze stroną za 0 zł z góry lub wdrożenie jednorazowe. 100% uczciwych zasad.
+            Zamiast płacić kilka tysięcy za projekt strony - wchodzisz w abonament od pierwszego miesiąca i od razu masz gotową witrynę, hosting, SEO i kampanie. 100% uczciwych zasad.
           </p>
         </div>
 
@@ -30,9 +30,9 @@ export default function PricingSection() {
             <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center font-black">
               <Zap className="w-6 h-6" />
             </div>
-            <h3 className="text-lg font-black uppercase italic text-white tracking-tight">0 PLN na start</h3>
+            <h3 className="text-lg font-black uppercase italic text-white tracking-tight">Strona bez jednorazowej inwestycji</h3>
             <p className="text-xs text-white/50 leading-relaxed font-medium">
-              Nie zamrażasz tysięcy złotych w gotówce. Projektujemy i wdrażamy stronę za 0 zł w ramach abonamentu.
+              Nie zamrażasz tysięcy złotych z góry. Płacisz od 1. miesiąca abonamentu - strona, hosting, domena i opieka techniczna w cenie.
             </p>
           </div>
 
