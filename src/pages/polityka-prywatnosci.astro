@@ -9,11 +9,8 @@ import Footer from '../components/Footer.astro';
 	<main class="pt-32 pb-24">
 		<section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="mb-12">
-				<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-xs font-bold uppercase tracking-widest text-indigo-400 mb-6">
-					<span>Dokument Prawny • Noindex</span>
-				</div>
 				<h1 class="text-4xl sm:text-6xl font-black uppercase italic tracking-tighter text-white leading-none mb-4">
-					Polityka Prywatności
+					Polityka Prywatności i Plików Cookies
 				</h1>
 				<p class="text-white/40 text-xs font-medium uppercase tracking-wider">
 					Ostatnia aktualizacja: {new Date().toLocaleDateString('pl-PL')}
@@ -24,45 +21,79 @@ import Footer from '../components/Footer.astro';
 				<div class="p-8 rounded-3xl bg-white/[0.02] border border-white/10 space-y-4">
 					<h2 class="text-xl font-black uppercase italic text-white">1. Administrator Danych Osobowych</h2>
 					<p>
-						Administratorem Twoich danych osobowych przetwarzanych w ramach serwisu Foundly Agencja (dostępnego pod adresem strony) jest Foundly Agencja. W sprawach związanych z ochroną danych osobowych możesz skontaktować się z nami pod adresem e-mail: <strong class="text-white">kontakt@foundly.pl</strong>.
+						Administratorem Twoich danych osobowych przetwarzanych w ramach serwisu internetowego Foundly Agencja (dostępnego pod adresem <strong class="text-white">foundly.pl</strong>) jest Foundly Agencja (Aleksander Banaszak).
+					</p>
+					<p>
+						W sprawach związanych z ochroną danych osobowych, realizacją praw RODO oraz pytaniami technicznymi możesz skontaktować się z nami pod adresem e-mail: <strong class="text-white">kontakt@foundly.pl</strong> lub telefonicznie: <strong class="text-white">+48 881 548 644</strong>.
 					</p>
 				</div>
 
 				<div class="p-8 rounded-3xl bg-white/[0.02] border border-white/10 space-y-4">
-					<h2 class="text-xl font-black uppercase italic text-white">2. Cel i Podstawa Przetwarzania Danych</h2>
-					<p>Twoje dane osobowe (tzn. Imię, Nazwisko, Numer Telefonu, Adres E-mail oraz szczegóły zapytania) przetwarzane są w celu:</p>
-					<ul class="list-disc pl-5 space-y-2 text-xs">
-						<li>Obsługi zapytań ofertowych i przygotowania wstępnej wyceny projektu (art. 6 ust. 1 lit. b RODO).</li>
-						<li>Realizacji usług tworzenia stron WWW, pozycjonowania SEO oraz prowadzenia kampanii reklamowych (art. 6 ust. 1 lit. b RODO).</li>
-						<li>Wypełnienia obowiązków prawnych ciążących na Administratorze (art. 6 ust. 1 lit. c RODO).</li>
-						<li>Prawnie uzasadnionego interesu polegającego na obronie przed ewentualnymi roszczeniami (art. 6 ust. 1 lit. f RODO).</li>
+					<h2 class="text-xl font-black uppercase italic text-white">2. Cele, Podstawy Prawne i Zakres Przetwarzania Danych</h2>
+					<p>Twoje dane osobowe przetwarzane są wyłącznie w zakresie niezbędnym do świadczenia usług, obsługi zapytań i pozyskiwania kontaktów biznesowych:</p>
+					<ul class="list-disc pl-5 space-y-3 text-xs">
+						<li>
+							<strong class="text-white">Obsługa Formularzy Kontaktowych i Kalkulatorów Wycen:</strong> Zakres: Imię i Nazwisko / Nazwa Firmy, Numer Telefonu, Adres E-mail, Adres Strony WWW, NIP, szczegóły branży i uwag. <br />
+							<em class="text-white/50">Podstawa prawna: art. 6 ust. 1 lit. b RODO (działania dążące do zawarcia umowy na żądanie osoby).</em>
+						</li>
+						<li>
+							<strong class="text-white">Obsługa Widgetu Czatu na Żywo (Live Chat):</strong> Zakres: Imię, Adres E-mail, treść wiadomości czatu, adres IP. Dane przesyłane są bezpośrednio do powiadomień operacyjnych agencji. <br />
+							<em class="text-white/50">Podstawa prawna: art. 6 ust. 1 lit. f RODO (prawnie uzasadniony interes Administratora polegający na szybkiej komunikacji z klientem).</em>
+						</li>
+						<li>
+							<strong class="text-white">Realizacja Umów (Strony WWW, Pozycjonowanie SEO, Ads):</strong> Zakres: Dane rejestrowe firmy, NIP, dane kontaktowe reprezentantów, rozliczenia finansowe. <br />
+							<em class="text-white/50">Podstawa prawna: art. 6 ust. 1 lit. b oraz lit. c RODO (obowiązki podatkowo-księgowe).</em>
+						</li>
+						<li>
+							<strong class="text-white">Analityka i Optymalizacja Serwisu (GA4, GTM, Microsoft Clarity):</strong> Zakres: Zanonimizowany adres IP, rodzaj przeglądarki, czas spędzony na stronie, kliknięcia. <br />
+							<em class="text-white/50">Podstawa prawna: art. 6 ust. 1 lit. a RODO (dobrowolna zgoda wyrażona w banerze cookies).</em>
+						</li>
 					</ul>
 				</div>
 
 				<div class="p-8 rounded-3xl bg-white/[0.02] border border-white/10 space-y-4">
-					<h2 class="text-xl font-black uppercase italic text-white">3. Pliki Cookies i Analityka</h2>
+					<h2 class="text-xl font-black uppercase italic text-white">3. Pliki Cookies (Ciasteczka) i Consent Mode v2</h2>
 					<p>
-						Serwis wykorzystuje pliki cookies (ciasteczka) w celu zapewnienia prawidłowego działania strony, optymalizacji wydajności oraz zbierania anonimowych statystyk ruchu (Google Analytics 4). Możesz w każdej chwili zmienić ustawienia plików cookies w swojej przeglądarce internetowej.
+						Serwis wykorzystuje pliki cookies (ciasteczka) w celu zapewnienia prawidłowego działania strony, optymalizacji wydajności oraz gromadzenia danych analitycznych. Wspieramy standard <strong class="text-white">Google Consent Mode v2</strong>.
 					</p>
+					<ul class="list-disc pl-5 space-y-2 text-xs">
+						<li><strong class="text-white">Cookies Niezbędne:</strong> Niezbędne do poprawnego wyświetlania witryny, bezpieczeństwa oraz działania formularzy i czatu. Nie wymagają zgody.</li>
+						<li><strong class="text-white">Cookies Analityczne:</strong> Służą mierzeniu liczby odwiedzin, źródeł ruchu oraz tworzeniu map ciepła (np. Google Analytics 4, Microsoft Clarity). Instalowane wyłącznie po wyrażeniu zgody.</li>
+						<li><strong class="text-white">Cookies Marketingowe:</strong> Wykorzystywane do personalizacji reklam i mierzenia konwersji z kampanii Google Ads i Meta Ads. Instalowane wyłącznie po wyrażeniu zgody.</li>
+					</ul>
 				</div>
 
 				<div class="p-8 rounded-3xl bg-white/[0.02] border border-white/10 space-y-4">
-					<h2 class="text-xl font-black uppercase italic text-white">4. Prawa Użytkownika</h2>
-					<p>Przysługuje Ci prawo do:</p>
+					<h2 class="text-xl font-black uppercase italic text-white">4. Odbiorcy Danych i Przekazywanie Danych</h2>
+					<p>
+						Dane osobowe mogą być powierzane lub przekazywane zaufanym podmiotom współpracującym w celu obsługi strony i agencji:
+					</p>
+					<ul class="list-disc pl-5 space-y-2 text-xs">
+						<li>Dostawcom usług hostingowych i serwerowych (MyDevil / Hekko).</li>
+						<li>Dostawcom narzędzi analitycznych i marketingowych (Google LLC, Microsoft Ireland).</li>
+						<li>Dostawcom narzędzi powiadomień operacyjnych (Discord Inc. - poprzez bezpieczne połączenie Webhook wyłącznie dla wewnętrznej obsługi zapytań agencji).</li>
+						<li>Biuru rachunkowemu i dostawcom usług księgowych (w przypadku wystawienia faktury VAT).</li>
+					</ul>
+				</div>
+
+				<div class="p-8 rounded-3xl bg-white/[0.02] border border-white/10 space-y-4">
+					<h2 class="text-xl font-black uppercase italic text-white">5. Prawa Osoby, Której Dane Dotyczą</h2>
+					<p>Zgodnie z przepisami RODO przysługuje Ci prawo do:</p>
 					<ul class="list-disc pl-5 space-y-2 text-xs">
 						<li>Dostępu do treści swoich danych oraz otrzymania ich kopii.</li>
-						<li>Sprostowania (poprawiania) swoich danych.</li>
-						<li>Usunięcia danych ("prawo do bycia zapomnianym").</li>
+						<li>Sprostowania (poprawiania) nieprawidłowych lub niekompletnych danych.</li>
+						<li>Usunięcia danych ("prawo do bycia zapomnianym"), o ile nie zachodzą przesłanki prawne nakazujące ich dalsze przechowywanie.</li>
 						<li>Ograniczenia przetwarzania danych.</li>
-						<li>Wniesienia sprzeciwu wobec przetwarzania danych.</li>
-						<li>Wniesienia skargi do organu nadzorczego (Prezesa Urzędu Ochrony Danych Osobowych).</li>
+						<li>Wniesienia sprzeciwu wobec przetwarzania danych na podstawie prawnie uzasadnionego interesu.</li>
+						<li>Cofnięcia zgody na ciasteczka w dowolnym momencie w ustawieniach przeglądarki.</li>
+						<li>Wniesienia skargi do organu nadzorczego (Prezes Urzędu Ochrony Danych Osobowych, ul. Stawki 2, 00-193 Warszawa).</li>
 					</ul>
 				</div>
 
 				<div class="p-8 rounded-3xl bg-white/[0.02] border border-white/10 space-y-4">
-					<h2 class="text-xl font-black uppercase italic text-white">5. Okres Przechowywania Danych</h2>
+					<h2 class="text-xl font-black uppercase italic text-white">6. Okres Przechowywania Danych</h2>
 					<p>
-						Dane osobowe przechowywane są przez okres niezbędny do realizacji obsługi zapytania lub trwania umowy, a po tym czasie przez okres wymagany przepisami prawa powszechnie obowiązującego lub do czasu przedawnienia roszczeń.
+						Dane z formularzy kontaktowych i czatu przechowywane są przez okres trwania kontaktu biznesowego lub do 2 lat od ostatniego kontaktu. Dane niezbędne do celów podatkowych przechowywane są przez 5 lat od końca roku kalendarzowego.
 					</p>
 				</div>
 			</div>
