@@ -4,34 +4,38 @@ import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
 import SubscriptionOrderForm from '../../components/forms/SubscriptionOrderForm';
 import PricingSection from '../../components/PricingSection';
+import FAQ from '../../components/FAQ.astro';
+import { ArrowRight, CheckCircle2, Globe, Search, Megaphone } from 'lucide-react';
 ---
 
-<Layout title="Subskrypcja All-In-One (Strona 0 PLN + Marketing) - Foundly Agencja">
+<Layout title="Subskrypcja All-In-One (Strona + Marketing w Abonamencie) - Foundly Agencja">
 	<Navbar />
 	<main class="pt-32 pb-24">
 		<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			{/* 1. Hero */}
 			<div class="max-w-3xl mb-16">
 				<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/20 border border-indigo-500/40 text-xs font-bold uppercase tracking-widest text-indigo-300 mb-6">
 					<span>Flagowa Usługa • Subskrypcja All-In-One</span>
 				</div>
 				<h1 class="text-4xl sm:text-6xl lg:text-7xl font-black uppercase italic tracking-tighter text-white leading-none mb-8">
-					Strona WWW za 0 PLN z góry. <br />
+					Strona WWW bez opłaty z góry. <br />
 					<span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-indigo-200 to-purple-400">
 						+ Pełen marketing w abonamencie.
 					</span>
 				</h1>
 				<p class="text-white/60 text-lg leading-relaxed">
-					Brak zamrażania środków, pełny zestaw narzędzi pozyskiwania klientów od pierwszego dnia, stałe raporty co miesiąc i zerowe zobowiązania długoterminowe.
+					Zamiast wydawać kilka tysięcy złotych na start - wchodzisz w stałą opłatę miesięczną. Otrzymujesz stronę, szybki hosting, opiekię oraz pozycjonowanie i reklamy od pierwszego dnia.
 				</p>
 			</div>
 
+			{/* 2. Korzyści modelu */}
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-24">
 				<div class="p-8 rounded-[2.5rem] bg-white/[0.02] border border-white/10 flex flex-col justify-between">
 					<div>
-						<div class="text-3xl font-black text-indigo-400 italic mb-2">0 PLN</div>
-						<h3 class="text-xl font-black uppercase italic text-white mb-2">Bez Kosztów na Start</h3>
+						<div class="text-3xl font-black text-indigo-400 italic mb-2">1 msc</div>
+						<h3 class="text-xl font-black uppercase italic text-white mb-2">Opłata od Startu</h3>
 						<p class="text-xs text-white/50 leading-relaxed font-medium">
-							Nie musisz płacić kilku tysięcy złotych z góry za stronę. Projektujemy i wdrażamy witrynę w ramach abonamentu.
+							Brak dużej inwestycji z góry. Opłacasz jedynie 1. miesiąc wybranego abonamentu ze stroną i marketingiem w cenie.
 						</p>
 					</div>
 				</div>
@@ -67,11 +71,59 @@ import PricingSection from '../../components/PricingSection';
 				</div>
 			</div>
 
+			{/* 3. Cennik i pakiety (Najpierw klient zapoznaje się z wariantami) */}
+			<div class="mb-24">
+				<PricingSection client:visible />
+			</div>
+
+			{/* 4. Formularz Konfiguracji / Zamówienia Subskrypcji */}
 			<div class="mb-24">
 				<SubscriptionOrderForm client:visible />
 			</div>
 
-			<PricingSection client:visible />
+			{/* 5. Nawigacja i powiązane usługi */}
+			<div class="mb-24 p-10 rounded-[2.5rem] bg-white/[0.02] border border-white/10">
+				<h3 class="text-2xl font-black uppercase italic text-white mb-6">
+					Interesują Cię pojedyncze usługi bez abonamentu?
+				</h3>
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+					<a href="/uslugi/strony-www" class="p-6 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 transition-all group">
+						<div class="flex items-center gap-3 mb-3">
+							<Globe class="w-5 h-5 text-indigo-400" />
+							<span class="font-black text-sm uppercase italic text-white group-hover:text-indigo-400 transition-colors">Strony Internetowe</span>
+						</div>
+						<p class="text-xs text-white/50 leading-relaxed mb-4">
+							Wdrożenie jednorazowe witryny statycznej, WordPress lub sklepu e-commerce z pełnym przekazaniem praw.
+						</p>
+						<span class="text-xs font-bold text-indigo-400 flex items-center gap-1">Zobacz ofertę stron →</span>
+					</a>
+
+					<a href="/uslugi/seo" class="p-6 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 transition-all group">
+						<div class="flex items-center gap-3 mb-3">
+							<Search class="w-5 h-5 text-indigo-400" />
+							<span class="font-black text-sm uppercase italic text-white group-hover:text-indigo-400 transition-colors">Pozycjonowanie SEO</span>
+						</div>
+						<p class="text-xs text-white/50 leading-relaxed mb-4">
+							Optymalizacja wizytówki Google Maps oraz pozycjonowanie na frazy lokalne dla Twojej obecnej strony.
+						</p>
+						<span class="text-xs font-bold text-indigo-400 flex items-center gap-1">Zobacz ofertę SEO →</span>
+					</a>
+
+					<a href="/uslugi/kampanie-ads" class="p-6 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 transition-all group">
+						<div class="flex items-center gap-3 mb-3">
+							<Megaphone class="w-5 h-5 text-indigo-400" />
+							<span class="font-black text-sm uppercase italic text-white group-hover:text-indigo-400 transition-colors">Kampanie Reklamowe</span>
+						</div>
+						<p class="text-xs text-white/50 leading-relaxed mb-4">
+							Szybki dopływ klientów dzięki płatnym kampaniom Google Ads oraz Meta Ads z bezpośrednim zwrotem z inwestycji.
+						</p>
+						<span class="text-xs font-bold text-indigo-400 flex items-center gap-1">Zobacz kampanie Ads →</span>
+					</a>
+				</div>
+			</div>
+
+			{/* 6. Najczęściej zadawane pytania */}
+			<FAQ />
 		</section>
 	</main>
 	<Footer />

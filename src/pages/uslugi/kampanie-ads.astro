@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
 import AdsCampaignForm from '../../components/forms/AdsCampaignForm';
+import { ArrowRight, Sparkles } from 'lucide-react';
 ---
 
 <Layout title="Płatne Kampanie Reklamowe (Google Ads & Meta Ads) - Foundly Agencja">
@@ -22,6 +23,28 @@ import AdsCampaignForm from '../../components/forms/AdsCampaignForm';
 				<p class="text-white/60 text-lg leading-relaxed">
 					Nie czekaj miesięcy na efekty organiczne. Płatne kampanie reklamowe (Google Ads, Meta Ads / Facebook & Instagram) kierują precyzyjnie wyselekcjonowanych klientów na Twoją stronę od pierwszego dnia.
 				</p>
+			</div>
+
+			{/* Bannerek promujący abonament */}
+			<div class="mb-16 p-8 rounded-[2.5rem] bg-gradient-to-r from-indigo-950/40 via-purple-950/20 to-black border border-indigo-500/30 flex flex-col sm:flex-row items-center justify-between gap-6">
+				<div>
+					<div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-indigo-300 mb-1">
+						<Sparkles class="w-4 h-4" />
+						<span>Wolisz Nową Stronę + Reklamy w 1 Opłacie?</span>
+					</div>
+					<h3 class="text-xl font-black uppercase italic text-white">
+						Sprawdź Subskrypcję All-In-One
+					</h3>
+					<p class="text-xs text-white/60 mt-1">
+						Strona internetowa z Wersją Startową w 48h, pozycjonowanie oraz obsługa reklam w stałym abonamencie bez umów lojalnościowych.
+					</p>
+				</div>
+				<a href="/uslugi/abonament-growth" class="shrink-0">
+					<button class="px-6 h-12 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs uppercase tracking-widest transition-all flex items-center gap-2">
+						<span>Poznaj Subskrypcję</span>
+						<ArrowRight class="w-4 h-4" />
+					</button>
+				</a>
 			</div>
 
 			<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">

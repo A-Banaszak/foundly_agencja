@@ -23,7 +23,7 @@ export default function SubscriptionOrderForm() {
     setErrors({});
 
     sendLeadToDiscord({
-      formTitle: "Zamówienie Abonamentu (Strona 0 PLN)",
+      formTitle: "Zamówienie Abonamentu All-In-One",
       name: formData.name,
       contact: formData.contact,
       fields: [
@@ -41,9 +41,9 @@ export default function SubscriptionOrderForm() {
         <div className="w-14 h-14 rounded-full bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 flex items-center justify-center mx-auto mb-6">
           <CheckCircle2 className="w-8 h-8" />
         </div>
-        <h3 className="text-2xl font-black uppercase italic text-white mb-3">Zgłoszenie zarezerwowane!</h3>
+        <h3 className="text-2xl font-black uppercase italic text-white mb-3">Zgłoszenie odebrane!</h3>
         <p className="text-xs text-white/60 mb-6 leading-relaxed">
-          Zarezerwowaliśmy pakiet ze stroną za 0 zł na start. Skontaktujemy się telefonicznie w 2 godziny z gotowym projektem wstępnym.
+          Skontaktujemy się z Tobą telefonicznie w ciągu 2 godzin, aby doprecyzować szczegóły strony i strategii marketingowej.
         </p>
         <button
           onClick={() => {
@@ -59,17 +59,17 @@ export default function SubscriptionOrderForm() {
   }
 
   return (
-    <div className="p-8 sm:p-12 rounded-[2.5rem] bg-gradient-to-br from-indigo-950/40 via-purple-950/30 to-black border-2 border-indigo-500/50 backdrop-blur-xl shadow-2xl relative overflow-hidden">
+    <div id="zamow-formularz" className="p-8 sm:p-12 rounded-[2.5rem] bg-gradient-to-br from-indigo-950/40 via-purple-950/30 to-black border-2 border-indigo-500/50 backdrop-blur-xl shadow-2xl relative overflow-hidden">
       <div className="mb-8">
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/20 border border-indigo-500/40 text-[11px] font-bold uppercase tracking-widest text-indigo-300 mb-3">
           <Sparkles className="w-3.5 h-3.5" />
           <span>Dedykowany Formularz Subskrypcji All-In-One</span>
         </div>
         <h3 className="text-2xl sm:text-4xl font-black uppercase italic text-white tracking-tight">
-          Zarezerwuj Stronę za 0 PLN na start
+          Skonfiguruj Twój Abonament All-In-One
         </h3>
         <p className="text-xs sm:text-sm text-white/60 font-medium mt-1">
-          Wybierz plan abonamentowy. Stronę projektujemy bez kosztów wstępnych z gwarancją stałych raportów i brakiem długoterminowych umów.
+          Wybierz plan abonamentowy. Stronę WWW, szybki hosting, opiekę oraz marketing otrzymujesz w 1 stałej opłacie bez długoterminowych cyrografów.
         </p>
       </div>
 
@@ -80,9 +80,9 @@ export default function SubscriptionOrderForm() {
           </label>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {[
-              { id: 'start', title: 'Abonament Start', price: '99 zł / msc', desc: 'Strona one-page za 0 zł + SEO' },
-              { id: 'pro', title: 'Business Pro', price: '690 zł / msc', desc: 'Strona multi-page za 0 zł + SEO + Ads' },
-              { id: 'dominator', title: 'Dominator', price: '990 zł / msc', desc: 'Sklep za 0 zł + Full Growth (SEO+Ads)' }
+              { id: 'start', title: 'Abonament Start', price: '99 zł / msc', desc: 'Strona statyczna + SEO Lokalne' },
+              { id: 'pro', title: 'Business Pro', price: '690 zł / msc', desc: 'Strona WordPress + SEO + Ads' },
+              { id: 'dominator', title: 'Dominator', price: '990 zł / msc', desc: 'Sklep WordPress + Full Growth' }
             ].map((item) => (
               <button
                 key={item.id}
@@ -144,7 +144,7 @@ export default function SubscriptionOrderForm() {
 
         <div>
           <label className="block text-xs font-bold uppercase tracking-wider text-white/60 mb-2">
-            Branża lub czym zajmuje się Twoja firma:
+            Branża lub opis projektu:
           </label>
           <textarea
             rows={2}
@@ -159,7 +159,7 @@ export default function SubscriptionOrderForm() {
           type="submit"
           className="w-full h-14 rounded-2xl bg-white text-black font-black text-xs uppercase tracking-widest hover:bg-zinc-200 transition-colors shadow-2xl flex items-center justify-center gap-2"
         >
-          <span>Rezerwuj Stronę za 0 PLN + Marketing</span>
+          <span>Wyślij Zapytanie o Abonament</span>
           <Zap className="w-4 h-4 text-indigo-600 fill-indigo-600" />
         </button>
       </form>

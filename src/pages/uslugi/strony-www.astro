@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
 import WebsiteOrderForm from '../../components/forms/WebsiteOrderForm';
+import { ArrowRight, Sparkles } from 'lucide-react';
 ---
 
 <Layout title="Strony Internetowe dla Firm - Foundly Agencja">
@@ -20,8 +21,30 @@ import WebsiteOrderForm from '../../components/forms/WebsiteOrderForm';
 					</span>
 				</h1>
 				<p class="text-white/60 text-lg leading-relaxed">
-					Tworzymy wyjątkowo szybkie, czytelne i zoptymalizowane pod kątem urządzeń mobilnych strony internetowe. Wszystkie witryny piszemy w ultra-lekkiej technologii Astro.
+					Tworzymy wyjątkowo szybkie, czytelne i zoptymalizowane pod kątem urządzeń mobilnych strony internetowe w nowoczesnej technologii Astro lub WordPress.
 				</p>
+			</div>
+
+			{/* Bannerek promujący abonament */}
+			<div class="mb-16 p-8 rounded-[2.5rem] bg-gradient-to-r from-indigo-950/40 via-purple-950/20 to-black border border-indigo-500/30 flex flex-col sm:flex-row items-center justify-between gap-6">
+				<div>
+					<div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-indigo-300 mb-1">
+						<Sparkles class="w-4 h-4" />
+						<span>Alternatywny Model Rozliczenia</span>
+					</div>
+					<h3 class="text-xl font-black uppercase italic text-white">
+						Nie chcesz wydawać kilku tysięcy z góry za stronę?
+					</h3>
+					<p class="text-xs text-white/60 mt-1">
+						Skorzystaj z Subskrypcji All-In-One: strona, hosting, SEO i reklamy w 1 opłacie abonamentowej.
+					</p>
+				</div>
+				<a href="/uslugi/abonament-growth" class="shrink-0">
+					<button class="px-6 h-12 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs uppercase tracking-widest transition-all flex items-center gap-2">
+						<span>Sprawdź Abonament</span>
+						<ArrowRight class="w-4 h-4" />
+					</button>
+				</a>
 			</div>
 
 			<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
@@ -42,7 +65,7 @@ import WebsiteOrderForm from '../../components/forms/WebsiteOrderForm';
 					<div>
 						<span class="px-3 py-1 rounded-full bg-indigo-500 text-white text-[9px] font-black uppercase tracking-widest">Najczęściej Wybierana</span>
 						<h3 class="text-2xl font-black uppercase italic text-white mt-3 mb-2">Business Multi-Page</h3>
-						<div class="text-3xl font-black text-indigo-300 italic mb-6">od 2 999 PLN</div>
+						<div class="text-3xl font-black text-indigo-300 italic mb-6">od 2 499 PLN</div>
 						<ul class="space-y-3 text-xs font-medium text-white">
 							<li>✓ System CMS WordPress (opcja samodzielnej edycji)</li>
 							<li>✓ Do 5 rozbudowanych podstron</li>
@@ -55,7 +78,7 @@ import WebsiteOrderForm from '../../components/forms/WebsiteOrderForm';
 				<div class="p-8 rounded-[2.5rem] bg-white/[0.02] border border-white/10 flex flex-col justify-between">
 					<div>
 						<h3 class="text-2xl font-black uppercase italic text-white mb-2">Sklep E-Commerce</h3>
-						<div class="text-3xl font-black text-indigo-400 italic mb-6">od 4 999 PLN</div>
+						<div class="text-3xl font-black text-indigo-400 italic mb-6">od 4 499 PLN</div>
 						<ul class="space-y-3 text-xs font-medium text-white/70">
 							<li>✓ System WordPress + Sklep WooCommerce</li>
 							<li>✓ Płatności online BLIK / Przelewy24 / Karty</li>
