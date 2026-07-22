@@ -24,19 +24,6 @@ const isProd = import.meta.env.PROD;
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-		<!-- Cookiebot Banner & Consent Management (Tylko na produkcji, by zapobiec błędowi domeny localhost w dev) -->
-		{isProd && (
-			<script is:inline id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="e661a291-f3e8-4f26-b9df-1fbd8c1ad5c2" data-blockingmode="auto" type="text/javascript"></script>
-		)}
-
-		<!-- Google Tag Manager -->
-		<script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-		})(window,document,'script','dataLayer','GTM-PZG3VR7G');</script>
-		<!-- End Google Tag Manager -->
-
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
 		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -69,10 +56,52 @@ const isProd = import.meta.env.PROD;
 		<meta name="twitter:image" content={ogImageUrl} />
 		<meta name="twitter:image:alt" content="Foundly Agencja - Strony WWW & Pozyskiwanie Klientów" />
 
-		<!-- Dynamic Google Fonts Loading -->
+		<!-- Optimized Google Fonts Preconnect & Display Swap -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet" />
+		<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,700;0,800;1,800&display=swap" rel="stylesheet" />
+
+		<!-- Asynchronous Performance-First Loading for GTM & Cookiebot -->
+		<script is:inline>
+			(function loadThirdPartyScripts() {
+				var loaded = false;
+				function init() {
+					if (loaded) return;
+					loaded = true;
+
+					// Google Tag Manager
+					(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+					new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+					j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+					'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+					})(window,document,'script','dataLayer','GTM-PZG3VR7G');
+
+					// Cookiebot (prod only)
+					if (window.location.hostname !== 'localhost') {
+						var cb = document.createElement('script');
+						cb.id = 'Cookiebot';
+						cb.src = 'https://consent.cookiebot.com/uc.js';
+						cb.setAttribute('data-cbid', 'e661a291-f3e8-4f26-b9df-1fbd8c1ad5c2');
+						cb.setAttribute('data-blockingmode', 'auto');
+						cb.type = 'text/javascript';
+						document.head.appendChild(cb);
+					}
+				}
+
+				var events = ['pointerdown', 'scroll', 'touchstart', 'mousemove', 'keydown'];
+				events.forEach(function(e) {
+					window.addEventListener(e, init, { passive: true, once: true });
+				});
+
+				if ('requestIdleCallback' in window) {
+					requestIdleCallback(function() {
+						setTimeout(init, 3000);
+					});
+				} else {
+					setTimeout(init, 3000);
+				}
+			})();
+		</script>
 	</head>
 	<body class="bg-[#050505] text-white antialiased selection:bg-indigo-500 selection:text-white font-['Plus_Jakarta_Sans',sans-serif]">
 		<!-- Google Tag Manager (noscript) -->
