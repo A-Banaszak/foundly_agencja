@@ -1,56 +1,69 @@
 ---
 const reviews = [
   {
-    quote: "Strona powstała w 48h i od pierwszego dnia zaczęła przynosić zapytania o montaż mebli kuchennych. Wybór pakietu z pozycjonowaniem to była najlepsza decyzja.",
+    quote: "Model abonamentowy w Foundly to idealne rozwiązanie dla naszej agencji. Wdrażają stronę za 0 zł i od razu podłączają kampanie reklamowe, dzięki czemu zyskaliśmy stały dopływ klientów bez wywalania budżetu z góry.",
+    author: "Artur",
+    role: "CEO, ODM Partners",
+    stars: "★★★★★",
+    logo: "/logos/odm.svg"
+  },
+  {
+    quote: "Szukaliśmy agencji, która dostarczy nam nowoczesną stronę bez długoterminowych cyrografów. W Foundly dostaliśmy kompletną witrynę i widoczność w Google w stałej opłacie. Miesięczne raporty jasno pokazują stały wzrost zapytań.",
+    author: "Andrzej",
+    role: "Founder, Rentease.pl",
+    stars: "★★★★★",
+    logo: "/logos/rentease.svg"
+  },
+  {
+    quote: "Profesjonalizm i błyskawiczne tempo. Strona powstała w 48 godzin, a połączenie pozycjonowania z kampanią w Google Ads dało od razu przełożenie na telefoniczne zamówienia z naszego miasta.",
     author: "Marek W.",
-    role: "Stolarz Meble na Wymiar",
-    stars: "★★★★★"
-  },
-  {
-    quote: "Próbowałem z dwiema agencjami i zapłaciłem krocie za stronę, która stała pusta. W Foundly zrobili stronę w 2 dni i od razu włączyli Google Ads. Telefony dzwonią codziennie.",
-    author: "Tomasz K.",
-    role: "Firma Budowlana & Remonty",
-    stars: "★★★★★"
-  },
-  {
-    quote: "Profesjonalnie i bez ściemy. Cennik był jasny od samego początku, żadnych ukrytych opłat po wdrożeniu. Pacjenci bardzo chwalą wygląd i łatwość rezerwacji.",
-    author: "Anna K.",
-    role: "Gabinet Psychoterapii",
-    stars: "★★★★★"
+    role: "Usługi dla Firm",
+    stars: "★★★★★",
+    logo: null
   }
 ];
 ---
 
-<section class="py-28 bg-[#080808] relative border-t border-white/5">
+<section id="opinie" class="py-28 bg-[#080808] relative border-t border-white/5">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center max-w-3xl mx-auto mb-20">
       <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-indigo-400 mb-4">
         <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
-        <span>06. Opinie Klientów</span>
+        <span>Opinie Klientów</span>
       </div>
-      <h2 class="text-4xl sm:text-6xl font-black uppercase italic tracking-tighter text-white leading-none">
-        Co mówią przedsiębiorcy. <br />
-        <span class="text-white/40">Średnia ocen 4.9 / 5.0</span>
+      <h2 class="text-4xl sm:text-6xl font-black uppercase italic tracking-tighter text-white leading-none mb-4">
+        Co mówią nasi klienci?
       </h2>
+      <p class="text-white/50 text-sm font-medium">
+        Średnia ocen 4.9 / 5.0 • Zaufało nam ponad 150 firm z całej Polski.
+      </p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
       {reviews.map((rev) => (
-        <div class="p-8 rounded-[2.5rem] bg-white/[0.02] border border-white/5 flex flex-col justify-between hover:border-white/20 transition-all">
+        <div class="p-8 rounded-[2.5rem] bg-white/[0.02] border border-white/10 flex flex-col justify-between hover:border-indigo-500/40 transition-all duration-300 group">
           <div>
-            <div class="text-amber-400 text-sm tracking-widest mb-6 font-black">{rev.stars}</div>
+            <div class="flex items-center justify-between mb-6">
+              <div class="text-amber-400 text-sm tracking-widest font-black">{rev.stars}</div>
+              {rev.logo && (
+                <div class="h-8 flex items-center justify-end">
+                  <img src={rev.logo} alt={rev.role} class="h-6 w-auto max-w-[120px] object-contain opacity-80 group-hover:opacity-100 transition-opacity" />
+                </div>
+              )}
+            </div>
+
             <p class="text-sm text-white/80 leading-relaxed font-medium mb-8 italic">
               „{rev.quote}”
             </p>
           </div>
 
           <div class="flex items-center gap-4 pt-6 border-t border-white/5">
-            <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-indigo-500 to-purple-600 flex items-center justify-center font-black text-white text-xs">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-indigo-500 to-purple-600 flex items-center justify-center font-black text-white text-xs shadow-lg shadow-indigo-500/20">
               {rev.author.substring(0, 2)}
             </div>
             <div>
               <div class="text-sm font-black text-white italic">{rev.author}</div>
-              <div class="text-[11px] font-bold uppercase tracking-wider text-white/40">{rev.role}</div>
+              <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-400">{rev.role}</div>
             </div>
           </div>
         </div>
