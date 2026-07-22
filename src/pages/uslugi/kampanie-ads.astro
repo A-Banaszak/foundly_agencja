@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
 import AdsCampaignForm from '../../components/forms/AdsCampaignForm';
+import ClientPortalFeature from '../../components/ClientPortalFeature.astro';
 import { ArrowRight, Sparkles } from 'lucide-react';
 ---
 
@@ -47,7 +48,7 @@ import { ArrowRight, Sparkles } from 'lucide-react';
 				</a>
 			</div>
 
-			<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
 				<div class="p-8 rounded-[2.5rem] bg-white/[0.02] border border-white/10 flex flex-col justify-between">
 					<div>
 						<span class="px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-400 text-[10px] font-black uppercase tracking-widest">Google Ads</span>
@@ -87,6 +88,9 @@ import { ArrowRight, Sparkles } from 'lucide-react';
 					</div>
 				</div>
 			</div>
+
+			{/* Dedykowana Sekcja Panelu Klienta Live */}
+			<ClientPortalFeature />
 
 			<AdsCampaignForm client:visible />
 		</section>
