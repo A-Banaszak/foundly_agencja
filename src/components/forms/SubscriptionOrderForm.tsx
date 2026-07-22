@@ -69,7 +69,7 @@ export default function SubscriptionOrderForm() {
           Skonfiguruj Twój Abonament All-In-One
         </h3>
         <p className="text-xs sm:text-sm text-white/60 font-medium mt-1">
-          Wybierz plan abonamentowy. Stronę WWW, szybki hosting, opiekę oraz marketing otrzymujesz w 1 stałej opłacie bez długoterminowych cyrografów.
+          Wybierz plan abonamentowy lub zgłoś zapotrzebowanie na abonament dopasowany indywidualnie (Custom).
         </p>
       </div>
 
@@ -78,12 +78,13 @@ export default function SubscriptionOrderForm() {
           <label className="block text-xs font-bold uppercase tracking-wider text-white/60 mb-3">
             Wybierz wariant abonamentu:
           </label>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
             {[
-              { id: 'start', title: 'Abonament Start', price: '99 zł / msc', desc: 'Strona One-Page + SEO Lokalne' },
-              { id: 'growth', title: 'Abonament Growth', price: '390 zł / msc', desc: 'Strona Multi-Page (5 podstron) + SEO' },
-              { id: 'pro', title: 'Business Pro', price: '690 zł / msc', desc: 'Strona WordPress + SEO + Google Ads' },
-              { id: 'ecommerce', title: 'E-Commerce Max', price: '990 zł / msc', desc: 'Sklep WooCommerce + Full Growth' }
+              { id: 'start', title: 'Abonament Start', price: '99 zł / msc', desc: 'Strona One-Page + SEO' },
+              { id: 'growth', title: 'Abonament Growth', price: '390 zł / msc', desc: 'Multi-Page (5p) + SEO' },
+              { id: 'pro', title: 'Business Pro', price: '690 zł / msc', desc: 'WordPress + SEO + Ads' },
+              { id: 'ecommerce', title: 'E-Commerce Max', price: '990 zł / msc', desc: 'Sklep WooCommerce + Full' },
+              { id: 'custom', title: 'Abonament Custom', price: 'Wycena Indywidualna', desc: 'Zakres i budżet na wymiar' }
             ].map((item) => (
               <button
                 key={item.id}
@@ -96,7 +97,7 @@ export default function SubscriptionOrderForm() {
                 }`}
               >
                 <div className="text-xs font-black uppercase tracking-tight mb-1">{item.title}</div>
-                <div className="text-xs font-bold text-indigo-400 mb-1">{item.price}</div>
+                <div className="text-[11px] font-bold text-indigo-400 mb-1">{item.price}</div>
                 <div className="text-[10px] text-white/40">{item.desc}</div>
               </button>
             ))}
@@ -145,13 +146,13 @@ export default function SubscriptionOrderForm() {
 
         <div>
           <label className="block text-xs font-bold uppercase tracking-wider text-white/60 mb-2">
-            Branża lub opis projektu:
+            Branża lub opis projektu (opcjonalne uwagi do wyceny):
           </label>
           <textarea
             rows={2}
             value={formData.notes}
             onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-            placeholder="Krótko opisz swój biznes..."
+            placeholder="Krótko opisz swój biznes lub wymagania niestandardowe..."
             className="w-full p-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/20 text-xs focus:outline-none focus:border-indigo-500 transition-colors resize-none"
           ></textarea>
         </div>
