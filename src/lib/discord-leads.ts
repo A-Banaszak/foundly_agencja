@@ -36,7 +36,7 @@ export async function sendLeadToDiscord(payload: LeadPayload) {
           title: `NOWY LEAD: ${payload.formTitle}`,
           color: 0xf59e0b, // Złocisty kolor dla wyróżnienia leadów
           fields: discordFields,
-          footer: { text: "Foundly Agencja — System Pozyskiwania Leada" },
+          footer: { text: "Foundly Agencja - System Pozyskiwania Leada" },
           timestamp: new Date().toISOString()
         }]
       })

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Lock, LogOut, RefreshCw, Send, User, Mail, MessageSquare, ShieldCheck } from "lucide-react";
+import { Lock, LogOut, RefreshCw, Send, User, Mail, MessageSquare, ShieldCheck, KeyRound, ArrowLeft } from "lucide-react";
 
 interface SessionItem {
   sessionId: string;
@@ -21,6 +21,11 @@ interface MessageItem {
 export function ChatAdmin() {
   const [username, setUsername] = useState("admin");
   const [password, setPassword] = useState("");
+  const [step, setStep] = useState<1 | 2>(1);
+  const [twoFactorCode, setTwoFactorCode] = useState("");
+  const [enteredCode, setEnteredCode] = useState("");
+  const [pendingToken, setPendingToken] = useState("");
+
   const [token, setToken] = useState("");
   const [isAuth, setIsAuth] = useState(false);
   const [authError, setAuthError] = useState("");
@@ -51,10 +56,13 @@ export function ChatAdmin() {
     return () => clearInterval(interval);
   }, [isAuth, token, activeSession]);
 
-  async function handleLogin(e: React.FormEvent) {
+  async function handleLoginStep1(e: React.FormEvent) {
     e.preventDefault();
     setAuthError("");
     setLoading(true);
+
+    let isCredentialsValid = false;
+    let validToken = "";
 
     try {
       const res = await fetch("/api/chat.php?action=login", {
@@ -67,34 +75,73 @@ export function ChatAdmin() {
       if (res.ok && contentType.includes("application/json")) {
         const data = await res.json();
         if (data.token) {
-          setToken(data.token);
-          setIsAuth(true);
-          localStorage.setItem("foundly_admin_session_token", data.token);
-          await fetchSessions(data.token, true);
-          setLoading(false);
-          return;
+          isCredentialsValid = true;
+          validToken = data.token;
         }
       }
-    } catch (err) {
-      console.log("PHP backend not active (local environment)");
+    } catch (err) {}
+
+    if (!isCredentialsValid) {
+      if (username === "admin" && (password === "foundly2026!" || password === "admin")) {
+        isCredentialsValid = true;
+        validToken = "local_dev_token_2026";
+      }
     }
 
-    // Tryb lokalny (gdy uruchamiasz 'npm run dev' bez lokalnego serwera PHP):
-    if (username === "admin" && (password === "foundly2026!" || password === "admin")) {
-      const mockToken = "local_dev_token_2026";
-      setToken(mockToken);
-      setIsAuth(true);
-      localStorage.setItem("foundly_admin_session_token", mockToken);
-      await fetchSessions(mockToken, true);
-    } else {
+    if (!isCredentialsValid) {
       setAuthError("Błędny użytkownik lub hasło!");
+      setLoading(false);
+      return;
     }
+
+    // Wygeneruj kod 2FA i wyślij na Discord
+    const generatedCode = Math.floor(100000 + Math.random() * 900000).toString();
+    setTwoFactorCode(generatedCode);
+    setPendingToken(validToken);
+
+    const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1478104823730802811/GpNCU-mHyBjQNm6OgGX9zZS7qh2Cov61-TRQ4TspNhEkr2FIpr3vu3wFV4bKOrFccY7R";
+    try {
+      await fetch(DISCORD_WEBHOOK, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          embeds: [{
+            title: "BEZPIECZEŃSTWO: Kod 2FA Logowania do Panelu Foundly",
+            color: 0x6366f1,
+            description: `Właśnie podjęto próbę logowania na konto **${username}**.\n\n🔑 Kod weryfikacyjny 2FA: **${generatedCode}**\n\nPodaj ten kod w formularzu na stronie, aby zalogować się do panelu.`,
+            footer: { text: "Foundly Agencja - Autoryzacja Dwuetapowa 2FA" },
+            timestamp: new Date().toISOString()
+          }]
+        })
+      });
+    } catch (e) {
+      console.error("Błąd wysyłania 2FA na Discord:", e);
+    }
+
     setLoading(false);
+    setStep(2);
+  }
+
+  async function handleVerify2FA(e: React.FormEvent) {
+    e.preventDefault();
+    setAuthError("");
+
+    if (enteredCode.trim() === twoFactorCode) {
+      setToken(pendingToken);
+      setIsAuth(true);
+      localStorage.setItem("foundly_admin_session_token", pendingToken);
+      await fetchSessions(pendingToken, true);
+    } else {
+      setAuthError("Błędny 6-cyfrowy kod 2FA! Sprawdź wiadomość wysłaną na Discord.");
+    }
   }
 
   function handleLogout() {
     setIsAuth(false);
     setToken("");
+    setStep(1);
+    setTwoFactorCode("");
+    setEnteredCode("");
     localStorage.removeItem("foundly_admin_session_token");
   }
 
@@ -113,11 +160,8 @@ export function ChatAdmin() {
           return;
         }
       }
-    } catch (err) {
-      console.log("Fetching PHP sessions failed, loading from local dev storage");
-    }
+    } catch (err) {}
 
-    // Fallback dla lokalnego trybu dev
     loadLocalDevSessions();
     if (showLoader) setLoading(false);
   }
@@ -159,7 +203,6 @@ export function ChatAdmin() {
       }
     } catch (e) {}
 
-    // Fallback lokalny
     const rawLocalData = localStorage.getItem("foundly_local_chats");
     if (rawLocalData) {
       try {
@@ -196,7 +239,6 @@ export function ChatAdmin() {
       }
     } catch (err) {}
 
-    // Zapis w trybie lokalnym
     const rawLocalData = localStorage.getItem("foundly_local_chats");
     let parsed: any = {};
     if (rawLocalData) {
@@ -224,10 +266,14 @@ export function ChatAdmin() {
       <div className="max-w-md mx-auto my-16 p-8 bg-[#0a0a0a] border border-white/10 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.8)] text-white backdrop-blur-xl">
         <div className="flex flex-col items-center text-center mb-8">
           <div className="w-16 h-16 rounded-2xl bg-indigo-600/20 border border-indigo-500/30 flex items-center justify-center mb-4 text-indigo-400">
-            <Lock className="w-8 h-8" />
+            {step === 1 ? <Lock className="w-8 h-8" /> : <KeyRound className="w-8 h-8" />}
           </div>
-          <h2 className="text-2xl font-bold tracking-tight">Panel Czata — Logowanie</h2>
-          <p className="text-xs text-white/40 mt-1">Foundly Agencja Management</p>
+          <h2 className="text-2xl font-bold tracking-tight">
+            {step === 1 ? "Panel Czata - Logowanie" : "Autoryzacja 2FA (Discord)"}
+          </h2>
+          <p className="text-xs text-white/40 mt-1">
+            {step === 1 ? "Foundly Agencja Management" : "Kod weryfikacyjny wysłano na Discord"}
+          </p>
         </div>
 
         {authError && (
@@ -236,49 +282,80 @@ export function ChatAdmin() {
           </div>
         )}
 
-        <form onSubmit={handleLogin} className="space-y-4">
-          <div>
-            <label className="block text-xs font-medium text-white/60 mb-1">Użytkownik:</label>
-            <div className="relative">
-              <input
-                type="text"
-                value={username}
-                onChange={e => setUsername(e.target.value)}
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-indigo-500 transition-all pl-10"
-                placeholder="Wpisz login..."
-              />
-              <User className="w-4 h-4 text-white/30 absolute left-3.5 top-3.5" />
+        {step === 1 ? (
+          <form onSubmit={handleLoginStep1} className="space-y-4">
+            <div>
+              <label className="block text-xs font-medium text-white/60 mb-1">Użytkownik:</label>
+              <div className="relative">
+                <input
+                  type="text"
+                  value={username}
+                  onChange={e => setUsername(e.target.value)}
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-indigo-500 transition-all pl-10"
+                  placeholder="Wpisz login..."
+                />
+                <User className="w-4 h-4 text-white/30 absolute left-3.5 top-3.5" />
+              </div>
             </div>
-          </div>
 
-          <div>
-            <label className="block text-xs font-medium text-white/60 mb-1">Hasło:</label>
-            <div className="relative">
-              <input
-                type="password"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-indigo-500 transition-all pl-10"
-                placeholder="Wpisz hasło..."
-              />
-              <ShieldCheck className="w-4 h-4 text-white/30 absolute left-3.5 top-3.5" />
+            <div>
+              <label className="block text-xs font-medium text-white/60 mb-1">Hasło:</label>
+              <div className="relative">
+                <input
+                  type="password"
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-indigo-500 transition-all pl-10"
+                  placeholder="Wpisz hasło..."
+                />
+                <ShieldCheck className="w-4 h-4 text-white/30 absolute left-3.5 top-3.5" />
+              </div>
             </div>
-          </div>
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-sm transition-all shadow-lg shadow-indigo-500/20 active:scale-95 disabled:opacity-50 mt-2"
-          >
-            {loading ? "Logowanie..." : "Zaloguj się"}
-          </button>
-        </form>
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-sm transition-all shadow-lg shadow-indigo-500/20 active:scale-95 disabled:opacity-50 mt-2"
+            >
+              {loading ? "Wysyłanie kodu 2FA..." : "Zaloguj się"}
+            </button>
+          </form>
+        ) : (
+          <form onSubmit={handleVerify2FA} className="space-y-4">
+            <div>
+              <label className="block text-xs font-medium text-white/60 mb-1">Kod 2FA z Discorda:</label>
+              <div className="relative">
+                <input
+                  type="text"
+                  maxLength={6}
+                  value={enteredCode}
+                  onChange={e => setEnteredCode(e.target.value)}
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-center text-xl tracking-[0.5em] font-mono text-white focus:outline-none focus:border-indigo-500 transition-all"
+                  placeholder="000000"
+                  autoFocus
+                />
+              </div>
+              <p className="text-[11px] text-white/40 mt-2 text-center">
+                Sprawdź kanał Discord - wysłano 6-cyfrowy kod autoryzacji.
+              </p>
+            </div>
 
-        <div className="mt-6 pt-4 border-t border-white/5 text-center">
-          <p className="text-[11px] text-white/40">
-            Domyślny login: <code className="text-indigo-400 font-mono">admin</code> | Hasło: <code className="text-indigo-400 font-mono">foundly2026!</code>
-          </p>
-        </div>
+            <button
+              type="submit"
+              className="w-full py-3.5 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-bold rounded-xl text-sm transition-all shadow-lg active:scale-95 mt-2"
+            >
+              Potwierdź Kod 2FA
+            </button>
+
+            <button
+              type="button"
+              onClick={() => { setStep(1); setAuthError(""); }}
+              className="w-full py-2 text-xs text-white/40 hover:text-white flex items-center justify-center gap-1 transition-colors"
+            >
+              <ArrowLeft className="w-3.5 h-3.5" /> Wróć do logowania
+            </button>
+          </form>
+        )}
       </div>
     );
   }
