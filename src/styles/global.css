@@ -32,6 +32,7 @@
   summary,
   label[for] {
     cursor: pointer !important;
+    touch-action: manipulation;
   }
 
   ::selection {
@@ -60,18 +61,23 @@
   animation: pulse-glow 6s ease-in-out infinite;
 }
 
+/* Optimize backdrop blurs for 60 FPS mobile performance in Safari WebKit */
 .glass-card {
-  background-color: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  background-color: rgba(12, 12, 18, 0.95);
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08);
 }
 
+@media (min-width: 768px) {
+  .glass-card {
+    background-color: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+  }
+}
+
 .bento-card {
-  background-color: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  background-color: rgba(12, 12, 18, 0.95);
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08);
   border-radius: 2rem;
@@ -79,10 +85,26 @@
   transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+@media (min-width: 768px) {
+  .bento-card {
+    background-color: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+  }
+}
+
 .bento-card:hover {
   border-color: rgba(99, 102, 241, 0.4);
   background-color: rgba(255, 255, 255, 0.05);
   transform: translateY(-4px);
+}
+
+/* Disable heavy blur animations on small mobile screens to prevent GPU Safari throttling */
+@media (max-width: 768px) {
+  .animate-pulse-glow {
+    animation: none !important;
+    opacity: 0.3 !important;
+  }
 }
 
 .tech-item {
