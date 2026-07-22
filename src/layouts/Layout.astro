@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { ChatWidget } from '../components/ChatWidget';
 
 interface Props {
 	title?: string;
@@ -40,5 +41,6 @@ const {
 	</head>
 	<body class="bg-[#050505] text-[#ededed] min-h-screen selection:bg-indigo-500/30 selection:text-white relative">
 		<slot />
+		<ChatWidget client:idle />
 	</body>
 </html>

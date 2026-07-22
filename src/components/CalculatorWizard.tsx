@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Check, ArrowRight, Sparkles, Send, Building, Wrench, Shield, Stethoscope, Scissors } from 'lucide-react';
+import { sendLeadToDiscord } from '../lib/discord-leads';
+import { validateName, validateContact } from '../lib/validation';
 
 export default function CalculatorWizard() {
   const [step, setStep] = useState<number>(1);
@@ -12,6 +14,7 @@ export default function CalculatorWizard() {
     contact: '',
     details: ''
   });
+  const [errors, setErrors] = useState<{ name?: string; contact?: string }>({});
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
   const getSitePrice = () => {
@@ -30,8 +33,34 @@ export default function CalculatorWizard() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    const nameErr = validateName(formData.name);
+    const contactErr = validateContact(formData.contact);
+
+    if (nameErr || contactErr) {
+      setErrors({ name: nameErr || undefined, contact: contactErr || undefined });
+      return;
+    }
+
+    setErrors({});
+
+    sendLeadToDiscord({
+      formTitle: "Kalkulator Wyceny Online (Wizard)",
+      name: formData.name,
+      contact: formData.contact,
+      fields: [
+        { name: "🏢 Branża", value: industry.toUpperCase(), inline: true },
+        { name: "💻 Pakiet Strony", value: `${sitePackage.toUpperCase()} (${getSitePrice()} zł)`, inline: true },
+        { name: "🚀 Pakiet Marketing", value: `${marketingPackage.toUpperCase()} (${getMarketingPrice()} zł/msc)`, inline: true },
+        { name: "💰 Szacowany Koszt Łączny", value: `${getSitePrice()} zł na start + ${getMarketingPrice()} zł/msc`, inline: false }
+      ],
+      notes: formData.details
+    });
+
     setIsSubmitted(true);
   };
+
+
 
   return (
     <section id="kalkulator" className="py-28 bg-[#080808] relative border-t border-white/5">
@@ -222,7 +251,7 @@ export default function CalculatorWizard() {
             )}
 
             {step === 3 && (
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit} noValidate>
                 <h3 className="text-xl font-black uppercase italic text-white mb-2">
                   Krok 3: Gdzie wysłać bezpłatny podgląd projektu?
                 </h3>
@@ -237,12 +266,17 @@ export default function CalculatorWizard() {
                     </label>
                     <input
                       type="text"
-                      required
                       value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      onChange={(e) => {
+                        setFormData({ ...formData, name: e.target.value });
+                        if (errors.name) setErrors({ ...errors, name: undefined });
+                      }}
                       placeholder="np. Jan Kowalski - Usługi Stolarskie"
-                      className="w-full h-14 px-5 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-white/20 text-sm focus:outline-none focus:border-indigo-500 transition-colors"
+                      className={`w-full h-14 px-5 rounded-2xl bg-white/5 border ${
+                        errors.name ? 'border-red-500' : 'border-white/10'
+                      } text-white placeholder-white/20 text-sm focus:outline-none focus:border-indigo-500 transition-colors`}
                     />
+                    {errors.name && <p className="text-[11px] text-red-400 mt-1">{errors.name}</p>}
                   </div>
 
                   <div>
@@ -251,12 +285,17 @@ export default function CalculatorWizard() {
                     </label>
                     <input
                       type="text"
-                      required
                       value={formData.contact}
-                      onChange={(e) => setFormData({ ...formData, contact: e.target.value })}
+                      onChange={(e) => {
+                        setFormData({ ...formData, contact: e.target.value });
+                        if (errors.contact) setErrors({ ...errors, contact: undefined });
+                      }}
                       placeholder="np. 600 111 222 lub biuro@firma.pl"
-                      className="w-full h-14 px-5 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-white/20 text-sm focus:outline-none focus:border-indigo-500 transition-colors"
+                      className={`w-full h-14 px-5 rounded-2xl bg-white/5 border ${
+                        errors.contact ? 'border-red-500' : 'border-white/10'
+                      } text-white placeholder-white/20 text-sm focus:outline-none focus:border-indigo-500 transition-colors`}
                     />
+                    {errors.contact && <p className="text-[11px] text-red-400 mt-1">{errors.contact}</p>}
                   </div>
 
                   <div>

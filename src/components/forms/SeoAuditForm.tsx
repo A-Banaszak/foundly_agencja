@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Search, CheckCircle2, Send, MapPin } from 'lucide-react';
+import { sendLeadToDiscord } from '../../lib/discord-leads';
+import { validateName, validateContact, validateWebsite, validateField } from '../../lib/validation';
 
 export default function SeoAuditForm() {
   const [submitted, setSubmitted] = useState<boolean>(false);
@@ -10,9 +12,39 @@ export default function SeoAuditForm() {
     name: '',
     contact: ''
   });
+  const [errors, setErrors] = useState<{ website?: string; city?: string; name?: string; contact?: string }>({});
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    const websiteErr = validateWebsite(formData.website);
+    const cityErr = validateField(formData.city, 'Miasto / obszar');
+    const nameErr = validateName(formData.name);
+    const contactErr = validateContact(formData.contact);
+
+    if (websiteErr || cityErr || nameErr || contactErr) {
+      setErrors({
+        website: websiteErr || undefined,
+        city: cityErr || undefined,
+        name: nameErr || undefined,
+        contact: contactErr || undefined
+      });
+      return;
+    }
+
+    setErrors({});
+
+    sendLeadToDiscord({
+      formTitle: "Darmowy Audyt SEO & Google Maps",
+      name: formData.name,
+      contact: formData.contact,
+      fields: [
+        { name: "🌐 Witryna", value: formData.website, inline: true },
+        { name: "📍 Miasto / Obszar", value: formData.city, inline: true },
+        { name: "🔍 Słowa kluczowe", value: formData.keywords || "Nie podano", inline: false }
+      ]
+    });
+
     setSubmitted(true);
   };
 
@@ -27,7 +59,10 @@ export default function SeoAuditForm() {
           Przeanalizujemy pozycje Twojej witryny oraz konkurencji w Google Maps. Raport prześlemy w ciągu 24h.
         </p>
         <button
-          onClick={() => setSubmitted(false)}
+          onClick={() => {
+            setSubmitted(false);
+            setFormData({ website: '', city: '', keywords: '', name: '', contact: '' });
+          }}
           className="px-6 py-2.5 rounded-full bg-white/10 text-white font-bold text-xs uppercase tracking-widest hover:bg-white/20 transition-colors"
         >
           Zamów kolejny audyt
@@ -51,7 +86,7 @@ export default function SeoAuditForm() {
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-6" noValidate>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div>
             <label className="block text-xs font-bold uppercase tracking-wider text-white/60 mb-2">
@@ -59,12 +94,17 @@ export default function SeoAuditForm() {
             </label>
             <input
               type="text"
-              required
               value={formData.website}
-              onChange={(e) => setFormData({ ...formData, website: e.target.value })}
+              onChange={(e) => {
+                setFormData({ ...formData, website: e.target.value });
+                if (errors.website) setErrors({ ...errors, website: undefined });
+              }}
               placeholder="np. mojanazwafirmy.pl"
-              className="w-full h-12 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/20 text-xs focus:outline-none focus:border-indigo-500 transition-colors"
+              className={`w-full h-12 px-4 rounded-xl bg-white/5 border ${
+                errors.website ? 'border-red-500' : 'border-white/10'
+              } text-white placeholder-white/20 text-xs focus:outline-none focus:border-indigo-500 transition-colors`}
             />
+            {errors.website && <p className="text-[11px] text-red-400 mt-1">{errors.website}</p>}
           </div>
 
           <div>
@@ -73,12 +113,17 @@ export default function SeoAuditForm() {
             </label>
             <input
               type="text"
-              required
               value={formData.city}
-              onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+              onChange={(e) => {
+                setFormData({ ...formData, city: e.target.value });
+                if (errors.city) setErrors({ ...errors, city: undefined });
+              }}
               placeholder="np. Warszawa, Poznań lub cała Polska"
-              className="w-full h-12 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/20 text-xs focus:outline-none focus:border-indigo-500 transition-colors"
+              className={`w-full h-12 px-4 rounded-xl bg-white/5 border ${
+                errors.city ? 'border-red-500' : 'border-white/10'
+              } text-white placeholder-white/20 text-xs focus:outline-none focus:border-indigo-500 transition-colors`}
             />
+            {errors.city && <p className="text-[11px] text-red-400 mt-1">{errors.city}</p>}
           </div>
         </div>
 
@@ -102,12 +147,17 @@ export default function SeoAuditForm() {
             </label>
             <input
               type="text"
-              required
               value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              onChange={(e) => {
+                setFormData({ ...formData, name: e.target.value });
+                if (errors.name) setErrors({ ...errors, name: undefined });
+              }}
               placeholder="np. Jan Kowalski"
-              className="w-full h-12 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/20 text-xs focus:outline-none focus:border-indigo-500 transition-colors"
+              className={`w-full h-12 px-4 rounded-xl bg-white/5 border ${
+                errors.name ? 'border-red-500' : 'border-white/10'
+              } text-white placeholder-white/20 text-xs focus:outline-none focus:border-indigo-500 transition-colors`}
             />
+            {errors.name && <p className="text-[11px] text-red-400 mt-1">{errors.name}</p>}
           </div>
 
           <div>
@@ -116,12 +166,17 @@ export default function SeoAuditForm() {
             </label>
             <input
               type="text"
-              required
               value={formData.contact}
-              onChange={(e) => setFormData({ ...formData, contact: e.target.value })}
+              onChange={(e) => {
+                setFormData({ ...formData, contact: e.target.value });
+                if (errors.contact) setErrors({ ...errors, contact: undefined });
+              }}
               placeholder="np. 600 111 222 lub biuro@firma.pl"
-              className="w-full h-12 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/20 text-xs focus:outline-none focus:border-indigo-500 transition-colors"
+              className={`w-full h-12 px-4 rounded-xl bg-white/5 border ${
+                errors.contact ? 'border-red-500' : 'border-white/10'
+              } text-white placeholder-white/20 text-xs focus:outline-none focus:border-indigo-500 transition-colors`}
             />
+            {errors.contact && <p className="text-[11px] text-red-400 mt-1">{errors.contact}</p>}
           </div>
         </div>
 

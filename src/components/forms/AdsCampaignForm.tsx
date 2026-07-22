@@ -1,14 +1,38 @@
 import React, { useState } from 'react';
 import { Megaphone, CheckCircle2, Send, PhoneCall } from 'lucide-react';
+import { sendLeadToDiscord } from '../../lib/discord-leads';
+import { validateName, validateContact } from '../../lib/validation';
 
 export default function AdsCampaignForm() {
   const [channel, setChannel] = useState<string>('all');
   const [budget, setBudget] = useState<string>('medium');
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [formData, setFormData] = useState({ name: '', contact: '', goal: '' });
+  const [errors, setErrors] = useState<{ name?: string; contact?: string }>({});
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    const nameErr = validateName(formData.name);
+    const contactErr = validateContact(formData.contact);
+
+    if (nameErr || contactErr) {
+      setErrors({ name: nameErr || undefined, contact: contactErr || undefined });
+      return;
+    }
+
+    setErrors({});
+
+    sendLeadToDiscord({
+      formTitle: "Prognoza Kampanii Google & Meta Ads",
+      name: formData.name,
+      contact: formData.contact,
+      fields: [
+        { name: "📢 Wybrane kanały", value: channel.toUpperCase(), inline: true },
+        { name: "💰 Budżet miesięczny", value: budget.toUpperCase(), inline: true }
+      ]
+    });
+
     setSubmitted(true);
   };
 
@@ -23,7 +47,10 @@ export default function AdsCampaignForm() {
           Opracujemy estymację kosztów kliknięcia i szacowaną liczbę połączeń/formularzy z reklam. Skontaktujemy się w 2 godziny.
         </p>
         <button
-          onClick={() => setSubmitted(false)}
+          onClick={() => {
+            setSubmitted(false);
+            setFormData({ name: '', contact: '', goal: '' });
+          }}
           className="px-6 py-2.5 rounded-full bg-white/10 text-white font-bold text-xs uppercase tracking-widest hover:bg-white/20 transition-colors"
         >
           Zapytaj ponownie
@@ -47,7 +74,7 @@ export default function AdsCampaignForm() {
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-6" noValidate>
         <div>
           <label className="block text-xs font-bold uppercase tracking-wider text-white/60 mb-3">
             Wybierz interesujące Cię kanały reklamowe:
@@ -107,12 +134,17 @@ export default function AdsCampaignForm() {
             </label>
             <input
               type="text"
-              required
               value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              onChange={(e) => {
+                setFormData({ ...formData, name: e.target.value });
+                if (errors.name) setErrors({ ...errors, name: undefined });
+              }}
               placeholder="np. Jan Kowalski"
-              className="w-full h-12 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/20 text-xs focus:outline-none focus:border-indigo-500 transition-colors"
+              className={`w-full h-12 px-4 rounded-xl bg-white/5 border ${
+                errors.name ? 'border-red-500' : 'border-white/10'
+              } text-white placeholder-white/20 text-xs focus:outline-none focus:border-indigo-500 transition-colors`}
             />
+            {errors.name && <p className="text-[11px] text-red-400 mt-1">{errors.name}</p>}
           </div>
 
           <div>
@@ -121,12 +153,17 @@ export default function AdsCampaignForm() {
             </label>
             <input
               type="text"
-              required
               value={formData.contact}
-              onChange={(e) => setFormData({ ...formData, contact: e.target.value })}
+              onChange={(e) => {
+                setFormData({ ...formData, contact: e.target.value });
+                if (errors.contact) setErrors({ ...errors, contact: undefined });
+              }}
               placeholder="np. 600 111 222 lub biuro@firma.pl"
-              className="w-full h-12 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/20 text-xs focus:outline-none focus:border-indigo-500 transition-colors"
+              className={`w-full h-12 px-4 rounded-xl bg-white/5 border ${
+                errors.contact ? 'border-red-500' : 'border-white/10'
+              } text-white placeholder-white/20 text-xs focus:outline-none focus:border-indigo-500 transition-colors`}
             />
+            {errors.contact && <p className="text-[11px] text-red-400 mt-1">{errors.contact}</p>}
           </div>
         </div>
 

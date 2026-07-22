@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Send, CheckCircle2, Monitor, Rocket } from 'lucide-react';
+import { sendLeadToDiscord } from '../../lib/discord-leads';
+import { validateName, validateContact } from '../../lib/validation';
 
 export default function WebsiteOrderForm() {
   const [pkg, setPkg] = useState<string>('business');
@@ -7,9 +9,33 @@ export default function WebsiteOrderForm() {
   const [timeline, setTimeline] = useState<string>('48h');
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [formData, setFormData] = useState({ name: '', contact: '', notes: '' });
+  const [errors, setErrors] = useState<{ name?: string; contact?: string }>({});
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    const nameErr = validateName(formData.name);
+    const contactErr = validateContact(formData.contact);
+
+    if (nameErr || contactErr) {
+      setErrors({ name: nameErr || undefined, contact: contactErr || undefined });
+      return;
+    }
+
+    setErrors({});
+    
+    sendLeadToDiscord({
+      formTitle: "Zamówienie Strony WWW",
+      name: formData.name,
+      contact: formData.contact,
+      fields: [
+        { name: "💻 Wybrany Pakiet", value: pkg.toUpperCase(), inline: true },
+        { name: "🌐 Posiada domenę/stronę?", value: hasDomain === 'yes' ? 'Tak' : 'Nie', inline: true },
+        { name: "⏱️ Czas realizacji", value: timeline, inline: true },
+      ],
+      notes: formData.notes
+    });
+
     setSubmitted(true);
   };
 
@@ -24,7 +50,10 @@ export default function WebsiteOrderForm() {
           Przygotowujemy wstępną makietę strony dla Twojej firmy. Skontaktujemy się z Tobą telefonicznie lub mailowo w ciągu 2 godzin.
         </p>
         <button
-          onClick={() => setSubmitted(false)}
+          onClick={() => {
+            setSubmitted(false);
+            setFormData({ name: '', contact: '', notes: '' });
+          }}
           className="px-6 py-2.5 rounded-full bg-white/10 text-white font-bold text-xs uppercase tracking-widest hover:bg-white/20 transition-colors"
         >
           Wyślij ponownie
@@ -48,7 +77,7 @@ export default function WebsiteOrderForm() {
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-6" noValidate>
         <div>
           <label className="block text-xs font-bold uppercase tracking-wider text-white/60 mb-3">
             Wybierz pakiet strony WWW:
@@ -125,12 +154,17 @@ export default function WebsiteOrderForm() {
             </label>
             <input
               type="text"
-              required
               value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              onChange={(e) => {
+                setFormData({ ...formData, name: e.target.value });
+                if (errors.name) setErrors({ ...errors, name: undefined });
+              }}
               placeholder="np. Jan Kowalski Usługi Budowlane"
-              className="w-full h-12 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/20 text-xs focus:outline-none focus:border-indigo-500 transition-colors"
+              className={`w-full h-12 px-4 rounded-xl bg-white/5 border ${
+                errors.name ? 'border-red-500' : 'border-white/10'
+              } text-white placeholder-white/20 text-xs focus:outline-none focus:border-indigo-500 transition-colors`}
             />
+            {errors.name && <p className="text-[11px] text-red-400 mt-1">{errors.name}</p>}
           </div>
 
           <div>
@@ -139,12 +173,17 @@ export default function WebsiteOrderForm() {
             </label>
             <input
               type="text"
-              required
               value={formData.contact}
-              onChange={(e) => setFormData({ ...formData, contact: e.target.value })}
+              onChange={(e) => {
+                setFormData({ ...formData, contact: e.target.value });
+                if (errors.contact) setErrors({ ...errors, contact: undefined });
+              }}
               placeholder="np. 600 111 222 lub biuro@firma.pl"
-              className="w-full h-12 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/20 text-xs focus:outline-none focus:border-indigo-500 transition-colors"
+              className={`w-full h-12 px-4 rounded-xl bg-white/5 border ${
+                errors.contact ? 'border-red-500' : 'border-white/10'
+              } text-white placeholder-white/20 text-xs focus:outline-none focus:border-indigo-500 transition-colors`}
             />
+            {errors.contact && <p className="text-[11px] text-red-400 mt-1">{errors.contact}</p>}
           </div>
         </div>
 
