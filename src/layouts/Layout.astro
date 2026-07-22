@@ -16,6 +16,55 @@ const {
 const canonicalUrl = new URL(Astro.url.pathname, "https://foundly.pl").href;
 const ogImageUrl = "https://foundly.pl/og-image.png";
 const isProd = import.meta.env.PROD;
+
+const schemaData = {
+	"@context": "https://schema.org",
+	"@type": "ProfessionalService",
+	"name": "Foundly Agencja",
+	"url": "https://foundly.pl",
+	"logo": "https://foundly.pl/og-image.png",
+	"image": "https://foundly.pl/og-image.png",
+	"description": "Nowoczesne strony internetowe w abonamencie, pozycjonowanie SEO oraz płatne kampanie Google Ads dla małych i średnich firm. Wersja Startowa w 48h.",
+	"telephone": "+48786429360",
+	"email": "kontakt@foundly.pl",
+	"priceRange": "99 PLN - 990 PLN/msc",
+	"address": {
+		"@type": "PostalAddress",
+		"addressCountry": "PL"
+	},
+	"areaServed": "PL",
+	"knowsAbout": [
+		"Strony internetowe w abonamencie",
+		"Pozycjonowanie SEO",
+		"Kampanie Google Ads",
+		"Meta Ads",
+		"Projektowanie stron WWW",
+		"Marketing dla małych firm"
+	],
+	"offers": [
+		{
+			"@type": "Offer",
+			"name": "Abonament Start",
+			"price": "99",
+			"priceCurrency": "PLN",
+			"description": "Strona One-Page + SEO Lokalne + Wizytówka Google Maps"
+		},
+		{
+			"@type": "Offer",
+			"name": "Abonament Growth",
+			"price": "390",
+			"priceCurrency": "PLN",
+			"description": "Rozbudowana strona firmowa do 5 podstron + SEO"
+		},
+		{
+			"@type": "Offer",
+			"name": "Business Pro",
+			"price": "690",
+			"priceCurrency": "PLN",
+			"description": "Witryna WordPress + Prowadzenie Kampanii Google Ads"
+		}
+	]
+};
 ---
 
 <!DOCTYPE html>
@@ -60,6 +109,9 @@ const isProd = import.meta.env.PROD;
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,700;0,800;1,800&display=swap" rel="stylesheet" />
+
+		<!-- Schema.org JSON-LD Structured Data for AI & Search Engines -->
+		<script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
 
 		<!-- Asynchronous Performance-First Loading for GTM & Cookiebot -->
 		<script is:inline>

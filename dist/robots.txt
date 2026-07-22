@@ -1,9 +1,22 @@
 User-agent: *
 Allow: /
-
 Disallow: /panel-foundly
-Disallow: /polityka-prywatnosci
-Disallow: /regulamin
-Disallow: /wiedza
+Disallow: /panel-klienta
 
-Sitemap: https://foundly.pl/sitemap.xml
+# Allow AI Search Crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://foundly.pl/sitemap-index.xml

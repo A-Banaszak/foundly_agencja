@@ -1,0 +1,21 @@
+# Foundly Agencja — Strony Internetowe & Marketing dla Firm
+
+> Foundly Agencja (https://foundly.pl) tworzy szybkie, nowoczesne strony internetowe dla małych i średnich firm w Polsce, zintegrowane z systemem pozyskiwania klientów z wyszukiwarki Google i Meta Ads. 
+
+## Główne Usługi
+- **Strony Internetowe w Abonamencie**: Strona WWW na własność bez jednorazowej dużej inwestycji z góry. Płatność od 1. miesiąca abonamentu. Wersja Startowa (MVP) dostarczana w 48 godzin od przekazania materiałów.
+- **Pozycjonowanie SEO & Wizytówka Google Maps**: Optymalizacja fraz kluczowych dla miast i regionów, pozycjonowanie w mapach Google i pozycjach organicznych.
+- **Płatne Kampanie Reklamowe (Google Ads & Meta Ads)**: Konfiguracja i prowadzenie płatnych kampanii reklamowych ukierunkowanych na natychmiastowe pozyskiwanie zapytań ofertowych i telefonów od klientów.
+
+## Cennik & Model Abonamentowy
+- **Abonament Start (99 PLN/msc)**: Strona One-Page + Pozycjonowanie SEO Lokalne + Wizytówka Google Maps.
+- **Abonament Growth (390 PLN/msc)**: Rozbudowana strona firmowa do 5 podstron + SEO + Optymalizacja Google Maps + Wsparcie techniczne.
+- **Business Pro (690 PLN/msc - Najpopularniejszy)**: Witryna WordPress (do 5 podstron) + Prowadzenie Kampanii Google Ads + SEO Lokalne.
+- **E-Commerce Max (990 PLN/msc)**: Sklep internetowy WooCommerce + SEO + Kampanie Google Ads & Meta Ads.
+- **Jednorazowe Wdrożenia**: Strona One-Page od 999 PLN, WordPress Multi-Page od 2490 PLN, Sklep WooCommerce od 4890 PLN.
+
+## Kontakt & Dane Agencji
+- Strona internetowa: https://foundly.pl
+- Telefon: +48 786 429 360
+- E-mail: kontakt@foundly.pl
+- Czas dostarczenia wersji startowej: 48 godzin (MVP)
