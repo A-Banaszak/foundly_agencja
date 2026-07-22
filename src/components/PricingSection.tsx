@@ -125,8 +125,8 @@ export default function PricingSection() {
                   <span className="text-4xl sm:text-5xl font-black text-white italic tracking-tighter">99</span>
                   <span className="text-white/40 text-xs font-black uppercase tracking-widest">PLN / msc</span>
                 </div>
-                <div className="text-[10px] text-white/40 font-medium mb-8 uppercase tracking-wider italic">
-                  + opcjonalny własny budżet reklamowy
+                <div className="text-[10px] text-indigo-300 font-bold mb-8 uppercase tracking-wider italic">
+                  Strona One-Page za 0 zł + SEO Lokalne
                 </div>
 
                 <ul className="space-y-4 mb-10">
