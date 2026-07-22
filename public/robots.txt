@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin/
+Disallow: /polityka-prywatnosci
+Disallow: /regulamin
+Disallow: /wiedza
+
+Sitemap: https://foundly.pl/sitemap.xml

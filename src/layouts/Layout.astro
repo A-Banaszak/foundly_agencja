@@ -13,6 +13,7 @@ const {
 	description = "Nowoczesne, szybkie strony internetowe z wbudowanym systemem pozyskiwania klientów z Google. Wersja Startowa do kampanii gotowa w 48h. Zobacz cennik i zamów wycenę.",
 	noindex = false
 } = Astro.props;
+const canonicalUrl = new URL(Astro.url.pathname, "https://foundly.pl").href;
 ---
 
 <!DOCTYPE html>
@@ -29,6 +30,7 @@ const {
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="canonical" href={canonicalUrl} />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		<meta name="description" content={description} />
