@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { 
   BarChart3, RefreshCw, Smartphone, ShieldCheck, Zap, TrendingUp, CheckCircle2, 
   Lock, Key, Phone, Mail, FileText, Download, MessageSquare, Search, Filter, 
-  ChevronRight, ExternalLink, Calendar, DollarSign, Activity, AlertCircle, LogOut
+  ChevronRight, ExternalLink, Calendar, DollarSign, Activity, AlertCircle, LogOut, Eye, EyeOff
 } from 'lucide-react';
 import { DEMO_CLIENT_ACCOUNT, DEMO_DAILY_METRICS, DEMO_LEADS_HISTORY } from '../../lib/client-portal-api';
 import type { ClientAccount, LeadItem } from '../../lib/client-portal-api';
@@ -10,7 +10,8 @@ import type { ClientAccount, LeadItem } from '../../lib/client-portal-api';
 export default function ClientDashboard() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [emailInput, setEmailInput] = useState<string>('');
-  const [pinInput, setPinInput] = useState<string>('');
+  const [passwordInput, setPasswordInput] = useState<string>('');
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const [authError, setAuthError] = useState<string>('');
   
   const [activeAccount, setActiveAccount] = useState<ClientAccount>(DEMO_CLIENT_ACCOUNT);
@@ -21,17 +22,32 @@ export default function ClientDashboard() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (emailInput.toLowerCase() === DEMO_CLIENT_ACCOUNT.email.toLowerCase() && pinInput === DEMO_CLIENT_ACCOUNT.pin) {
-      setIsAuthenticated(true);
-      setAuthError('');
-    } else {
-      setAuthError('Nieprawidłowy adres e-mail lub kod PIN. Użyj danych logowania demo.');
+    if (!emailInput.trim() || !passwordInput.trim()) {
+      setAuthError('Wprowadź e-mail oraz hasło.');
+      return;
     }
+
+    if (passwordInput.length < 3) {
+      setAuthError('Hasło musi składać się z co najmniej 3 znaków.');
+      return;
+    }
+
+    // Set client account context
+    setActiveAccount({
+      ...DEMO_CLIENT_ACCOUNT,
+      email: emailInput,
+      clientName: emailInput.split('@')[0].toUpperCase(),
+      companyName: emailInput.includes('demo') ? DEMO_CLIENT_ACCOUNT.companyName : `Firma ${emailInput.split('@')[0]}`
+    });
+
+    setIsAuthenticated(true);
+    setAuthError('');
   };
 
   const handleDemoLogin = () => {
     setEmailInput(DEMO_CLIENT_ACCOUNT.email);
-    setPinInput(DEMO_CLIENT_ACCOUNT.pin);
+    setPasswordInput('haslo123');
+    setActiveAccount(DEMO_CLIENT_ACCOUNT);
     setIsAuthenticated(true);
     setAuthError('');
   };
@@ -88,7 +104,7 @@ export default function ClientDashboard() {
             </div>
           )}
 
-          <form onSubmit={handleLogin} className="space-y-5">
+          <form onSubmit={handleLogin} className="space-y-5" noValidate>
             <div>
               <label className="block text-xs font-bold uppercase tracking-wider text-white/60 mb-2">
                 Adres E-mail Klienta:
@@ -98,23 +114,32 @@ export default function ClientDashboard() {
                 required
                 value={emailInput}
                 onChange={(e) => setEmailInput(e.target.value)}
-                placeholder="np. demo@foundly.pl"
+                placeholder="np. demo@foundly.pl lub Twój e-mail"
                 className="w-full h-12 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/20 text-xs focus:outline-none focus:border-indigo-500 transition-colors"
               />
             </div>
 
             <div>
               <label className="block text-xs font-bold uppercase tracking-wider text-white/60 mb-2">
-                Kod PIN lub Hasło:
+                Hasło:
               </label>
-              <input
-                type="password"
-                required
-                value={pinInput}
-                onChange={(e) => setPinInput(e.target.value)}
-                placeholder="****"
-                className="w-full h-12 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/20 text-xs focus:outline-none focus:border-indigo-500 transition-colors"
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  required
+                  value={passwordInput}
+                  onChange={(e) => setPasswordInput(e.target.value)}
+                  placeholder="Wprowadź swoje hasło"
+                  className="w-full h-12 pl-4 pr-11 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/20 text-xs focus:outline-none focus:border-indigo-500 transition-colors"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3.5 top-3.5 text-white/40 hover:text-white transition-colors"
+                >
+                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
             </div>
 
             <button
@@ -126,16 +151,16 @@ export default function ClientDashboard() {
             </button>
           </form>
 
-          <div className="pt-4 border-t border-white/10 text-center">
+          <div className="pt-4 border-t border-white/10 text-center space-y-3">
             <button
               onClick={handleDemoLogin}
-              className="w-full py-3 px-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-indigo-300 font-bold text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
+              className="w-full py-3.5 px-4 rounded-xl bg-white/10 border border-white/20 hover:bg-white/20 text-white font-bold text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2 shadow-lg"
             >
-              <Zap className="w-4 h-4 text-indigo-400" />
+              <Zap className="w-4 h-4 text-indigo-400 fill-indigo-400" />
               <span>Szybkie Logowanie Konto Demo (1-Click)</span>
             </button>
-            <p className="text-[10px] text-white/30 mt-3">
-              Login demo: <code className="text-white/60">demo@foundly.pl</code> | PIN: <code className="text-white/60">1234</code>
+            <p className="text-[10px] text-white/40">
+              Użyj dowolnego e-maila i hasła lub kliknij przycisk powyżej.
             </p>
           </div>
         </div>
@@ -295,7 +320,7 @@ export default function ClientDashboard() {
               <span className="text-xs font-bold uppercase text-white">Search Console API</span>
               <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
             </div>
-            <div className="text-[11px] font-mono text-white/40">Domain: kowalski-stolarstwo.pl</div>
+            <div className="text-[11px] font-mono text-white/40">Domain: {activeAccount.gscSiteUrl.replace('https://', '')}</div>
             <div className="text-[10px] text-emerald-300 font-bold">Pozycje Fraza Po Frazie</div>
           </div>
         </div>
