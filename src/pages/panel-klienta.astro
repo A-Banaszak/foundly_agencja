@@ -1,0 +1,14 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import ClientDashboard from '../components/client-portal/ClientDashboard';
+---
+
+<Layout title="Panel Klienta 24/7 — Foundly Agencja" noindex={true}>
+	<Navbar />
+	<main class="pt-24 pb-16 min-h-screen bg-[#050505]">
+		<ClientDashboard client:only="react" />
+	</main>
+	<Footer />
+</Layout>
