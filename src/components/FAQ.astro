@@ -5,6 +5,10 @@ const faqs = [
     a: "Pierwszy działający projekt strony firmowej przesyłamy do wglądu w ciągu 48 godzin od wypełnienia briefu i przekazania materiałów. Po akceptacji strona jest publikowana natychmiast."
   },
   {
+    q: "Czy kwota abonamentu obejmuje budżet na kliknięcia w Google/Meta Ads?",
+    a: "Abonament Foundly obejmuje pełną obsługę agencyjną, projekt i hosting strony za 0 zł, opiekę techniczną, SEO oraz optymalizację kampanii Ads. Sam budżet na kliknięcia (np. 300 - 1000 zł/mc) ustalasz z nami elastycznie i wpłacasz bezpośrednio na swoje konto w Google/Meta Ads. Dzięki temu zachowujesz 100% kontroli i zero ukrytych prowizji."
+  },
+  {
     q: "Czy strona będzie moja na własność?",
     a: "Tak. Przy wyborze płatności jednorazowej dostajesz 100% praw do strony, kodu, grafik oraz domeny. Nie trzymamy klientów 'na uwięzi'."
   },
@@ -28,7 +32,7 @@ const faqs = [
     <div class="text-center mb-16">
       <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-indigo-400 mb-4">
         <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
-        <span>07. Najczęściej Zadawane Pytania</span>
+        <span>Najczęściej Zadawane Pytania</span>
       </div>
       <h2 class="text-4xl sm:text-6xl font-black uppercase italic tracking-tighter text-white">
         Wszystko, co musisz wiedzieć.
@@ -36,7 +40,7 @@ const faqs = [
     </div>
 
     <div class="space-y-4">
-      {faqs.map((item, idx) => (
+      {faqs.map((item) => (
         <details class="group p-6 rounded-2xl bg-white/[0.02] border border-white/5 cursor-pointer transition-all duration-300 [&[open]]:bg-white/[0.05] [&[open]]:border-indigo-500/30">
           <summary class="flex items-center justify-between text-lg font-black uppercase italic tracking-tight text-white list-none">
             <span>{item.q}</span>

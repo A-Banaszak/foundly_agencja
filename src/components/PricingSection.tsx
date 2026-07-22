@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CheckCircle2, Zap, Sparkles, ShieldCheck, BarChart3, Clock, Unlock } from 'lucide-react';
+import { CheckCircle2, Zap, Sparkles, BarChart3, Clock, Unlock, Info } from 'lucide-react';
 
 export default function PricingSection() {
   const [mode, setMode] = useState<'subscription' | 'oneoff'>('subscription');
@@ -12,7 +12,7 @@ export default function PricingSection() {
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-xs font-bold uppercase tracking-widest text-indigo-400 mb-4">
             <Sparkles className="w-4 h-4 text-indigo-400" />
-            <span>Elastyczne Pakiety & Abonament</span>
+            <span>Elastyczne Pakiety & Przejrzyste Zasady</span>
           </div>
           <h2 className="text-4xl sm:text-6xl font-black uppercase italic tracking-tighter text-white leading-none mb-6">
             Zyskaj stronę i klientów. <br />
@@ -21,11 +21,11 @@ export default function PricingSection() {
             </span>
           </h2>
           <p className="text-white/60 text-base leading-relaxed">
-            Wybierz zoptymalizowany model abonamentowy ze stroną za 0 zł z góry lub wdrożenie jednorazowe.
+            Wybierz zoptymalizowany model abonamentowy ze stroną za 0 zł z góry lub wdrożenie jednorazowe. 100% uczciwych zasad.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           <div className="p-6 rounded-3xl bg-white/[0.02] border border-white/10 flex flex-col gap-3 hover:border-indigo-500/40 transition-colors">
             <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center font-black">
               <Zap className="w-6 h-6" />
@@ -42,7 +42,7 @@ export default function PricingSection() {
             </div>
             <h3 className="text-lg font-black uppercase italic text-white tracking-tight">Pełen Pakiet od 1. Dnia</h3>
             <p className="text-xs text-white/50 leading-relaxed font-medium">
-              Od razu otrzymujesz stronę, hosting, domenkę, pozycjonowanie w Google oraz kampanie reklamowe.
+              Od razu otrzymujesz stronę, hosting, domenkę, pozycjonowanie w Google oraz konfigurację płatnych kampanii.
             </p>
           </div>
 
@@ -64,6 +64,14 @@ export default function PricingSection() {
             <p className="text-xs text-white/50 leading-relaxed font-medium">
               Szanujemy Twoją wolność. Elastyczna umowa z 30-dniowym okresem wypowiedzenia bez lojalnościówek.
             </p>
+          </div>
+        </div>
+
+        {/* Transparent Note on Ad Budget */}
+        <div className="p-6 rounded-2xl bg-indigo-500/10 border border-indigo-500/30 max-w-4xl mx-auto mb-16 flex items-start gap-4">
+          <Info className="w-6 h-6 text-indigo-400 shrink-0 mt-0.5" />
+          <div className="text-xs sm:text-sm text-indigo-200/90 leading-relaxed">
+            <strong className="text-white uppercase font-black">100% Uczciwe Zasady:</strong> Abonament Foundly obejmuje pełną obsługę agencyjną, projekt i hosting strony za 0 zł, SEO oraz tworzenie i optymalizację kampanii Ads. <span className="underline decoration-indigo-400">Budżet na kliknięcia (Google/Meta Ads) jest elastyczny i płatny bezpośrednio do Google/Meta</span> (ustalamy go z Tobą indywidualnie, np. od 300 zł/mc). Zero ukrytych prowizji!
           </div>
         </div>
 
@@ -113,9 +121,12 @@ export default function PricingSection() {
                   <div className="text-2xl font-black text-white italic">0 PLN <span className="text-xs font-normal text-white/40">(zamiast 890 zł)</span></div>
                 </div>
 
-                <div className="flex items-baseline gap-1 mb-8">
+                <div className="flex items-baseline gap-1 mb-2">
                   <span className="text-4xl sm:text-5xl font-black text-white italic tracking-tighter">390</span>
                   <span className="text-white/40 text-xs font-black uppercase tracking-widest">PLN / msc</span>
+                </div>
+                <div className="text-[10px] text-white/40 font-medium mb-8 uppercase tracking-wider italic">
+                  + opcjonalny własny budżet reklamowy
                 </div>
 
                 <ul className="space-y-4 mb-10">
@@ -161,9 +172,12 @@ export default function PricingSection() {
                   <div className="text-2xl font-black text-white italic">0 PLN <span className="text-xs font-normal text-white/40">(zamiast 1490 zł)</span></div>
                 </div>
 
-                <div className="flex items-baseline gap-1 mb-8">
+                <div className="flex items-baseline gap-1 mb-2">
                   <span className="text-4xl sm:text-5xl font-black text-white italic tracking-tighter">690</span>
                   <span className="text-white/40 text-xs font-black uppercase tracking-widest">PLN / msc</span>
+                </div>
+                <div className="text-[10px] text-indigo-300/80 font-bold mb-8 uppercase tracking-wider italic">
+                  + własny budżet reklamowy do Google/Meta
                 </div>
 
                 <ul className="space-y-4 mb-10">
@@ -206,9 +220,12 @@ export default function PricingSection() {
                   <div className="text-2xl font-black text-white italic">0 PLN <span className="text-xs font-normal text-white/40">(zamiast 2990 zł)</span></div>
                 </div>
 
-                <div className="flex items-baseline gap-1 mb-8">
+                <div className="flex items-baseline gap-1 mb-2">
                   <span className="text-4xl sm:text-5xl font-black text-white italic tracking-tighter">990</span>
                   <span className="text-white/40 text-xs font-black uppercase tracking-widest">PLN / msc</span>
+                </div>
+                <div className="text-[10px] text-white/40 font-medium mb-8 uppercase tracking-wider italic">
+                  + własny budżet reklamowy do Google/Meta
                 </div>
 
                 <ul className="space-y-4 mb-10">
