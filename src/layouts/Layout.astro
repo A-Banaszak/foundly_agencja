@@ -4,15 +4,17 @@ import '../styles/global.css';
 interface Props {
 	title?: string;
 	description?: string;
+	noindex?: boolean;
 }
 
 const { 
 	title = "Foundly.Agencja — Strony Internetowe + SEO i Reklamy dla Firm", 
-	description = "Nowoczesne, szybkie strony internetowe z wbudowanym systemem pozyskiwania klientów z Google. Realizacja od 48h. Zobacz nasz cennik i zamów wycenę." 
+	description = "Nowoczesne, szybkie strony internetowe z wbudowanym systemem pozyskiwania klientów z Google. Realizacja od 48h. Zobacz nasz cennik i zamów wycenę.",
+	noindex = false
 } = Astro.props;
 ---
 
-<!static html>
+<!DOCTYPE html>
 <html lang="pl" class="dark">
 	<head>
 		<meta charset="UTF-8" />
@@ -22,6 +24,8 @@ const {
 		<title>{title}</title>
 		<meta name="description" content={description} />
 		<meta name="theme-color" content="#050505" />
+
+		{noindex && <meta name="robots" content="noindex, nofollow" />}
 
 		<!-- Open Graph / Social -->
 		<meta property="og:type" content="website" />

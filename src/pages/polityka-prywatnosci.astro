@@ -1,0 +1,72 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Polityka Prywatności — Foundly Agencja" noindex={true}>
+	<Navbar />
+	<main class="pt-32 pb-24">
+		<section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="mb-12">
+				<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-xs font-bold uppercase tracking-widest text-indigo-400 mb-6">
+					<span>Dokument Prawny • Noindex</span>
+				</div>
+				<h1 class="text-4xl sm:text-6xl font-black uppercase italic tracking-tighter text-white leading-none mb-4">
+					Polityka Prywatności
+				</h1>
+				<p class="text-white/40 text-xs font-medium uppercase tracking-wider">
+					Ostatnia aktualizacja: {new Date().toLocaleDateString('pl-PL')}
+				</p>
+			</div>
+
+			<div class="space-y-8 text-sm text-white/70 leading-relaxed font-medium">
+				<div class="p-8 rounded-3xl bg-white/[0.02] border border-white/10 space-y-4">
+					<h2 class="text-xl font-black uppercase italic text-white">1. Administrator Danych Osobowych</h2>
+					<p>
+						Administratorem Twoich danych osobowych przetwarzanych w ramach serwisu Foundly Agencja (dostępnego pod adresem strony) jest Foundly Agencja. W sprawach związanych z ochroną danych osobowych możesz skontaktować się z nami pod adresem e-mail: <strong class="text-white">kontakt@foundly.pl</strong>.
+					</p>
+				</div>
+
+				<div class="p-8 rounded-3xl bg-white/[0.02] border border-white/10 space-y-4">
+					<h2 class="text-xl font-black uppercase italic text-white">2. Cel i Podstawa Przetwarzania Danych</h2>
+					<p>Twoje dane osobowe (tzn. Imię, Nazwisko, Numer Telefonu, Adres E-mail oraz szczegóły zapytania) przetwarzane są w celu:</p>
+					<ul class="list-disc pl-5 space-y-2 text-xs">
+						<li>Obsługi zapytań ofertowych i przygotowania wstępnej wyceny projektu (art. 6 ust. 1 lit. b RODO).</li>
+						<li>Realizacji usług tworzenia stron WWW, pozycjonowania SEO oraz prowadzenia kampanii reklamowych (art. 6 ust. 1 lit. b RODO).</li>
+						<li>Wypełnienia obowiązków prawnych ciążących na Administratorze (art. 6 ust. 1 lit. c RODO).</li>
+						<li>Prawnie uzasadnionego interesu polegającego na obronie przed ewentualnymi roszczeniami (art. 6 ust. 1 lit. f RODO).</li>
+					</ul>
+				</div>
+
+				<div class="p-8 rounded-3xl bg-white/[0.02] border border-white/10 space-y-4">
+					<h2 class="text-xl font-black uppercase italic text-white">3. Pliki Cookies i Analityka</h2>
+					<p>
+						Serwis wykorzystuje pliki cookies (ciasteczka) w celu zapewnienia prawidłowego działania strony, optymalizacji wydajności oraz zbierania anonimowych statystyk ruchu (Google Analytics 4). Możesz w każdej chwili zmienić ustawienia plików cookies w swojej przeglądarce internetowej.
+					</p>
+				</div>
+
+				<div class="p-8 rounded-3xl bg-white/[0.02] border border-white/10 space-y-4">
+					<h2 class="text-xl font-black uppercase italic text-white">4. Prawa Użytkownika</h2>
+					<p>Przysługuje Ci prawo do:</p>
+					<ul class="list-disc pl-5 space-y-2 text-xs">
+						<li>Dostępu do treści swoich danych oraz otrzymania ich kopii.</li>
+						<li>Sprostowania (poprawiania) swoich danych.</li>
+						<li>Usunięcia danych ("prawo do bycia zapomnianym").</li>
+						<li>Ograniczenia przetwarzania danych.</li>
+						<li>Wniesienia sprzeciwu wobec przetwarzania danych.</li>
+						<li>Wniesienia skargi do organu nadzorczego (Prezesa Urzędu Ochrony Danych Osobowych).</li>
+					</ul>
+				</div>
+
+				<div class="p-8 rounded-3xl bg-white/[0.02] border border-white/10 space-y-4">
+					<h2 class="text-xl font-black uppercase italic text-white">5. Okres Przechowywania Danych</h2>
+					<p>
+						Dane osobowe przechowywane są przez okres niezbędny do realizacji obsługi zapytania lub trwania umowy, a po tym czasie przez okres wymagany przepisami prawa powszechnie obowiązującego lub do czasu przedawnienia roszczeń.
+					</p>
+				</div>
+			</div>
+		</section>
+	</main>
+	<Footer />
+</Layout>

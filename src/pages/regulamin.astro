@@ -1,0 +1,63 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Regulamin Usług — Foundly Agencja" noindex={true}>
+	<Navbar />
+	<main class="pt-32 pb-24">
+		<section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="mb-12">
+				<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-xs font-bold uppercase tracking-widest text-indigo-400 mb-6">
+					<span>Dokument Prawny • Noindex</span>
+				</div>
+				<h1 class="text-4xl sm:text-6xl font-black uppercase italic tracking-tighter text-white leading-none mb-4">
+					Regulamin Świadczenia Usług
+				</h1>
+				<p class="text-white/40 text-xs font-medium uppercase tracking-wider">
+					Ostatnia aktualizacja: {new Date().toLocaleDateString('pl-PL')}
+				</p>
+			</div>
+
+			<div class="space-y-8 text-sm text-white/70 leading-relaxed font-medium">
+				<div class="p-8 rounded-3xl bg-white/[0.02] border border-white/10 space-y-4">
+					<h2 class="text-xl font-black uppercase italic text-white">§ 1. Postanowienia Ogólne</h2>
+					<p>
+						Niniejszy Regulamin określa zasady i warunki świadczenia usług drogą elektroniczną, tworzenia stron internetowych, pozycjonowania SEO oraz prowadzenia płatnych kampanii reklamowych przez Foundly Agencja.
+					</p>
+				</div>
+
+				<div class="p-8 rounded-3xl bg-white/[0.02] border border-white/10 space-y-4">
+					<h2 class="text-xl font-black uppercase italic text-white">§ 2. Modele Współpracy i Płatności</h2>
+					<ul class="list-disc pl-5 space-y-2 text-xs">
+						<li><strong class="text-white">Wdrożenia Jednorazowe:</strong> Usługa polega na stworzeniu strony WWW za ustaloną w wycenie kwotę z góry lub w ratach ustalonych indywidualnie. Po zaksięgowaniu pełnej wpłaty prawa autorskie przechodzą na Zamawiającego.</li>
+						<li><strong class="text-white">Model Abonamentowy (Strona za 0 PLN na start):</strong> Projekt i wdrożenie strony wykonywane są bez opłaty wstępnej (0 PLN z góry). Zamawiający opłaca stałą miesięczną subskrypcję obejmującą utrzymanie strony, hosting, domenę oraz pakiet działań marketingowych (SEO / Ads).</li>
+					</ul>
+				</div>
+
+				<div class="p-8 rounded-3xl bg-white/[0.02] border border-white/10 space-y-4">
+					<h2 class="text-xl font-black uppercase italic text-white">§ 3. Czas Realizacji i Gwarancja 48h</h2>
+					<p>
+						Dla standardowych projektów stron One-Page oraz Business Multi-Page, pierwszy roboczy podgląd witryny przygotowywany jest w ciągu 48 godzin roboczych od momentu dostarczenia kompletnych materiałów (brief, logotypy, wytyczne) przez Zamawiającego.
+					</p>
+				</div>
+
+				<div class="p-8 rounded-3xl bg-white/[0.02] border border-white/10 space-y-4">
+					<h2 class="text-xl font-black uppercase italic text-white">§ 4. Warunki Wypowiedzenia i Bez Umów Lojalnościowych</h2>
+					<p>
+						Większość usług abonamentowych i opiekuńczych świadczona jest na podstawie umowy na czas nieokreślony z 30-dniowym okresem wypowiedzenia ze skutkiem na koniec miesiąca rozliczeniowego, chyba że indywidualna umowa stanowi inaczej.
+					</p>
+				</div>
+
+				<div class="p-8 rounded-3xl bg-white/[0.02] border border-white/10 space-y-4">
+					<h2 class="text-xl font-black uppercase italic text-white">§ 5. Reklamacje i Wsparcie Techniczne</h2>
+					<p>
+						Wszelkie uwagi oraz reklamacje dotyczące działania serwisów lub kampanii mogą być zgłaszane drogą elektroniczną na adres e-mail: <strong class="text-white">kontakt@foundly.pl</strong>. Reklamacje rozpatrywane są w terminie do 14 dni roboczych.
+					</p>
+				</div>
+			</div>
+		</section>
+	</main>
+	<Footer />
+</Layout>
