@@ -40,29 +40,26 @@ async function main() {
     const style = document.createElement('style');
     style.innerHTML = `
       astro-dev-toolbar, [data-astro-dev-toolbar] { display: none !important; }
-      .blur-sensitive {
-        filter: blur(5px) !important;
+      .sensitive-data, .blur-sensitive {
+        filter: blur(6px) !important;
         user-select: none !important;
       }
     `;
     document.head.appendChild(style);
 
-    // Target name, email, domains & account IDs for privacy blur
-    const textNodes = document.querySelectorAll('p, strong, span, td, div, h1, h2, a');
-    textNodes.forEach(el => {
+    // Also target any remaining text nodes with email or domain
+    const elements = document.querySelectorAll('.sensitive-data, strong, span, td');
+    elements.forEach(el => {
       const text = el.textContent || '';
       if (
         text.includes('Jan Kowalski') || 
         text.includes('demo@foundly.pl') || 
         text.includes('kowalski-stolarstwo.pl') ||
-        text.includes('https://kowalski-stolarstwo.pl') ||
         text.includes('389201948') ||
         text.includes('849-201-9482') ||
         text.includes('act_492019482')
       ) {
-        if (el.children.length === 0 || el.tagName === 'STRONG' || el.tagName === 'SPAN' || el.tagName === 'A' || el.tagName === 'TD') {
-          el.classList.add('blur-sensitive');
-        }
+        el.classList.add('sensitive-data');
       }
     });
   });

@@ -156,7 +156,7 @@ export default function ClientDashboard() {
               Statystyki Kampanii: {activeAccount.companyName}
             </h1>
             <p className="text-xs text-zinc-500">
-              Konto: <strong className="text-zinc-800">{activeAccount.clientName}</strong> ({activeAccount.email}) &bull; Domena: <span className="font-mono text-zinc-700">{activeAccount.gscSiteUrl}</span>
+              Konto: <strong className="sensitive-data text-zinc-800">{activeAccount.clientName}</strong> <span className="sensitive-data">({activeAccount.email})</span> &bull; Domena: <span className="sensitive-data font-mono text-zinc-700">{activeAccount.gscSiteUrl}</span>
             </p>
           </div>
 
@@ -236,25 +236,25 @@ export default function ClientDashboard() {
               <tbody className="divide-y divide-zinc-100 text-zinc-700">
                 <tr>
                   <td className="py-2.5 px-3 font-semibold text-zinc-900">Google Analytics 4</td>
-                  <td className="py-2.5 px-3 font-mono text-zinc-500">ID: {activeAccount.ga4PropertyId}</td>
+                  <td className="py-2.5 px-3 font-mono text-zinc-500"><span className="sensitive-data">ID: {activeAccount.ga4PropertyId}</span></td>
                   <td className="py-2.5 px-3">Unikalni użytkownicy, sesje, zdarzenia kliknięcia w telefon</td>
                   <td className="py-2.5 px-3 text-right"><span className="text-emerald-600 font-medium">● Aktywne API</span></td>
                 </tr>
                 <tr>
                   <td className="py-2.5 px-3 font-semibold text-zinc-900">Google Ads API</td>
-                  <td className="py-2.5 px-3 font-mono text-zinc-500">ID: {activeAccount.googleAdsCustomerId}</td>
+                  <td className="py-2.5 px-3 font-mono text-zinc-500"><span className="sensitive-data">ID: {activeAccount.googleAdsCustomerId}</span></td>
                   <td className="py-2.5 px-3">Wydatki, kliknięcia w wyszukiwarce, średni koszt kliknięcia (CPC)</td>
                   <td className="py-2.5 px-3 text-right"><span className="text-emerald-600 font-medium">● Aktywne API</span></td>
                 </tr>
                 <tr>
                   <td className="py-2.5 px-3 font-semibold text-zinc-900">Meta Marketing API</td>
-                  <td className="py-2.5 px-3 font-mono text-zinc-500">ID: {activeAccount.metaAdAccountId}</td>
+                  <td className="py-2.5 px-3 font-mono text-zinc-500"><span className="sensitive-data">ID: {activeAccount.metaAdAccountId}</span></td>
                   <td className="py-2.5 px-3">Wydatki na kampanie Facebook / Instagram, zasięg reklam</td>
                   <td className="py-2.5 px-3 text-right"><span className="text-emerald-600 font-medium">● Aktywne API</span></td>
                 </tr>
                 <tr>
                   <td className="py-2.5 px-3 font-semibold text-zinc-900">Google Search Console</td>
-                  <td className="py-2.5 px-3 font-mono text-zinc-500">Domena: {activeAccount.gscSiteUrl.replace('https://', '')}</td>
+                  <td className="py-2.5 px-3 font-mono text-zinc-500"><span className="sensitive-data">Domena: {activeAccount.gscSiteUrl.replace('https://', '')}</span></td>
                   <td className="py-2.5 px-3">Średnie pozycje w organicznych wynikach wyszukiwania Google</td>
                   <td className="py-2.5 px-3 text-right"><span className="text-emerald-600 font-medium">● Aktywne API</span></td>
                 </tr>
