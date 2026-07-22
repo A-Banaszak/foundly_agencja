@@ -15,11 +15,11 @@ const reviews = [
     logo: "/logos/rentease.svg"
   },
   {
-    quote: "Profesjonalizm i błyskawiczne tempo. Strona powstała w 48 godzin, a połączenie pozycjonowania z kampanią w Google Ads dało od razu przełożenie na telefoniczne zamówienia z naszego miasta.",
-    author: "Marek W.",
-    role: "Usługi dla Firm",
+    quote: "Współpraca z Foundly przy nowej stronie improtak.pl to była czysta przyjemność. Cały proces od projektu w 48h po szybki kod i natychmiastowe ustawienie pozycjonowania przebiegł sprawnie, bez ukrytych opłat i zbędnych nerwów.",
+    author: "Jarosław",
+    role: "Founder, Improtak.pl",
     stars: "★★★★★",
-    logo: null
+    logo: "/logos/improtak.png"
   }
 ];
 ---
@@ -47,7 +47,7 @@ const reviews = [
               <div class="text-amber-400 text-sm tracking-widest font-black">{rev.stars}</div>
               {rev.logo && (
                 <div class="h-8 flex items-center justify-end">
-                  <img src={rev.logo} alt={rev.role} class="h-6 w-auto max-w-[120px] object-contain opacity-80 group-hover:opacity-100 transition-opacity" />
+                  <img src={rev.logo} alt={rev.role} class="h-7 w-auto max-w-[130px] object-contain opacity-80 group-hover:opacity-100 transition-opacity" />
                 </div>
               )}
             </div>
