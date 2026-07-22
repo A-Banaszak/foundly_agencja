@@ -183,7 +183,7 @@ export default function PricingSection() {
                     Abonament Growth
                   </h3>
                   <p className="text-[11px] text-white/40 font-medium uppercase tracking-wider mb-6">
-                    Wielopodstronowa strona (do 5 podstron) + SEO Lokalne.
+                    Rozbudowana strona (do 5 podstron) + SEO Lokalne.
                   </p>
 
                   <div className="p-3.5 rounded-2xl bg-white/5 border border-white/5 mb-6">
@@ -236,7 +236,7 @@ export default function PricingSection() {
                     Business Pro
                   </h3>
                   <p className="text-[11px] text-indigo-200/60 font-medium uppercase tracking-wider mb-6">
-                    Wielopodstronowy WordPress + reklama w Google Ads.
+                    Rozbudowana witryna WordPress + reklama w Google Ads.
                   </p>
 
                   <div className="p-3.5 rounded-2xl bg-indigo-500/10 border border-indigo-500/30 mb-6">
@@ -410,7 +410,7 @@ export default function PricingSection() {
                   Business Multi-Page
                 </h3>
                 <p className="text-xs text-white/40 font-medium uppercase tracking-wider mb-6">
-                  Wielopodstronowy serwis dla rozwijających się firm.
+                  Rozbudowany serwis dla rozwijających się firm.
                 </p>
 
                 <div className="flex items-baseline gap-1 mb-6">
