@@ -1,0 +1,17 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { ChatAdmin } from '../components/ChatAdmin';
+---
+
+<Layout title="Panel Zarządzania - Foundly Agencja" noindex={true}>
+	<main class="min-h-screen p-4 sm:p-8 bg-[#050505]">
+		<div class="max-w-7xl mx-auto mb-6 flex justify-between items-center">
+			<a href="/" class="text-xs font-bold text-white/50 hover:text-white transition-all">← Strona główna</a>
+			<div class="flex items-center gap-2">
+				<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+				<span class="text-xs font-mono text-indigo-400 font-bold">Foundly Admin Panel v2.0</span>
+			</div>
+		</div>
+		<ChatAdmin client:only="react" />
+	</main>
+</Layout>

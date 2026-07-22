@@ -43,6 +43,15 @@ try {
             user_id TEXT,
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP
         );
+        CREATE TABLE IF NOT EXISTS form_leads (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            form_title TEXT NOT NULL,
+            name TEXT NOT NULL,
+            contact TEXT NOT NULL,
+            details TEXT,
+            notes TEXT,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        );
     ");
 } catch (Exception $e) {
     echo json_encode(['error' => 'Błąd połączenia z bazą: ' . $e->getMessage()]);
@@ -53,7 +62,7 @@ function sendDiscordEmbed($message, $user, $role, $webhookUrl) {
     if (!$webhookUrl || strpos($webhookUrl, 'http') !== 0) return;
 
     $color = ($role === 'ADMIN') ? 0x4f46e5 : (($role === 'LEAD') ? 0xf59e0b : 0x10b981);
-    $title = ($role === 'LEAD') ? "🎯 Nowy Lead na Czacie (Foundly)!" : "💬 Nowa wiadomość na czacie Foundly";
+    $title = ($role === 'LEAD') ? "Nowy Lead na Czacie (Foundly)!" : "Nowa wiadomość na czacie Foundly";
 
     $payload = json_encode([
         'embeds' => [[
@@ -141,7 +150,7 @@ if ($action === 'send') {
     exit();
 }
 
-// 3. Zapis leada (Imię + Email)
+// 3. Zapis leada czatu
 if ($action === 'lead') {
     $sessionId = trim($input['sessionId'] ?? '');
     $name = trim($input['name'] ?? '');
@@ -161,7 +170,22 @@ if ($action === 'lead') {
     exit();
 }
 
-// 4. Panel Admina - Lista sesji
+// 4. Zapis leada z formularza na stronie
+if ($action === 'save_form_lead') {
+    $title = trim($input['formTitle'] ?? 'Formularz');
+    $name = trim($input['name'] ?? '');
+    $contact = trim($input['contact'] ?? '');
+    $details = trim($input['details'] ?? '');
+    $notes = trim($input['notes'] ?? '');
+
+    $stmt = $pdo->prepare("INSERT INTO form_leads (form_title, name, contact, details, notes) VALUES (:title, :name, :contact, :details, :notes)");
+    $stmt->execute([':title' => $title, ':name' => $name, ':contact' => $contact, ':details' => $details, ':notes' => $notes]);
+
+    echo json_encode(['success' => true]);
+    exit();
+}
+
+// 5. Panel Admina - Lista sesji czatów
 if ($action === 'admin_sessions') {
     $token = $_GET['token'] ?? '';
     if ($token !== $ADMIN_SECRET_KEY) {
@@ -187,7 +211,23 @@ if ($action === 'admin_sessions') {
     exit();
 }
 
-// 5. Panel Admina - Odpowiedź administratora
+// 6. Panel Admina - Lista leadów z formularzy
+if ($action === 'admin_leads') {
+    $token = $_GET['token'] ?? '';
+    if ($token !== $ADMIN_SECRET_KEY) {
+        http_response_code(401);
+        echo json_encode(['error' => 'Brak dostępu']);
+        exit();
+    }
+
+    $stmt = $pdo->query("SELECT id, form_title as formTitle, name, contact, details, notes, created_at as createdAt FROM form_leads ORDER BY id DESC");
+    $leads = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    echo json_encode(['leads' => $leads]);
+    exit();
+}
+
+// 7. Panel Admina - Odpowiedź administratora
 if ($action === 'admin_reply') {
     $token = $input['token'] ?? '';
     $sessionId = $input['sessionId'] ?? '';

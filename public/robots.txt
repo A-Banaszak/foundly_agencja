@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-Disallow: /admin/
+Disallow: /panel-foundly
 Disallow: /polityka-prywatnosci
 Disallow: /regulamin
 Disallow: /wiedza

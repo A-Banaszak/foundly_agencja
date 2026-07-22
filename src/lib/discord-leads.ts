@@ -15,8 +15,6 @@ export interface LeadPayload {
 }
 
 export async function sendLeadToDiscord(payload: LeadPayload) {
-  if (!FORM_DISCORD_WEBHOOK) return;
-
   const discordFields: LeadField[] = [
     { name: "Imię / Firma", value: payload.name || "Nie podano", inline: true },
     { name: "Kontakt", value: payload.contact || "Nie podano", inline: true },
@@ -27,21 +25,56 @@ export async function sendLeadToDiscord(payload: LeadPayload) {
     discordFields.push({ name: "Uwagi / Opis", value: payload.notes, inline: false });
   }
 
+  // 1. Wysyłka do Discord Webhook
+  if (FORM_DISCORD_WEBHOOK) {
+    try {
+      await fetch(FORM_DISCORD_WEBHOOK, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          embeds: [{
+            title: `NOWY LEAD: ${payload.formTitle}`,
+            color: 0xf59e0b,
+            fields: discordFields,
+            footer: { text: "Foundly Agencja - System Pozyskiwania Leada" },
+            timestamp: new Date().toISOString()
+          }]
+        })
+      });
+    } catch (err) {
+      console.error("Błąd wysyłania leada na Discord:", err);
+    }
+  }
+
+  // 2. Zapis w bazie PHP (SQLite)
+  const detailsStr = payload.fields?.map(f => `${f.name}: ${f.value}`).join(" | ") || "";
   try {
-    await fetch(FORM_DISCORD_WEBHOOK, {
+    await fetch("/api/chat.php?action=save_form_lead", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        embeds: [{
-          title: `NOWY LEAD: ${payload.formTitle}`,
-          color: 0xf59e0b, // Złocisty kolor dla wyróżnienia leadów
-          fields: discordFields,
-          footer: { text: "Foundly Agencja - System Pozyskiwania Leada" },
-          timestamp: new Date().toISOString()
-        }]
+        formTitle: payload.formTitle,
+        name: payload.name,
+        contact: payload.contact,
+        details: detailsStr,
+        notes: payload.notes || ""
       })
     });
-  } catch (err) {
-    console.error("Błąd wysyłania leada na Discord:", err);
-  }
+  } catch (err) {}
+
+  // 3. Zapis lokalny (fallback dev)
+  try {
+    const rawLocal = localStorage.getItem("foundly_form_leads") || "[]";
+    const parsed = JSON.parse(rawLocal);
+    parsed.unshift({
+      id: Date.now(),
+      formTitle: payload.formTitle,
+      name: payload.name,
+      contact: payload.contact,
+      details: detailsStr,
+      notes: payload.notes || "",
+      createdAt: new Date().toISOString()
+    });
+    localStorage.setItem("foundly_form_leads", JSON.stringify(parsed));
+  } catch (e) {}
 }
