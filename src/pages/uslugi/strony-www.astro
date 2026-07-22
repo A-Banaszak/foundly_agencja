@@ -2,7 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
-import CalculatorWizard from '../../components/CalculatorWizard';
+import WebsiteOrderForm from '../../components/forms/WebsiteOrderForm';
 ---
 
 <Layout title="Strony Internetowe dla Firm — Foundly Agencja">
@@ -36,7 +36,6 @@ import CalculatorWizard from '../../components/CalculatorWizard';
 							<li>✓ Optymalizacja SEO On-Page</li>
 						</ul>
 					</div>
-					<a href="/kontakt" class="mt-8 block text-center py-3 rounded-full bg-white/10 text-white font-bold text-xs uppercase tracking-widest hover:bg-white/20 transition-colors">Zamów Starter</a>
 				</div>
 
 				<div class="p-8 rounded-[2.5rem] bg-gradient-to-b from-indigo-950/40 to-black border-2 border-indigo-500 shadow-xl flex flex-col justify-between">
@@ -51,7 +50,6 @@ import CalculatorWizard from '../../components/CalculatorWizard';
 							<li>✓ 2 tury poprawek + opieka 30 dni</li>
 						</ul>
 					</div>
-					<a href="/kontakt" class="mt-8 block text-center py-3 rounded-full bg-white text-black font-black text-xs uppercase tracking-widest hover:bg-zinc-200 transition-colors">Zamów Business</a>
 				</div>
 
 				<div class="p-8 rounded-[2.5rem] bg-white/[0.02] border border-white/10 flex flex-col justify-between">
@@ -65,11 +63,10 @@ import CalculatorWizard from '../../components/CalculatorWizard';
 							<li>✓ Wsparcia opiekuna technicznego</li>
 						</ul>
 					</div>
-					<a href="/kontakt" class="mt-8 block text-center py-3 rounded-full bg-white/10 text-white font-bold text-xs uppercase tracking-widest hover:bg-white/20 transition-colors">Wycena Sklepu</a>
 				</div>
 			</div>
 
-			<CalculatorWizard client:visible />
+			<WebsiteOrderForm client:visible />
 		</section>
 	</main>
 	<Footer />

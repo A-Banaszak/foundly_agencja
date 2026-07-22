@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
+import SeoAuditForm from '../../components/forms/SeoAuditForm';
 ---
 
 <Layout title="Pozycjonowanie SEO & Google Maps — Foundly Agencja">
@@ -61,19 +62,7 @@ import Footer from '../../components/Footer.astro';
 				</div>
 			</div>
 
-			<div class="p-10 sm:p-14 rounded-[3rem] bg-gradient-to-r from-indigo-950/60 to-black border border-indigo-500/40 text-center">
-				<h2 class="text-3xl sm:text-4xl font-black uppercase italic text-white mb-4">
-					Chcesz sprawdzić obecne pozycje swojej firmy?
-				</h2>
-				<p class="text-white/60 text-sm max-w-xl mx-auto mb-8">
-					Zamów bezpłatny mini-audyt SEO. Przeanalizujemy Twoją stronę i konkurencję w ciągu 24h.
-				</p>
-				<a href="/kontakt">
-					<button class="h-16 px-10 rounded-full bg-white text-black font-black text-xs uppercase tracking-widest hover:bg-zinc-200 transition-colors">
-						Zamów darmowy audyt SEO →
-					</button>
-				</a>
-			</div>
+			<SeoAuditForm client:visible />
 		</section>
 	</main>
 	<Footer />

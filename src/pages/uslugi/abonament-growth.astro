@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
+import SubscriptionOrderForm from '../../components/forms/SubscriptionOrderForm';
 import PricingSection from '../../components/PricingSection';
 ---
 
@@ -64,6 +65,10 @@ import PricingSection from '../../components/PricingSection';
 						</p>
 					</div>
 				</div>
+			</div>
+
+			<div class="mb-24">
+				<SubscriptionOrderForm client:visible />
 			</div>
 
 			<PricingSection client:visible />

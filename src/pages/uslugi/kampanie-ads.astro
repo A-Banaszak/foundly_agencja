@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
+import AdsCampaignForm from '../../components/forms/AdsCampaignForm';
 ---
 
 <Layout title="Płatne Kampanie Reklamowe (Google Ads & Meta Ads) — Foundly Agencja">
@@ -64,19 +65,7 @@ import Footer from '../../components/Footer.astro';
 				</div>
 			</div>
 
-			<div class="p-10 sm:p-14 rounded-[3rem] bg-gradient-to-r from-indigo-950/60 to-black border border-indigo-500/40 text-center">
-				<h2 class="text-3xl sm:text-4xl font-black uppercase italic text-white mb-4">
-					Chcesz natychmiastowych klientów z reklam?
-				</h2>
-				<p class="text-white/60 text-sm max-w-xl mx-auto mb-8">
-					Przygotujemy estymację budżetu i prognozę liczby zapytań dla Twojej branży.
-				</p>
-				<a href="/kontakt">
-					<button class="h-16 px-10 rounded-full bg-white text-black font-black text-xs uppercase tracking-widest hover:bg-zinc-200 transition-colors">
-						Zapytaj o kampanię reklamową →
-					</button>
-				</a>
-			</div>
+			<AdsCampaignForm client:visible />
 		</section>
 	</main>
 	<Footer />
