@@ -196,8 +196,8 @@ export default function PricingSection() {
                   Najczęściej Wybierany
                 </div>
                 <div>
-                  <span className="px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-500/40 text-[10px] font-black uppercase tracking-widest text-indigo-300">
-                    Strona + SEO + Google Ads
+                  <span className="inline-block whitespace-nowrap px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-500/40 text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-indigo-300">
+                    SEO + GOOGLE ADS
                   </span>
                   <h3 className="text-xl font-black uppercase italic tracking-tighter text-white mt-4 mb-2">
                     Business Pro
