@@ -1,0 +1,95 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import { LayoutGrid, Search, Megaphone, Sparkles } from 'lucide-react';
+
+const services = [
+  {
+    icon: LayoutGrid,
+    title: "Strony Internetowe",
+    href: "/uslugi/strony-www",
+    desc: "Błyskawiczne, nowoczesne i responsywne serwisy firmowe realizowane w 48 godzin.",
+    perks: ["Wdrożenie w 48h", "100% RWD & Błyskawiczny kod", "Formularze i mapa w cenie"]
+  },
+  {
+    icon: Search,
+    title: "Pozycjonowanie SEO",
+    href: "/uslugi/seo",
+    desc: "Budowanie najwyższych pozycji na lokalne frazy kluczowe oraz optymalizacja Google Maps.",
+    perks: ["Wizytówka Google Moja Firma", "Pozycje na frazy w Twoim mieście", "Co miesięczny raport wyników"]
+  },
+  {
+    icon: Megaphone,
+    title: "Płatne Kampanie Reklamowe",
+    href: "/uslugi/kampanie-ads",
+    desc: "Precyzyjnie celowane reklamy w Google Ads i Meta Ads przynoszące telefony i formularze od pierwszego dnia.",
+    perks: ["Natychmiastowe telefony od klientów", "Optymalizacja budżetu & ROAS", "Brak prowizji ukrytych"]
+  },
+  {
+    icon: Sparkles,
+    title: "Subskrypcja All-In-One",
+    href: "/uslugi/abonament-growth",
+    desc: "Strona za 0 zł z góry połączona z pełnym pakietem pozycjonowania i reklam w 1 stałej miesięcznej racie.",
+    perks: ["0 PLN kosztów początkowych", "Strona + SEO + Ads w 1 opłacie", "Zero długoterminowych umów"]
+  }
+];
+---
+
+<Layout title="Nasze Usługi — Foundly Agencja">
+	<Navbar />
+	<main class="pt-32 pb-24">
+		<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="max-w-3xl mb-16">
+				<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-xs font-bold uppercase tracking-widest text-indigo-400 mb-6">
+					<span>Zakres Usług Foundly Agencja</span>
+				</div>
+				<h1 class="text-4xl sm:text-6xl lg:text-7xl font-black uppercase italic tracking-tighter text-white leading-none mb-8">
+					Kompletny ekosystem <br />
+					<span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">
+						dla wzrostu Twojej firmy.
+					</span>
+				</h1>
+				<p class="text-white/60 text-lg leading-relaxed">
+					Wybierz pojedynczą usługę lub skorzystaj z najbardziej opłacalnego pakietu **Subskrypcja All-In-One ze stroną za 0 zł na start.**
+				</p>
+			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-24">
+				{services.map((serv) => {
+					const IconComp = serv.icon;
+					return (
+						<a href={serv.href} class="p-8 sm:p-10 rounded-[2.5rem] bg-white/[0.02] border border-white/10 hover:border-indigo-500/50 hover:bg-white/[0.04] transition-all duration-300 flex flex-col justify-between group">
+							<div>
+								<div class="flex items-center justify-between mb-6">
+									<div class="p-4 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 group-hover:scale-110 transition-transform">
+										<IconComp class="w-6 h-6" />
+									</div>
+									<span class="text-xs font-black uppercase tracking-widest text-indigo-400 group-hover:translate-x-1 transition-transform">Poznaj usługę →</span>
+								</div>
+
+								<h2 class="text-2xl sm:text-3xl font-black uppercase italic tracking-tight text-white mb-4 group-hover:text-indigo-300 transition-colors">
+									{serv.title}
+								</h2>
+
+								<p class="text-xs sm:text-sm text-white/50 leading-relaxed font-medium mb-8">
+									{serv.desc}
+								</p>
+
+								<ul class="space-y-3 mb-4">
+									{serv.perks.map((p) => (
+										<li class="flex items-center gap-2 text-xs font-bold uppercase tracking-tight text-white/70">
+											<span class="text-indigo-400">✓</span>
+											<span>{p}</span>
+										</li>
+									))}
+								</ul>
+							</div>
+						</a>
+					);
+				})}
+			</div>
+		</section>
+	</main>
+	<Footer />
+</Layout>

@@ -1,0 +1,87 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+const articles = [
+  {
+    title: "Dlaczego sama strona WWW nie przynosi klientów i jak to zmienić?",
+    category: "Marketing & Strategia",
+    readTime: "4 min czytania",
+    desc: "Dowiedz się, dlaczego 90% stron firmowych w Polsce stoi pustych oraz jak połączyć szybki kod z kampaniami reklamowymi, by generować zapytania od 1-szego dnia.",
+    date: "18 Lipca 2026"
+  },
+  {
+    title: "SEO Lokalne vs Google Ads: Co wybrać dla małej firmy w 2026 roku?",
+    category: "Pozycjonowanie & Ads",
+    readTime: "6 min czytania",
+    desc: "Porównanie kosztów, czasów oczekiwania na efekty oraz zwrotu z inwestycji (ROAS) przy pozycjonowaniu w Google Maps i płatnej reklamie w wyszukiwarce.",
+    date: "10 Lipca 2026"
+  },
+  {
+    title: "Strona WWW w abonamencie vs Jednorazowe wdrożenie u freelancera",
+    category: "Finanse & Inwestycje",
+    readTime: "5 min czytania",
+    desc: "Przeanalizujmy ukryte koszty serwera, poprawek, aktualizacji oraz braku marketingu. Dlaczego model abonamentowy ze stroną za 0 zł zyskuje popularność?",
+    date: "2 Lipca 2026"
+  },
+  {
+    title: "5 kluczowych elementów landing page'a dla stolarza i firmy budowlanej",
+    category: "UX & Konwersja",
+    readTime: "4 min czytania",
+    desc: "Jak układać nagłówki, zdjęcia z realizacji oraz przyciski kontaktowe, aby potencjalny klient nie opuścił witryny bez wysłania zapytania.",
+    date: "24 Czerwca 2026"
+  }
+];
+---
+
+<Layout title="Wiedza i Poradniki — Foundly Agencja">
+	<Navbar />
+	<main class="pt-32 pb-24">
+		<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="max-w-3xl mb-16">
+				<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-xs font-bold uppercase tracking-widest text-indigo-400 mb-6">
+					<span>Baza Wiedzy & Poradniki</span>
+				</div>
+				<h1 class="text-4xl sm:text-6xl lg:text-7xl font-black uppercase italic tracking-tighter text-white leading-none mb-8">
+					Wiedza o wzrostach <br />
+					<span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">
+						i pozyskiwaniu klientów.
+					</span>
+				</h1>
+				<p class="text-white/60 text-lg leading-relaxed">
+					Praktyczne poradniki i analizy dotyczące tworzenia stron WWW, pozycjonowania SEO oraz optymalizacji kampanii reklamowych Google Ads i Meta Ads dla małych firm.
+				</p>
+			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-24">
+				{articles.map((art) => (
+					<article class="p-8 sm:p-10 rounded-[2.5rem] bg-white/[0.02] border border-white/10 hover:border-indigo-500/40 transition-all duration-300 flex flex-col justify-between group">
+						<div>
+							<div class="flex items-center justify-between mb-6">
+								<span class="px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-[10px] font-black uppercase tracking-widest text-indigo-400">
+									{art.category}
+								</span>
+								<span class="text-xs font-medium text-white/30">{art.readTime}</span>
+							</div>
+
+							<h2 class="text-2xl font-black uppercase italic tracking-tight text-white mb-4 group-hover:text-indigo-300 transition-colors">
+								{art.title}
+							</h2>
+
+							<p class="text-xs sm:text-sm text-white/50 leading-relaxed font-medium mb-8">
+								{art.desc}
+							</p>
+						</div>
+
+						<div class="flex items-center justify-between pt-6 border-t border-white/5 text-xs">
+							<span class="text-white/30 font-medium">{art.date}</span>
+							<span class="font-black uppercase tracking-wider text-indigo-400 group-hover:translate-x-1 transition-transform">Czytaj artykuł →</span>
+						</div>
+					</article>
+				))}
+			</div>
+		</section>
+	</main>
+	<Footer />
+</Layout>

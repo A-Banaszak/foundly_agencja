@@ -1,0 +1,73 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import PricingSection from '../../components/PricingSection';
+---
+
+<Layout title="Subskrypcja All-In-One (Strona 0 PLN + Marketing) — Foundly Agencja">
+	<Navbar />
+	<main class="pt-32 pb-24">
+		<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="max-w-3xl mb-16">
+				<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/20 border border-indigo-500/40 text-xs font-bold uppercase tracking-widest text-indigo-300 mb-6">
+					<span>Flagowa Usługa • Subskrypcja All-In-One</span>
+				</div>
+				<h1 class="text-4xl sm:text-6xl lg:text-7xl font-black uppercase italic tracking-tighter text-white leading-none mb-8">
+					Strona WWW za 0 PLN z góry. <br />
+					<span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-indigo-200 to-purple-400">
+						+ Pełen marketing w abonamencie.
+					</span>
+				</h1>
+				<p class="text-white/60 text-lg leading-relaxed">
+					Brak zamrażania środków, pełny zestaw narzędzi pozyskiwania klientów od pierwszego dnia, stałe raporty co miesiąc i zerowe zobowiązania długoterminowe.
+				</p>
+			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-24">
+				<div class="p-8 rounded-[2.5rem] bg-white/[0.02] border border-white/10 flex flex-col justify-between">
+					<div>
+						<div class="text-3xl font-black text-indigo-400 italic mb-2">0 PLN</div>
+						<h3 class="text-xl font-black uppercase italic text-white mb-2">Bez Kosztów na Start</h3>
+						<p class="text-xs text-white/50 leading-relaxed font-medium">
+							Nie musisz płacić kilku tysięcy złotych z góry za stronę. Projektujemy i wdrażamy witrynę w ramach abonamentu.
+						</p>
+					</div>
+				</div>
+
+				<div class="p-8 rounded-[2.5rem] bg-white/[0.02] border border-white/10 flex flex-col justify-between">
+					<div>
+						<div class="text-3xl font-black text-indigo-400 italic mb-2">100%</div>
+						<h3 class="text-xl font-black uppercase italic text-white mb-2">Pełen Pakiet Działań</h3>
+						<p class="text-xs text-white/50 leading-relaxed font-medium">
+							W 1 opłacie masz gotową stronę, szybki hosting, domenę, pozycjonowanie w Google oraz płatne reklamy.
+						</p>
+					</div>
+				</div>
+
+				<div class="p-8 rounded-[2.5rem] bg-white/[0.02] border border-white/10 flex flex-col justify-between">
+					<div>
+						<div class="text-3xl font-black text-indigo-400 italic mb-2">Co msc</div>
+						<h3 class="text-xl font-black uppercase italic text-white mb-2">Stałe Raportowanie</h3>
+						<p class="text-xs text-white/50 leading-relaxed font-medium">
+							Co miesiąc otrzymujesz czytelne podsumowanie pozycji w Google, liczby telefonów oraz zapytań od klientów.
+						</p>
+					</div>
+				</div>
+
+				<div class="p-8 rounded-[2.5rem] bg-white/[0.02] border border-white/10 flex flex-col justify-between">
+					<div>
+						<div class="text-3xl font-black text-indigo-400 italic mb-2">30 Dni</div>
+						<h3 class="text-xl font-black uppercase italic text-white mb-2">Bez Długich Umów</h3>
+						<p class="text-xs text-white/50 leading-relaxed font-medium">
+							Działamy na umowie na czas nieokreślony z 30-dniowym okresem wypowiedzenia. Zero cyrografów.
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<PricingSection client:visible />
+		</section>
+	</main>
+	<Footer />
+</Layout>
