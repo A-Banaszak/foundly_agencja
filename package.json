@@ -21,18 +21,15 @@
     "clsx": "^2.1.1",
     "framer-motion": "^12.42.2",
     "lucide-react": "^1.25.0",
-    "puppeteer": "^25.3.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "tailwind-merge": "^3.6.0",
     "tailwindcss": "^4.3.3"
   },
-  "optionalDependencies": {
-    "@astrojs/compiler-binding-freebsd-x64": "^2.10.3"
-  },
   "devDependencies": {
     "html-to-image": "^1.11.13",
     "playwright": "^1.61.1",
+    "puppeteer": "^25.3.0",
     "puppeteer-core": "^25.3.0"
   }
 }

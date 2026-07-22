@@ -136,11 +136,6 @@ export default function PricingSection() {
                     Strona statyczna One-Page + lokalne SEO w Google.
                   </p>
 
-                  <div className="p-3.5 rounded-2xl bg-white/5 border border-white/5 mb-6">
-                    <div className="text-[10px] font-bold text-indigo-300 uppercase">Koszt wykonania strony:</div>
-                    <div className="text-xl font-black text-white italic">0 zł <span className="text-[10px] font-normal text-white/40">(startujesz od 1. msc abonamentu)</span></div>
-                  </div>
-
                   <div className="flex items-baseline gap-1 mb-2">
                     <span className="text-3xl sm:text-4xl font-black text-white italic tracking-tighter">99</span>
                     <span className="text-white/40 text-xs font-black uppercase tracking-widest">PLN / msc</span>
@@ -185,11 +180,6 @@ export default function PricingSection() {
                   <p className="text-[11px] text-white/40 font-medium uppercase tracking-wider mb-6">
                     Rozbudowana strona (do 5 podstron) + SEO Lokalne.
                   </p>
-
-                  <div className="p-3.5 rounded-2xl bg-white/5 border border-white/5 mb-6">
-                    <div className="text-[10px] font-bold text-indigo-300 uppercase">Koszt wykonania strony:</div>
-                    <div className="text-xl font-black text-white italic">0 zł <span className="text-[10px] font-normal text-white/40">(startujesz od 1. msc abonamentu)</span></div>
-                  </div>
 
                   <div className="flex items-baseline gap-1 mb-2">
                     <span className="text-3xl sm:text-4xl font-black text-white italic tracking-tighter">390</span>
@@ -239,11 +229,6 @@ export default function PricingSection() {
                     Rozbudowana witryna WordPress + reklama w Google Ads.
                   </p>
 
-                  <div className="p-3.5 rounded-2xl bg-indigo-500/10 border border-indigo-500/30 mb-6">
-                    <div className="text-[10px] font-bold text-indigo-300 uppercase">Koszt wykonania strony:</div>
-                    <div className="text-xl font-black text-white italic">0 zł <span className="text-[10px] font-normal text-white/40">(startujesz od 1. msc abonamentu)</span></div>
-                  </div>
-
                   <div className="flex items-baseline gap-1 mb-2">
                     <span className="text-3xl sm:text-4xl font-black text-white italic tracking-tighter">690</span>
                     <span className="text-white/40 text-xs font-black uppercase tracking-widest">PLN / msc</span>
@@ -288,11 +273,6 @@ export default function PricingSection() {
                   <p className="text-[11px] text-white/40 font-medium uppercase tracking-wider mb-6">
                     Sklep WooCommerce + SEO + Google Ads & Meta Ads.
                   </p>
-
-                  <div className="p-3.5 rounded-2xl bg-white/5 border border-white/5 mb-6">
-                    <div className="text-[10px] font-bold text-purple-300 uppercase">Koszt wykonania strony:</div>
-                    <div className="text-xl font-black text-white italic">0 zł <span className="text-[10px] font-normal text-white/40">(startujesz od 1. msc abonamentu)</span></div>
-                  </div>
 
                   <div className="flex items-baseline gap-1 mb-2">
                     <span className="text-3xl sm:text-4xl font-black text-white italic tracking-tighter">990</span>
