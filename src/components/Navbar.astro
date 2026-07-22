@@ -5,11 +5,11 @@
   <div class="max-w-7xl mx-auto">
     <nav class="glass-card rounded-full sm:rounded-full px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between border border-white/10 bg-[#050505]/95 backdrop-blur-xl shadow-2xl relative z-50">
       
-      {/* Brand Logo */}
+      {/* Brand Logo - AGENCJA visible on mobile too */}
       <a href="/" class="flex items-center gap-1.5 sm:gap-2.5 group shrink-0">
-        <span class="text-lg sm:text-xl font-black tracking-tighter uppercase italic text-white flex items-center">
+        <span class="text-base sm:text-xl font-black tracking-tighter uppercase italic text-white flex items-center">
           Foundly<span class="text-indigo-500 font-bold not-italic">.</span>
-          <span class="hidden sm:inline-block text-[9px] sm:text-[10px] not-italic ml-1.5 sm:ml-2.5 px-2 sm:px-2.5 py-0.5 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/25 font-black tracking-widest uppercase">
+          <span class="inline-block text-[9px] sm:text-[10px] not-italic ml-1.5 sm:ml-2.5 px-2 sm:px-2.5 py-0.5 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/25 font-black tracking-widest uppercase">
             AGENCJA
           </span>
         </span>
@@ -138,35 +138,47 @@
   </div>
 </header>
 
-<script>
-  const toggleBtn = document.getElementById('mobile-menu-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const iconHamburger = document.getElementById('icon-hamburger');
-  const iconClose = document.getElementById('icon-close');
+<script is:inline>
+  (function setupMobileMenu() {
+    function init() {
+      const toggleBtn = document.getElementById('mobile-menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const iconHamburger = document.getElementById('icon-hamburger');
+      const iconClose = document.getElementById('icon-close');
 
-  if (toggleBtn && mobileMenu && iconHamburger && iconClose) {
-    toggleBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const isOpen = !mobileMenu.classList.contains('hidden');
-      if (isOpen) {
-        mobileMenu.classList.add('hidden');
-        iconHamburger.classList.remove('hidden');
-        iconClose.classList.add('hidden');
-      } else {
-        mobileMenu.classList.remove('hidden');
-        iconHamburger.classList.add('hidden');
-        iconClose.classList.remove('hidden');
-      }
-    });
+      if (!toggleBtn || !mobileMenu || !iconHamburger || !iconClose) return;
+      if (toggleBtn.getAttribute('data-bound') === 'true') return;
+      toggleBtn.setAttribute('data-bound', 'true');
 
-    // Close on link click inside drawer
-    const menuLinks = mobileMenu.querySelectorAll('a');
-    menuLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.add('hidden');
-        iconHamburger.classList.remove('hidden');
-        iconClose.classList.add('hidden');
+      toggleBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var isHidden = mobileMenu.classList.contains('hidden');
+        if (isHidden) {
+          mobileMenu.classList.remove('hidden');
+          iconHamburger.classList.add('hidden');
+          iconClose.classList.remove('hidden');
+        } else {
+          mobileMenu.classList.add('hidden');
+          iconHamburger.classList.remove('hidden');
+          iconClose.classList.add('hidden');
+        }
       });
-    });
-  }
+
+      var links = mobileMenu.querySelectorAll('a');
+      links.forEach(function(link) {
+        link.addEventListener('click', function() {
+          mobileMenu.classList.add('hidden');
+          iconHamburger.classList.remove('hidden');
+          iconClose.classList.add('hidden');
+        });
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
 </script>
