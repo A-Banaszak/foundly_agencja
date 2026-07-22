@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Sparkles, CheckCircle2, Zap } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Sparkles, CheckCircle2 } from 'lucide-react';
 import { sendLeadToDiscord } from '../../lib/discord-leads';
 import { validateName, validateContact } from '../../lib/validation';
 
@@ -8,6 +8,16 @@ export default function SubscriptionOrderForm() {
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [formData, setFormData] = useState({ name: '', contact: '', notes: '' });
   const [errors, setErrors] = useState<{ name?: string; contact?: string }>({});
+
+  useEffect(() => {
+    const handleSelectPlanEvent = (e: CustomEvent) => {
+      if (e.detail) {
+        setPlan(e.detail);
+      }
+    };
+    window.addEventListener('selectPlan', handleSelectPlanEvent as EventListener);
+    return () => window.removeEventListener('selectPlan', handleSelectPlanEvent as EventListener);
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -159,10 +169,9 @@ export default function SubscriptionOrderForm() {
 
         <button
           type="submit"
-          className="w-full h-14 rounded-2xl bg-white text-black font-black text-xs uppercase tracking-widest hover:bg-zinc-200 transition-colors shadow-2xl flex items-center justify-center gap-2"
+          className="w-full h-14 rounded-2xl bg-white hover:bg-zinc-100 text-black font-black text-xs uppercase tracking-widest transition-colors shadow-2xl flex items-center justify-center cursor-pointer"
         >
           <span>Wyślij Zapytanie o Abonament</span>
-          <Zap className="w-4 h-4 text-indigo-600 fill-indigo-600" />
         </button>
       </form>
     </div>

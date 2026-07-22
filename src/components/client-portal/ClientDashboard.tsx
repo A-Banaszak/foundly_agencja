@@ -160,7 +160,13 @@ export default function ClientDashboard() {
             </p>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
+            <a
+              href="mailto:kontakt@foundly.pl"
+              className="px-3.5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-xs rounded-lg transition-colors shadow-sm cursor-pointer"
+            >
+              Kontakt z Opiekunem
+            </a>
             <button
               type="button"
               onClick={handleManualSync}
@@ -214,13 +220,10 @@ export default function ClientDashboard() {
 
         {/* Status Połączonych Systemów API */}
         <div className="bg-white border border-zinc-200 rounded-xl p-5 shadow-sm space-y-4">
-          <div className="flex items-center justify-between border-b border-zinc-100 pb-3">
+          <div className="border-b border-zinc-100 pb-3">
             <h2 className="text-sm font-bold text-zinc-900 uppercase tracking-wider">
               Połączone Interfejsy API Raportów
             </h2>
-            <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded border border-emerald-200">
-              100% Automatyczny Odczyt
-            </span>
           </div>
 
           <div className="overflow-x-auto">
@@ -316,7 +319,7 @@ export default function ClientDashboard() {
           </div>
           <a
             href="mailto:kontakt@foundly.pl"
-            className="px-3.5 py-1.5 bg-white border border-zinc-300 hover:bg-zinc-50 text-zinc-800 font-semibold rounded text-[11px] shrink-0 transition-colors"
+            className="px-3.5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg text-xs shrink-0 transition-colors shadow-sm cursor-pointer"
           >
             Kontakt z Opiekunem
           </a>
