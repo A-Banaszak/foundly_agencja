@@ -1,0 +1,9 @@
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  
+  # Redirect old /akceptacja-oferty to new /rozmowa-o-ofercie while preserving query parameters
+  RewriteRule ^akceptacja-oferty/?$ /rozmowa-o-ofercie/ [R=301,L,QSA]
+</IfModule>
