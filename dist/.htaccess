@@ -4,20 +4,26 @@ ErrorDocument 404 /404.html
   RewriteEngine On
   RewriteBase /
 
-  # 1. Przekierowanie starej podstrony akceptacja-oferty na rozmowa-o-ofercie
+  # 1. Przekierowanie starej ścieżki /akceptacja-oferty na /rozmowa-o-ofercie/
   RewriteRule ^akceptacja-oferty/?$ /rozmowa-o-ofercie/ [R=301,L,QSA]
 
-  # 2. Jeśli ścieżka to katalog z index.html lub konkretny plik - serwuj go
+  # 2. Usuwanie wymuszonego błędu dla ścieżek z widocznym /index.html
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
 
-  # 3. Jeśli użytkownik wchodzi na /rozmowa-o-ofercie (bez ukośnika), obsłuż folder
+  # 3. Dodawanie trailing slash / jeśli użytkownik wpisze /rozmowa-o-ofercie
+  RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{DOCUMENT_ROOT}/$1/index.html -f
-  RewriteRule ^(.*)$ /$1/index.html [L]
+  RewriteRule ^(.*)$ /$1/ [R=301,L]
 
-  # 4. Jeśli plik nie istnieje, serwuj firmowy 404.html
+  # 4. Obsługa żądań do podkatalogów (z index.html)
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteCond %{REQUEST_FILENAME}/index.html -f
+  RewriteRule ^(.*)$ $1/index.html [L]
+
+  # 5. Dedykowany fallback 404 dla nieistniejących podstron
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule . /404.html [L]
+  RewriteRule ^ /404.html [L]
 </IfModule>
