@@ -19,3 +19,11 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Private local offers & generated PDFs
+src/pages/oferta.astro
+public/*.pdf
+public/pdf_*.png
+dist/pdf_*.png
+dist/Oferta_*.pdf
+

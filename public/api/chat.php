@@ -61,8 +61,15 @@ try {
 function sendDiscordEmbed($message, $user, $role, $webhookUrl) {
     if (!$webhookUrl || strpos($webhookUrl, 'http') !== 0) return;
 
-    $color = ($role === 'ADMIN') ? 0x4f46e5 : (($role === 'LEAD') ? 0xf59e0b : 0x10b981);
-    $title = ($role === 'LEAD') ? "Nowy Lead na Czacie (Foundly)!" : "Nowa wiadomość na czacie Foundly";
+    $color = 0x6366f1;
+    if ($role === 'LEAD') $color = 0x10b981; // zielony dla leadu
+    if ($role === 'OFFER_VIEW') $color = 0x3b82f6; // niebieski dla odsłony oferty
+    if ($role === 'ADMIN') $color = 0x8b5cf6;
+
+    $title = "Powiadomienie Foundly";
+    if ($role === 'LEAD') $title = "🎉 NOWA AKCEPTACJA OFERTY / LEAD!";
+    if ($role === 'OFFER_VIEW') $title = "👀 Ktoś właśnie przegląda ofertę!";
+    if ($role === 'GUEST') $title = "💬 Nowa wiadomość na czacie";
 
     $payload = json_encode([
         'embeds' => [[
@@ -70,8 +77,8 @@ function sendDiscordEmbed($message, $user, $role, $webhookUrl) {
             'description' => $message,
             'color' => $color,
             'fields' => [
-                ['name' => 'Autor', 'value' => $user, 'inline' => true],
-                ['name' => 'Rola', 'value' => $role, 'inline' => true]
+                ['name' => 'Klient / Kontakt', 'value' => $user, 'inline' => true],
+                ['name' => 'Typ', 'value' => $role, 'inline' => true]
             ],
             'timestamp' => date('c')
         ]]
@@ -170,7 +177,45 @@ if ($action === 'lead') {
     exit();
 }
 
-// 4. Zapis leada z formularza na stronie
+// 4. Powiadomienie o wyświetleniu oferty przez klienta (Offer View Ping)
+if ($action === 'offer_view') {
+    $client = trim($input['client'] ?? 'Nieznany');
+    $email = trim($input['email'] ?? 'Brak');
+    $offer = trim($input['offer'] ?? 'Oferta');
+    $variant = trim($input['variant'] ?? 'Nie wybrano');
+
+    $msg = "👀 **Klient otworzył formularz akceptacji oferty!**\n• Klient: {$client}\n• Email: {$email}\n• Oferta: {$offer}\n• Domyślny wariant: {$variant}";
+    sendDiscordEmbed($msg, "{$client} ({$email})", 'OFFER_VIEW', $DISCORD_WEBHOOK_URL);
+
+    echo json_encode(['success' => true]);
+    exit();
+}
+
+// 5. Zapis leada akceptacji oferty i powiadomienie Discord
+if ($action === 'submit_lead') {
+    $name = trim($input['name'] ?? 'Klient');
+    $email = trim($input['email'] ?? '');
+    $phone = trim($input['phone'] ?? '');
+    $offer = trim($input['offer'] ?? '');
+    $variant = trim($input['variant'] ?? '');
+    $message = trim($input['message'] ?? '');
+
+    $stmt = $pdo->prepare("INSERT INTO form_leads (form_title, name, contact, details, notes) VALUES ('Akceptacja Oferty', :name, :contact, :details, :notes)");
+    $stmt->execute([
+        ':name' => $name,
+        ':contact' => $phone . ($email ? " ({$email})" : ""),
+        ':details' => "Wariant: {$variant} | Project: {$offer}",
+        ':notes' => $message
+    ]);
+
+    $discordMsg = "🎉 **NOWA AKCEPTACJA OFERTY ON-LINE!** 🎉\n\n👤 **Klient:** {$name}\n📞 **Telefon:** {$phone}\n✉️ **Email:** {$email}\n📄 **Oferta:** {$offer}\n⭐ **Wybrany Wariant:** {$variant}";
+    sendDiscordEmbed($discordMsg, "{$name} ({$phone})", 'LEAD', $DISCORD_WEBHOOK_URL);
+
+    echo json_encode(['success' => true]);
+    exit();
+}
+
+// 6. Zapis leada z ogólnego formularza na stronie
 if ($action === 'save_form_lead') {
     $title = trim($input['formTitle'] ?? 'Formularz');
     $name = trim($input['name'] ?? '');
@@ -180,6 +225,8 @@ if ($action === 'save_form_lead') {
 
     $stmt = $pdo->prepare("INSERT INTO form_leads (form_title, name, contact, details, notes) VALUES (:title, :name, :contact, :details, :notes)");
     $stmt->execute([':title' => $title, ':name' => $name, ':contact' => $contact, ':details' => $details, ':notes' => $notes]);
+
+    sendDiscordEmbed("Zgłoszenie z formularza [{$title}]:\nImię: {$name}\nKontakt: {$contact}\nSzczegóły: {$details}", "{$name} ({$contact})", 'LEAD', $DISCORD_WEBHOOK_URL);
 
     echo json_encode(['success' => true]);
     exit();

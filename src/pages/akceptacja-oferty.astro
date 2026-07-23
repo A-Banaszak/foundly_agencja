@@ -39,22 +39,32 @@ import Layout from '../layouts/Layout.astro';
             <span>Adres email:</span>
             <strong id="summaryEmail" class="text-indigo-300 font-bold">-</strong>
           </div>
-          <div class="flex items-center justify-between text-xs text-white/50 border-b border-white/5 pb-2">
+          <div class="flex items-center justify-between text-xs text-white/50 pb-1">
             <span>Dotyczy projektu:</span>
             <strong id="summaryOffer" class="text-white font-bold">-</strong>
           </div>
-          <div class="flex items-center justify-between text-sm pt-1">
-            <span class="text-white/70 font-bold">Wybrany wariant:</span>
-            <span id="summaryVariant" class="px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/40 text-xs font-black uppercase tracking-wider">-</span>
-          </div>
         </div>
 
-        {/* Formularz Pozostawienia Telefonu */}
+        {/* Formularz Pozostawienia Telefonu & Wyboru Wariantu */}
         <form id="acceptanceForm" class="space-y-5">
           <input type="hidden" id="inputClient" name="client" />
           <input type="hidden" id="inputEmail" name="email" />
           <input type="hidden" id="inputOffer" name="offer" />
-          <input type="hidden" id="inputVariant" name="variant" />
+
+          <div>
+            <label for="variantSelect" class="block text-xs font-bold uppercase tracking-wider text-white/80 mb-2">
+              Wybierz Wariant Współpracy *
+            </label>
+            <select 
+              id="variantSelect" 
+              name="variant" 
+              class="w-full px-5 py-4 rounded-2xl bg-black/60 border-2 border-indigo-500/50 text-white font-bold focus:border-indigo-400 focus:outline-none focus:ring-4 focus:ring-indigo-500/20 transition-all text-sm appearance-none cursor-pointer"
+            >
+              <option value="Wariant 1: Jednorazowe Wdrożenie (1 900 PLN)">Wariant 1: Jednorazowe Wdrożenie (1 900 PLN)</option>
+              <option value="Wariant 2: Start Growth - Strona + Lokalne SEO (390 PLN / msc)">Wariant 2: Start Growth (390 PLN / msc)</option>
+              <option value="Wariant 3: Business Pro Restaurant - Strona + SEO + Social Media (690 PLN / msc)" selected>Wariant 3: Business Pro Restaurant (690 PLN / msc)</option>
+            </select>
+          </div>
 
           <div>
             <label for="phoneInput" class="block text-xs font-bold uppercase tracking-wider text-white/80 mb-2">
@@ -101,19 +111,40 @@ import Layout from '../layouts/Layout.astro';
     const client = urlParams.get('client') || 'Klient';
     const email = urlParams.get('email') || '-';
     const offer = urlParams.get('offer') || 'Strona Internetowa';
-    const variant = urlParams.get('variant') || 'Standard';
+    const variantParam = urlParams.get('variant') || '';
 
     // Wypełnij podsumowanie
     document.getElementById('summaryClient').textContent = client;
     document.getElementById('summaryEmail').textContent = email;
     document.getElementById('summaryOffer').textContent = offer;
-    document.getElementById('summaryVariant').textContent = variant;
 
     // Wypełnij Ukryte Pola
     document.getElementById('inputClient').value = client;
     document.getElementById('inputEmail').value = email;
     document.getElementById('inputOffer').value = offer;
-    document.getElementById('inputVariant').value = variant;
+
+    // Dopasuj domyślny select z URL jeśli przekazano
+    const selectEl = document.getElementById('variantSelect');
+    if (variantParam && selectEl) {
+      for (let option of selectEl.options) {
+        if (option.value.toLowerCase().includes(variantParam.toLowerCase()) || variantParam.toLowerCase().includes(option.value.toLowerCase())) {
+          option.selected = true;
+          break;
+        }
+      }
+    }
+
+    // Wyślij cichy ping na Discord, że klient właśnie otworzył link z oferty!
+    fetch('/api/chat.php?action=offer_view', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        client: client,
+        email: email,
+        offer: offer,
+        variant: selectEl ? selectEl.value : variantParam
+      })
+    }).catch(console.error);
 
     // Obsługa Formularza
     const form = document.getElementById('acceptanceForm');
@@ -123,6 +154,7 @@ import Layout from '../layouts/Layout.astro';
     form?.addEventListener('submit', async (e) => {
       e.preventDefault();
       const phone = document.getElementById('phoneInput').value;
+      const selectedVariant = selectEl ? selectEl.value : '';
 
       if (submitBtn) {
         submitBtn.disabled = true;
@@ -130,15 +162,16 @@ import Layout from '../layouts/Layout.astro';
       }
 
       try {
-        const res = await fetch('/api/chat.php', {
+        const res = await fetch('/api/chat.php?action=submit_lead', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            action: 'submit_lead',
             name: client,
             email: email !== '-' ? email : '',
             phone: phone,
-            message: `[AKCEPTACJA OFERTY ONLINE] Oferta: ${offer} | Wariant: ${variant}`
+            offer: offer,
+            variant: selectedVariant,
+            message: `[AKCEPTACJA OFERTY ONLINE] Oferta: ${offer} | Wariant: ${selectedVariant}`
           })
         });
 
