@@ -426,8 +426,12 @@ body.offer-body {
     color: #64748b !important;
   }
 
-  .offer-top-nav, .offer-bottom-nav, .offer-print-btn {
+  .offer-top-nav, .offer-bottom-nav, .offer-print-btn, header.offer-top-nav, .no-print {
     display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
   * {

@@ -34,7 +34,11 @@ async function exportPdf(urlOrPath, outputFilename = 'Oferta_Foundly_Agencja.pdf
       timeout: 30000,
     });
 
-    await page.evaluate(() => (document.fonts ? document.fonts.ready : Promise.resolve()));
+    await page.evaluate(() => {
+      const topNav = document.querySelector('.offer-top-nav');
+      if (topNav) topNav.remove();
+      return document.fonts ? document.fonts.ready : Promise.resolve();
+    });
 
     await page.pdf({
       path: outputPath,
