@@ -19,25 +19,37 @@ export default function SubscriptionOrderForm() {
     return () => window.removeEventListener('selectPlan', handleSelectPlanEvent as EventListener);
   }, []);
 
+  const [consentRodo, setConsentRodo] = useState<boolean>(false);
+  const [consentMarketing, setConsentMarketing] = useState<boolean>(false);
+  const [rodoError, setRodoError] = useState<string | undefined>(undefined);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     const nameErr = validateName(formData.name);
     const contactErr = validateContact(formData.contact);
 
-    if (nameErr || contactErr) {
+    if (!consentRodo) {
+      setRodoError('Wymagana jest akceptacja Polityki Prywatności (RODO).');
+    } else {
+      setRodoError(undefined);
+    }
+
+    if (nameErr || contactErr || !consentRodo) {
       setErrors({ name: nameErr || undefined, contact: contactErr || undefined });
       return;
     }
 
     setErrors({});
+    setRodoError(undefined);
 
     sendLeadToDiscord({
       formTitle: "Zamówienie Abonamentu All-In-One",
       name: formData.name,
       contact: formData.contact,
       fields: [
-        { name: "Wybrany Abonament", value: plan.toUpperCase(), inline: true }
+        { name: "Wybrany Abonament", value: plan.toUpperCase(), inline: true },
+        { name: "Zgoda Marketingowa", value: consentMarketing ? "TAK" : "NIE", inline: true }
       ],
       notes: formData.notes
     });
@@ -165,6 +177,35 @@ export default function SubscriptionOrderForm() {
             placeholder="Krótko opisz swój biznes lub wymagania niestandardowe..."
             className="w-full p-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/20 text-xs focus:outline-none focus:border-indigo-500 transition-colors resize-none"
           ></textarea>
+        </div>
+        <div className="space-y-3 pt-2">
+          <label className="flex items-start gap-3 cursor-pointer group">
+            <input
+              type="checkbox"
+              checked={consentRodo}
+              onChange={(e) => {
+                setConsentRodo(e.target.checked);
+                if (e.target.checked) setRodoError(undefined);
+              }}
+              className="mt-0.5 rounded border-white/20 bg-white/5 text-indigo-600 focus:ring-indigo-500 w-4 h-4 shrink-0"
+            />
+            <span className="text-[11px] text-white/60 leading-tight">
+              Wyrażam zgodę na przetwarzanie danych osobowych w celu obsługi zapytania zgodnie z <a href="/polityka-prywatnosci" target="_blank" className="text-indigo-400 underline hover:text-indigo-300">Polityką Prywatności</a>. *
+            </span>
+          </label>
+          {rodoError && <p className="text-[11px] text-red-400 font-medium pl-7">{rodoError}</p>}
+
+          <label className="flex items-start gap-3 cursor-pointer group">
+            <input
+              type="checkbox"
+              checked={consentMarketing}
+              onChange={(e) => setConsentMarketing(e.target.checked)}
+              className="mt-0.5 rounded border-white/20 bg-white/5 text-indigo-600 focus:ring-indigo-500 w-4 h-4 shrink-0"
+            />
+            <span className="text-[11px] text-white/40 leading-tight">
+              (Opcjonalnie) Wyrażam zgodę na przesyłanie informacji o promocjach i nowościach agencji na podany e-mail/telefon.
+            </span>
+          </label>
         </div>
 
         <button

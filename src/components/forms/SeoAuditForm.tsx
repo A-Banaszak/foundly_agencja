@@ -14,6 +14,10 @@ export default function SeoAuditForm() {
   });
   const [errors, setErrors] = useState<{ website?: string; city?: string; name?: string; contact?: string }>({});
 
+  const [consentRodo, setConsentRodo] = useState<boolean>(false);
+  const [consentMarketing, setConsentMarketing] = useState<boolean>(false);
+  const [rodoError, setRodoError] = useState<string | undefined>(undefined);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -22,7 +26,13 @@ export default function SeoAuditForm() {
     const nameErr = validateName(formData.name);
     const contactErr = validateContact(formData.contact);
 
-    if (websiteErr || cityErr || nameErr || contactErr) {
+    if (!consentRodo) {
+      setRodoError('Wymagana jest akceptacja Polityki Prywatności (RODO).');
+    } else {
+      setRodoError(undefined);
+    }
+
+    if (websiteErr || cityErr || nameErr || contactErr || !consentRodo) {
       setErrors({
         website: websiteErr || undefined,
         city: cityErr || undefined,
@@ -33,6 +43,7 @@ export default function SeoAuditForm() {
     }
 
     setErrors({});
+    setRodoError(undefined);
 
     sendLeadToDiscord({
       formTitle: "Darmowy Audyt SEO & Google Maps",
@@ -41,7 +52,8 @@ export default function SeoAuditForm() {
       fields: [
         { name: "Witryna", value: formData.website, inline: true },
         { name: "Miasto / Obszar", value: formData.city, inline: true },
-        { name: "Słowa kluczowe", value: formData.keywords || "Nie podano", inline: false }
+        { name: "Słowa kluczowe", value: formData.keywords || "Nie podano", inline: false },
+        { name: "Zgoda Marketingowa", value: consentMarketing ? "TAK" : "NIE", inline: true }
       ]
     });
 
@@ -178,6 +190,35 @@ export default function SeoAuditForm() {
             />
             {errors.contact && <p className="text-[11px] text-red-400 mt-1">{errors.contact}</p>}
           </div>
+        </div>
+        <div className="space-y-3 pt-2">
+          <label className="flex items-start gap-3 cursor-pointer group">
+            <input
+              type="checkbox"
+              checked={consentRodo}
+              onChange={(e) => {
+                setConsentRodo(e.target.checked);
+                if (e.target.checked) setRodoError(undefined);
+              }}
+              className="mt-0.5 rounded border-white/20 bg-white/5 text-indigo-600 focus:ring-indigo-500 w-4 h-4 shrink-0"
+            />
+            <span className="text-[11px] text-white/60 leading-tight">
+              Wyrażam zgodę na przetwarzanie danych osobowych w celu przygotowania audytu zgodnie z <a href="/polityka-prywatnosci" target="_blank" className="text-indigo-400 underline hover:text-indigo-300">Polityką Prywatności</a>. *
+            </span>
+          </label>
+          {rodoError && <p className="text-[11px] text-red-400 font-medium pl-7">{rodoError}</p>}
+
+          <label className="flex items-start gap-3 cursor-pointer group">
+            <input
+              type="checkbox"
+              checked={consentMarketing}
+              onChange={(e) => setConsentMarketing(e.target.checked)}
+              className="mt-0.5 rounded border-white/20 bg-white/5 text-indigo-600 focus:ring-indigo-500 w-4 h-4 shrink-0"
+            />
+            <span className="text-[11px] text-white/40 leading-tight">
+              (Opcjonalnie) Wyrażam zgodę na otrzymywanie porad i ofert z zakresu SEO od Foundly Agencja.
+            </span>
+          </label>
         </div>
 
         <button
