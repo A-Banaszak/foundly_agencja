@@ -3,7 +3,21 @@ ErrorDocument 404 /404.html
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
-  
-  # Redirect old /akceptacja-oferty to new /rozmowa-o-ofercie while preserving query parameters
+
+  # 1. Przekierowanie starej podstrony akceptacja-oferty na rozmowa-o-ofercie
   RewriteRule ^akceptacja-oferty/?$ /rozmowa-o-ofercie/ [R=301,L,QSA]
+
+  # 2. Jeśli ścieżka to katalog z index.html lub konkretny plik - serwuj go
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # 3. Jeśli użytkownik wchodzi na /rozmowa-o-ofercie (bez ukośnika), obsłuż folder
+  RewriteCond %{DOCUMENT_ROOT}/$1/index.html -f
+  RewriteRule ^(.*)$ /$1/index.html [L]
+
+  # 4. Jeśli plik nie istnieje, serwuj firmowy 404.html
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /404.html [L]
 </IfModule>
