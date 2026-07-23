@@ -1,0 +1,171 @@
+---
+import '../styles/offer.css';
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  clientName?: string;
+  clientEmail?: string;
+  date?: string;
+}
+
+const {
+  title = "Oferta Współpracy",
+  subtitle = "STRONA INTERNETOWA DLA RESTAURACJI",
+  clientName = "Klient",
+  clientEmail = "",
+  date = new Date().toLocaleDateString('pl-PL')
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title} — Foundly Agencja</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+</head>
+<body class="offer-body">
+    <main class="offer-document">
+        <header class="offer-top-nav">
+            <a href="/" class="offer-top-nav__link">← Powrót do Foundly Agencja</a>
+            <button onclick="window.print()" class="offer-print-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                Zapisz do PDF / Drukuj
+            </button>
+        </header>
+
+        <section class="offer-page">
+            <section class="offer-main">
+
+                <header class="offer-header-main">
+                    <div class="header-flex">
+                        <div>
+                            <div class="brand-badge">
+                                Foundly<span style="color: #6366f1;">.</span>
+                                <span class="brand-badge-tag">AGENCJA</span>
+                            </div>
+                            <h1 class="offer-title">{title}</h1>
+                            <p class="offer-subtitle">{subtitle}</p>
+                        </div>
+                        <div class="offer-contact-header">
+                            <p><strong>Foundly Agencja</strong></p>
+                            <p>kontakt@foundly.pl</p>
+                            <p>+48 881 548 644</p>
+                            <p>https://foundly.pl</p>
+                        </div>
+                    </div>
+                </header>
+
+                <section class="offer-section">
+                    <h2 class="offer-section-title">Dla kogo: {clientName} {clientEmail ? `(${clientEmail})` : ''}</h2>
+                    <p class="offer-date">Data przygotowania: {date}</p>
+                </section>
+
+                <section class="offer-section">
+                    <h2 class="offer-section-title">Wstępna propozycja</h2>
+                    <p class="offer-text">
+                        W odpowiedzi na zgłoszenie, przygotowałem dedykowaną propozycję stworzenia nowoczesnej, ultraszybkiej i w pełni responsywnej strony internetowej.
+                    </p>
+                    <p class="offer-text" style="margin-top: 10px;">
+                        Ponad 85% użytkowników wyszukuje usługi lokalne na smartfonie. Celem projektu jest zbudowanie strony w wysokiej estetyce z doskonałą optymalizacją pod SEO i konwersję (Core Web Vitals).
+                    </p>
+                </section>
+
+                <section class="offer-section">
+                    <h2 class="offer-section-title">Kluczowe moduły i funkcjonalności</h2>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h4>
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>
+                                Nowoczesna Prezentacja Oferty
+                            </h4>
+                            <p>Przejrzysty podział na sekcje, atrakcyjne karty usługowe oraz pełny panel nawigacyjny ułatwiający zapoznanie się z ofertą firmy.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                System Pozyskiwania Leadów
+                            </h4>
+                            <p>Formularze kontaktowe i zapytania o ofertę z natychmiastowym powiadomieniem e-mail oraz powiadomieniami na kanał Discord/SMS.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                                100% Responsywność (Mobile-First)
+                            </h4>
+                            <p>Perfekcyjne wyświetlanie na smartfonach – szybki kontakt jednym kliknięciem (click-to-call) oraz szybka nawigacja dojazdowa.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                                Szybkość i Lokalne SEO
+                            </h4>
+                            <p>Maksymalna wydajność (Core Web Vitals 95+), optymalizacja zdjęć w formatach AVIF/WebP oraz optymalizacja struktury pod pozycjonowanie w Google.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="offer-section">
+                    <h2 class="offer-section-title">Plan wdrożenia projektu</h2>
+                    <div class="phase-grid">
+                        <div class="phase-card">
+                            <strong>Etap 1 — Koncepcja i UX/UI</strong>
+                            <ul>
+                               <li>Analiza potrzeb i zebranie materiałów branżowych</li>
+                               <li>Zaprojektowanie struktury oraz unikalnego układu graficznego</li>
+                               <li>Akceptacja projektu przez klienta</li>
+                            </ul>
+                        </div>
+                        <div class="phase-card">
+                            <strong>Etap 2 — Kodowanie i Publikacja</strong>
+                            <ul>
+                               <li>Programowanie i optymalizacja wydajnościowa</li>
+                               <li>Integracje (formularze, Google Analytics, RODO)</li>
+                               <li>Testy na urządzeniach mobilnych i wdrożenie na serwer</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="highlight-box">
+                        <p><strong>Szacowany czas realizacji: ok. 7-10 dni roboczych.</strong> Prace będą prowadzone na środowisku testowym (staging), więc cały proces przebiega bez zakłóceń dla obecnej działalności.</p>
+                    </div>
+                </section>
+
+                <section class="offer-section">
+                    <h2 class="offer-section-title">Warianty wyceny (B2B)</h2>
+                    <table class="offer-table">
+                        <thead>
+                            <tr>
+                                <th>Wariant / Zakres</th>
+                                <th>Opis</th>
+                                <th class="text-right">Koszt (Netto)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Wariant 1: STANDARD</strong><br><small style="color: var(--offer-text-muted)">(Wizytówka Premium / Landing Page)</small></td>
+                                <td>Projekt UX/UI, Sekcja korzyści, Prezentacja oferty, Kontakt, Formularz leadowy, CMS, RWD i podstawowa optymalizacja SEO.</td>
+                                <td class="text-right"><strong>1 900 PLN</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Wariant 2: PREMIUM / PRO</strong><br><small style="color: var(--offer-text-muted)">(Pełny Serwis + Automatyzacja Marketingu)</small></td>
+                                <td>Wszystko z wariantu Standard + rozbudowane podstrony usług, dedykowany system integracji 2FA/Discord, automatyczny export ofert oraz optymalizacja pod kampanie Ads.</td>
+                                <td class="text-right"><strong>2 900 PLN</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+            </section>
+        </section>
+
+        <footer class="offer-bottom-nav">
+            <p style="font-size: 0.78rem; color: var(--offer-text-muted);">© Foundly Agencja — Wszystkie prawa zastrzeżone.</p>
+        </footer>
+    </main>
+</body>
+</html>

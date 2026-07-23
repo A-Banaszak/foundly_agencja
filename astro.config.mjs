@@ -21,6 +21,7 @@ export default defineConfig({
       !page.includes('/panel-klienta') && 
       !page.includes('/wiedza') && 
       !page.includes('/polityka-prywatnosci') && 
-      !page.includes('/regulamin')
+      !page.includes('/regulamin') &&
+      !page.includes('/oferta')
   })]
 });

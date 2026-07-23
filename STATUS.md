@@ -1,11 +1,18 @@
 # 🚀 Foundly Agencja — Dokumentacja Projektu, Zmian i Stanu Systemu
-**Data aktualizacji:** 22 lipca 2026 r.  
+**Data aktualizacji:** 23 lipca 2026 r.  
 **Domena główna:** [https://foundly.pl](https://foundly.pl)  
 **Repozytorium GitHub:** [A-Banaszak/foundly_agencja](https://github.com/A-Banaszak/foundly_agencja)
 
 ---
 
 ## 📌 Podsumowanie Wykonanych Prac
+
+### 6. 📄 Moduł Generowania Ofert B2B & Eksportu do PDF
+* **Przebudowa Stylów pod Brand Foundly:** Utworzono [src/styles/offer.css](file:///Ubuntu-26.04/home/alekb/foundly/foundly_agencja/src/styles/offer.css) z ciemnym motywem `#050505`, akcentami Indigo/Purple (`#6366f1` / `#818cf8`), fontem *Inter* oraz zoptymalizowanymi regułami `@media print` dla formatu A4.
+* **Podstrona Astro:** Dodano dedykowaną stronę oferty [src/pages/oferta.astro](file:///Ubuntu-26.04/home/alekb/foundly/foundly_agencja/src/pages/oferta.astro) z nagłówkiem z logo Foundly, modułami usług, harmonogramem wdrożenia, tabelą wariantów cenowych i przyciskiem drukowania / wywołania pliku PDF.
+* **Automatyczny Generator PDF (Puppeteer):** Dodano skrypt [scripts/export-pdf.js](file:///Ubuntu-26.04/home/alekb/foundly/foundly_agencja/scripts/export-pdf.js) pozwalający na bezobsługowe tworzenie gotowych plików PDF A4 ze strony HTML/Astro (`npm run export:pdf`).
+
+---
 
 ### 1. 🔑 Bezpieczeństwo i Panel Zarządzania (`/panel-foundly/`)
 * **Wtyczka 2FA Discord:** Dwuetapowa autoryzacja kodem generowanym cyklicznie i wysyłanym za pomocą webhooka na prywatny kanał Discord.
