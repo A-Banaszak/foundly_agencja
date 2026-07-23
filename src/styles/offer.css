@@ -311,58 +311,119 @@ body.offer-body {
 
 @page {
   size: A4;
-  margin: 12mm 0mm 12mm 0mm;
+  margin: 18mm 15mm 18mm 15mm;
 }
 
 @media print {
   html, body, body.offer-body {
     margin: 0 !important;
     padding: 0 !important;
-    background-color: #050508 !important;
-    color: #ffffff !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-family: var(--offer-font) !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
 
-  /* Force dark background container */
+  body::before {
+    display: none !important;
+  }
+
   .offer-document, .offer-page {
     width: 100% !important;
     max-width: 100% !important;
-    background: #050508 !important;
-    background-color: #050508 !important;
+    background: #ffffff !important;
     box-shadow: none !important;
     border: none !important;
     display: block !important;
     min-height: auto !important;
-    color: #ffffff !important;
+    color: #000000 !important;
   }
 
   .offer-main {
-    padding: 12mm 18mm !important;
+    padding: 0 !important;
     display: block !important;
-    background: #050508 !important;
+    background: #ffffff !important;
+  }
+
+  .offer-header-main {
+    border-bottom: 2px solid #6366f1 !important;
+    padding-bottom: 12px !important;
+    margin-bottom: 20px !important;
+  }
+
+  .brand-badge {
+    color: #000000 !important;
+  }
+
+  .offer-title {
+    color: #000000 !important;
+  }
+
+  .offer-subtitle, .offer-section-title {
+    color: #4f46e5 !important;
+  }
+
+  .offer-contact-header, .offer-date, .offer-text {
+    color: #1e293b !important;
   }
 
   .offer-section {
     page-break-inside: avoid;
     break-inside: avoid;
-    margin-bottom: 24px;
-    padding-top: 4mm;
+    margin-bottom: 22px !important;
+    padding-top: 2mm !important;
+  }
+
+  .feature-grid, .phase-grid {
+    gap: 10px !important;
   }
 
   .feature-card, .phase-card {
-    background: #0d0d14 !important;
-    border: 1px solid rgba(99, 102, 241, 0.3) !important;
+    background: #f8fafc !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #0f172a !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
 
-  .feature-card p, .phase-card ul, .offer-text, .offer-date {
-    color: rgba(245, 245, 255, 0.85) !important;
+  .feature-card h4 {
+    color: #4f46e5 !important;
+  }
+
+  .feature-card p, .phase-card ul {
+    color: #334155 !important;
+  }
+
+  .phase-card strong {
+    color: #0f172a !important;
+  }
+
+  .highlight-box {
+    background: #f1f5f9 !important;
+    border: 1px solid #cbd5e1 !important;
+  }
+
+  .highlight-box p {
+    color: #0f172a !important;
+  }
+
+  .highlight-box strong {
+    color: #4f46e5 !important;
+  }
+
+  .offer-table th {
+    color: #4f46e5 !important;
+    border-bottom: 2px solid #cbd5e1 !important;
   }
 
   .offer-table td {
-    color: #ffffff !important;
+    color: #0f172a !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+  }
+
+  .offer-table tr small {
+    color: #64748b !important;
   }
 
   .offer-top-nav, .offer-bottom-nav, .offer-print-btn {

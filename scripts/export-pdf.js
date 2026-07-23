@@ -41,9 +41,9 @@ async function exportPdf(urlOrPath, outputFilename = 'Oferta_Foundly_Agencja.pdf
       format: 'A4',
       printBackground: true,
       margin: {
-        top: '15mm',
+        top: '0mm',
         right: '0mm',
-        bottom: '15mm',
+        bottom: '0mm',
         left: '0mm',
       },
     });
