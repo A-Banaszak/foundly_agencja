@@ -317,7 +317,7 @@ export function ChatWidget() {
                   className="p-5 rounded-2xl bg-indigo-600/90 text-white space-y-3 shadow-lg backdrop-blur-sm border border-indigo-400/30"
                 >
                   <p className="text-[11px] leading-relaxed opacity-95">
-                    Podaj swoje imię oraz e-mail – jeśli nie odpiszemy od razu, prześlemy odpowiedź na Twoją skrzynkę!
+                    Podaj swoje imię oraz e-mail - jeśli nie odpiszemy od razu, prześlemy odpowiedź na Twoją skrzynkę!
                   </p>
                   <div className="space-y-2">
                     <input
