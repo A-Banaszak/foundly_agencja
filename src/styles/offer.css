@@ -16,8 +16,8 @@
 
 body.offer-body {
   margin: 0;
-  padding: 24px 16px;
-  background: var(--offer-bg);
+  padding: 0;
+  background: #050508;
   font-family: var(--offer-font);
   color: var(--offer-text-main);
   line-height: 1.5;
@@ -27,8 +27,10 @@ body.offer-body {
 .offer-document {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 0;
   align-items: center;
+  width: 100%;
+  background: #050508;
 }
 
 .offer-top-nav, .offer-bottom-nav {
@@ -37,6 +39,7 @@ body.offer-body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 16px 0;
 }
 
 .offer-top-nav__link {
@@ -56,12 +59,12 @@ body.offer-body {
 
 .offer-page {
   box-sizing: border-box;
-  width: 210mm;
+  width: 100%;
+  max-width: 210mm;
   min-height: 297mm;
-  background: linear-gradient(145deg, #0a0a10 0%, #050508 100%);
-  border: 1px solid var(--offer-border-subtle);
-  border-radius: 16px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 40px rgba(99, 102, 241, 0.08);
+  background: #050508;
+  border: none;
+  box-shadow: none;
   position: relative;
   overflow: visible;
   padding: 0;
@@ -311,127 +314,101 @@ body.offer-body {
 
 @page {
   size: A4;
-  margin: 18mm 15mm 18mm 15mm;
+  margin: 0;
 }
 
 @media print {
   html, body, body.offer-body {
     margin: 0 !important;
     padding: 0 !important;
-    background: #ffffff !important;
-    color: #000000 !important;
+    background: #08080c !important;
+    background-color: #08080c !important;
+    color: #ffffff !important;
     font-family: var(--offer-font) !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
 
-  body::before {
-    display: none !important;
-  }
-
   .offer-document, .offer-page {
     width: 100% !important;
     max-width: 100% !important;
-    background: #ffffff !important;
     box-shadow: none !important;
     border: none !important;
-    display: block !important;
-    min-height: auto !important;
-    color: #000000 !important;
+    background: #08080c !important;
+    background-color: #08080c !important;
+    color: #ffffff !important;
+    padding: 0 !important;
   }
 
   .offer-main {
-    padding: 0 !important;
-    display: block !important;
-    background: #ffffff !important;
+    padding: 16mm 18mm 8mm 18mm !important;
+    background: #08080c !important;
   }
 
-  .offer-header-main {
-    border-bottom: 2px solid #6366f1 !important;
-    padding-bottom: 12px !important;
-    margin-bottom: 20px !important;
-  }
-
-  .brand-badge {
-    color: #000000 !important;
-  }
-
-  .offer-title {
-    color: #000000 !important;
-  }
-
-  .offer-subtitle, .offer-section-title {
-    color: #4f46e5 !important;
-  }
-
-  .offer-contact-header, .offer-date, .offer-text {
-    color: #1e293b !important;
+  .offer-bottom-nav {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+    padding: 6mm 18mm 14mm 18mm !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .offer-section {
     page-break-inside: avoid;
     break-inside: avoid;
     margin-bottom: 22px !important;
-    padding-top: 2mm !important;
-  }
-
-  .feature-grid, .phase-grid {
-    gap: 10px !important;
+    padding-top: 6mm !important;
   }
 
   .feature-card, .phase-card {
-    background: #f8fafc !important;
-    border: 1px solid #cbd5e1 !important;
-    color: #0f172a !important;
+    background: #11111c !important;
+    border: 1px solid rgba(99, 102, 241, 0.4) !important;
+    color: #ffffff !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
 
-  .feature-card h4 {
-    color: #4f46e5 !important;
+  .feature-card h4, .phase-card h4, .phase-card strong {
+    color: #ffffff !important;
   }
 
-  .feature-card p, .phase-card ul {
-    color: #334155 !important;
-  }
-
-  .phase-card strong {
-    color: #0f172a !important;
+  .feature-card p, .phase-card ul, .offer-contact-header p, .offer-text, .offer-date {
+    color: #cbd5e1 !important;
   }
 
   .highlight-box {
-    background: #f1f5f9 !important;
-    border: 1px solid #cbd5e1 !important;
+    background: #11111c !important;
+    border: 1px solid #6366f1 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .highlight-box h3 {
+    color: #ffffff !important;
   }
 
   .highlight-box p {
-    color: #0f172a !important;
-  }
-
-  .highlight-box strong {
-    color: #4f46e5 !important;
+    color: #cbd5e1 !important;
   }
 
   .offer-table th {
-    color: #4f46e5 !important;
-    border-bottom: 2px solid #cbd5e1 !important;
+    color: #818cf8 !important;
+    border-bottom: 2px solid rgba(99, 102, 241, 0.4) !important;
   }
 
   .offer-table td {
-    color: #0f172a !important;
-    border-bottom: 1px solid #e2e8f0 !important;
+    color: #ffffff !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
   }
 
   .offer-table tr small {
-    color: #64748b !important;
+    color: #94a3b8 !important;
   }
 
-  .offer-top-nav, .offer-bottom-nav, .offer-print-btn, header.offer-top-nav, .no-print {
+  .offer-top-nav, .offer-print-btn, header.offer-top-nav, .no-print {
     display: none !important;
-    visibility: hidden !important;
-    height: 0 !important;
-    margin: 0 !important;
-    padding: 0 !important;
   }
 
   * {

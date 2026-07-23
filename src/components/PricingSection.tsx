@@ -325,7 +325,9 @@ export default function PricingSection() {
               <div className="shrink-0 flex flex-col sm:flex-row md:flex-col gap-3 w-full md:w-auto">
                 <button
                   type="button"
-                  onClick={() => handlePlanSelect('custom')}
+                  onClick={() => {
+                    handlePlanSelect('custom');
+                  }}
                   className="w-full px-8 h-14 rounded-2xl bg-white text-black font-black text-xs uppercase tracking-widest hover:bg-zinc-200 transition-colors shadow-xl flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <span>Skonsultuj Abonament Custom</span>

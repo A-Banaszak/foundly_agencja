@@ -30,15 +30,23 @@ async function exportPdf(urlOrPath, outputFilename = 'Oferta_Foundly_Agencja.pdf
 
     console.log(`🌐 Ładowanie adresu: ${targetUrl}`);
     await page.goto(targetUrl, {
-      waitUntil: 'networkidle0',
+      waitUntil: ['networkidle0', 'domcontentloaded'],
       timeout: 30000,
     });
 
-    await page.evaluate(() => {
+    await page.emulateMediaType('screen');
+
+    // Poczekaj na załadowanie czcionek Inter i stylów CSS
+    await page.evaluate(async () => {
+      if (document.fonts) {
+        await document.fonts.ready;
+      }
       const topNav = document.querySelector('.offer-top-nav');
       if (topNav) topNav.remove();
-      return document.fonts ? document.fonts.ready : Promise.resolve();
     });
+
+    // Krótka pauza na wyrenderowanie gradientów i stylów CSS
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
     await page.pdf({
       path: outputPath,
@@ -58,8 +66,8 @@ async function exportPdf(urlOrPath, outputFilename = 'Oferta_Foundly_Agencja.pdf
   }
 }
 
-const target = process.argv[2] || 'dist/oferta/index.html';
-const outputFile = process.argv[3] || 'Oferta_Foundly_Agencja.pdf';
+const target = process.argv[2] || 'http://localhost:4321/oferta/';
+const outputFile = process.argv[3] || 'Oferta_Strona_Restauracji_Olga_Wisniewska.pdf';
 
 exportPdf(target, outputFile).catch((err) => {
   console.error('❌ Błąd podczas generowania PDF:', err);
