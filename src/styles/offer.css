@@ -311,7 +311,7 @@ body.offer-body {
 
 @page {
   size: A4;
-  margin: 0;
+  margin: 15mm 0mm 15mm 0mm;
 }
 
 @media print {
@@ -354,13 +354,15 @@ body.offer-body {
   }
 
   .offer-main {
-    padding: 15mm !important;
+    padding: 10mm 18mm !important;
     display: block !important;
   }
 
   .offer-section {
     page-break-inside: avoid;
-    margin-bottom: 20px;
+    break-inside: avoid;
+    margin-bottom: 24px;
+    padding-top: 5mm;
   }
 
   .offer-top-nav, .offer-bottom-nav, .offer-print-btn {
